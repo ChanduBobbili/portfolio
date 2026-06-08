@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/* ─── Dark mode via class strategy (next-themes uses .dark on <html>) ──── */
+@variant dark (&:where(.dark, .dark *));
+
+/* ─── DARK MODE (default / .dark class on <html>) ───────────────────────── */
+:root,
+.dark {
+  --bg-base:        #0A0A0F;
+  --bg-surface:     #111118;
+  --bg-elevated:    #1A1A26;
+  --bg-subtle:      #16161F;
+
+  --border-default: #2A2A3D;
+  --border-muted:   #1E1E2E;
+  --border-neon:    #7C3AED33;
+
+  --text-primary:   #F0F0FF;
+  --text-secondary: #8B8BA8;
+  --text-tertiary:  #55556A;
+
+  --accent-purple:  #A78BFA;
+  --accent-cyan:    #22D3EE;
+  --accent-green:   #34D399;
+  --accent-pink:    #F472B6;
+
+  --glow-purple:    0 0 20px #A78BFA40, 0 0 40px #A78BFA20;
+  --glow-cyan:      0 0 20px #22D3EE40, 0 0 40px #22D3EE20;
+  --glow-green:     0 0 20px #34D39940, 0 0 40px #34D39920;
+
+  --btn-primary-bg:            #7C3AED;
+  --btn-primary-hover:         #6D28D9;
+  --btn-primary-text:          #FFFFFF;
+  --btn-secondary-border:      #2A2A3D;
+  --btn-secondary-text:        #F0F0FF;
+  --btn-secondary-hover-border:#A78BFA;
+
+  --nav-bg-scrolled: rgba(10, 10, 15, 0.85);
+  --nav-border:      #2A2A3D;
+
+  --dot-active:   #A78BFA;
+  --dot-inactive: #2A2A3D;
+
+  --gradient-hero:     radial-gradient(ellipse 80% 60% at 50% -10%, #7C3AED18 0%, transparent 70%);
+  --gradient-glow-top: radial-gradient(ellipse 60% 40% at 80% 20%, #22D3EE12 0%, transparent 60%);
+}
+
+/* ─── LIGHT MODE (.light class on <html>) ───────────────────────────────── */
+.light {
+  --bg-base:        #FAFAFA;
+  --bg-surface:     #FFFFFF;
+  --bg-elevated:    #F3F3F8;
+  --bg-subtle:      #F7F7FC;
+
+  --border-default: #E2E2EE;
+  --border-muted:   #ECECF5;
+  --border-neon:    #7C3AED22;
+
+  --text-primary:   #0F0F1A;
+  --text-secondary: #5A5A7A;
+  --text-tertiary:  #9090AA;
+
+  --accent-purple:  #6D28D9;
+  --accent-cyan:    #0891B2;
+  --accent-green:   #059669;
+  --accent-pink:    #DB2777;
+
+  --glow-purple:    0 4px 24px #7C3AED20;
+  --glow-cyan:      0 4px 24px #0891B220;
+  --glow-green:     0 4px 24px #05966920;
+
+  --btn-primary-bg:            #6D28D9;
+  --btn-primary-hover:         #5B21B6;
+  --btn-primary-text:          #FFFFFF;
+  --btn-secondary-border:      #E2E2EE;
+  --btn-secondary-text:        #0F0F1A;
+  --btn-secondary-hover-border:#6D28D9;
+
+  --nav-bg-scrolled: rgba(250, 250, 250, 0.90);
+  --nav-border:      #E2E2EE;
+
+  --dot-active:   #6D28D9;
+  --dot-inactive: #E2E2EE;
+
+  --gradient-hero:     radial-gradient(ellipse 80% 60% at 50% -10%, #7C3AED0C 0%, transparent 70%);
+  --gradient-glow-top: radial-gradient(ellipse 60% 40% at 80% 20%, #0891B20A 0%, transparent 60%);
+}
+
+/* ─── EXPOSE TOKENS TO TAILWIND v4 UTILITIES ────────────────────────────── */
+@theme inline {
+  --color-bg-base:       var(--bg-base);
+  --color-bg-surface:    var(--bg-surface);
+  --color-bg-elevated:   var(--bg-elevated);
+  --color-bg-subtle:     var(--bg-subtle);
+
+  --color-border-default: var(--border-default);
+  --color-border-muted:   var(--border-muted);
+  --color-border-neon:    var(--border-neon);
+
+  --color-text-primary:   var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary:  var(--text-tertiary);
+
+  --color-accent-purple:  var(--accent-purple);
+  --color-accent-cyan:    var(--accent-cyan);
+  --color-accent-green:   var(--accent-green);
+  --color-accent-pink:    var(--accent-pink);
+
+  --shadow-neon-purple: var(--glow-purple);
+  --shadow-neon-cyan:   var(--glow-cyan);
+  --shadow-neon-green:  var(--glow-green);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ─── SHARED BASE STYLES ─────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.2s ease;
+}
+
+::selection {
+  background: #A78BFA30;
+  color: var(--accent-purple);
+}
+
+.light ::selection {
+  background: #6D28D920;
+  color: #5B21B6;
+}
+
+section {
+  padding: 5rem 0;
+}
+
+.neon-glow-purple { box-shadow: var(--glow-purple); }
+.neon-glow-cyan   { box-shadow: var(--glow-cyan); }
+.neon-glow-green  { box-shadow: var(--glow-green); }
+
+.dark .scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
