@@ -286,7 +286,7 @@ export const articles = [
       'A practical, checklist-driven guide covering metadata, Open Graph, structured data, sitemap, Core Web Vitals, and more for Next.js apps.',
     tags: ['SEO', 'Next.js', 'Frontend'],
     accent: 'purple',
-    url: 'https://dev.to/chandubobbili',
+    url: 'https://dev.to/chandu_bobbili_06/mastering-seo-for-nextjs-a-practical-optimization-checklist-4nld',
   },
   {
     title: 'Biome Has Entered the Chat: A New Tool to Replace ESLint and Prettier',
@@ -294,7 +294,7 @@ export const articles = [
       'An introduction to Biome — a fast, unified linter and formatter written in Rust — and why it\'s a compelling replacement for the ESLint + Prettier combo.',
     tags: ['Tooling', 'DX', 'Open Source'],
     accent: 'cyan',
-    url: 'https://dev.to/chandubobbili',
+    url: 'https://dev.to/chandu_bobbili_06/biome-has-entered-the-chat-a-new-tool-to-replace-eslint-and-prettier-1p8e',
   },
   {
     title: 'Say Goodbye to Changelog Chaos: Introducing changesetgoo',
@@ -302,6 +302,6 @@ export const articles = [
       'Introduces changesetgoo — the Go CLI for semantic versioning and changelog management — covering the problem it solves and how to use it in a real project.',
     tags: ['Open Source', 'Release Management', 'Go'],
     accent: 'green',
-    url: 'https://dev.to/chandubobbili',
+    url: 'https://dev.to/chandu_bobbili_06/say-goodbye-to-changelog-chaos-introducing-changesetgoo-c2j',
   },
 ]
