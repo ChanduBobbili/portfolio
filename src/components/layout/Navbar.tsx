@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { Button } from '@/components/ui/button'
 import { personal } from '@/data/portfolio'
 
 const NAV_LINKS = [
@@ -46,26 +47,24 @@ export function Navbar() {
     >
       <div className="max-w-[1080px] mx-auto px-6 md:px-12">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="relative flex items-center gap-2 cursor-pointer group"
             aria-label="Scroll to top"
           >
-            <span className="font-display text-xl font-extrabold text-text-primary tracking-wide">
+            <span className="font-heading text-xl font-extrabold text-foreground tracking-wide">
               Chandu Bobbili
             </span>
             <span
               className="absolute -right-3 -top-1 w-2 h-2 rounded-full animate-orbit"
               style={{
-                background: 'var(--accent)',
-                boxShadow: '0 0 8px var(--accent)',
+                background: 'var(--brand)',
+                boxShadow: '0 0 8px var(--brand)',
                 transformOrigin: '0px 14px',
               }}
             />
           </button>
 
-          {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1">
             {NAV_LINKS.map((link) => {
               const isActive = activeId === link.href.replace('#', '')
@@ -73,15 +72,15 @@ export function Navbar() {
                 <button
                   key={link.href}
                   onClick={() => scrollTo(link.href)}
-                  className={`relative px-3 py-1.5 font-mono-tech text-[11px] uppercase tracking-widest transition-colors cursor-pointer ${
-                    isActive ? 'text-accent' : 'text-text-secondary hover:text-text-primary'
+                  className={`relative px-3 py-1.5 font-sans text-[11px] uppercase tracking-widest transition-colors cursor-pointer ${
+                    isActive ? 'text-brand' : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
                   {link.label}
                   {isActive && (
                     <motion.span
                       layoutId="nav-dot"
-                      className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent"
+                      className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand"
                     />
                   )}
                 </button>
@@ -91,16 +90,16 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle />
-            <a href={`mailto:${personal.email}`} className="btn-primary text-xs py-2 px-4">
-              Hire me
-            </a>
+            <Button size="sm" asChild>
+              <a href={`mailto:${personal.email}`}>Hire me</a>
+            </Button>
           </div>
 
           <div className="flex md:hidden items-center gap-2">
             <ThemeToggle />
             <button
               onClick={() => setMobileOpen((v) => !v)}
-              className="w-9 h-9 flex items-center justify-center rounded-xl border border-border-default text-text-secondary"
+              className="w-9 h-9 flex items-center justify-center rounded-xl border border-border text-muted-foreground"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={18} /> : <Menu size={18} />}
@@ -115,20 +114,20 @@ export function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="md:hidden fixed inset-0 top-16 z-40 flex flex-col bg-bg-base items-center justify-center gap-6"
+            className="md:hidden fixed inset-0 top-16 z-40 flex flex-col bg-background items-center justify-center gap-6"
           >
             {NAV_LINKS.map((link) => (
               <button
                 key={link.href}
                 onClick={() => scrollTo(link.href)}
-                className="font-mono-tech text-sm uppercase tracking-widest text-text-primary"
+                className="font-sans text-sm uppercase tracking-widest text-foreground"
               >
                 {link.label}
               </button>
             ))}
-            <a href={`mailto:${personal.email}`} className="btn-primary mt-4">
-              Hire me
-            </a>
+            <Button asChild className="mt-4">
+              <a href={`mailto:${personal.email}`}>Hire me</a>
+            </Button>
           </motion.div>
         )}
       </AnimatePresence>

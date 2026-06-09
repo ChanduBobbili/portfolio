@@ -6,6 +6,8 @@ import { ExternalLink, Star, Download } from 'lucide-react'
 import { GithubIcon } from '@/components/ui/SocialIcons'
 import { projects } from '@/data/portfolio'
 import { SectionTitle } from '@/components/ui/SectionTitle'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 
 const ACCENT_BAR: Record<string, string> = {
   green: '#34D399',
@@ -24,65 +26,58 @@ function ProjectDetail({ project }: { project: (typeof projects)[number] }) {
       className="overflow-hidden flex flex-col h-full"
     >
       <div className="p-2 flex flex-col flex-1">
-        {/* title */}
-        <h3 className="font-display text-2xl font-bold text-text-primary mb-1 leading-tight">
+        <h3 className="font-heading text-2xl font-bold text-foreground mb-1 leading-tight">
           {project.title}
         </h3>
         {project.subtitle && (
-          <p className="font-mono-tech text-xs text-text-tertiary mb-4">{project.subtitle}</p>
+          <p className="font-sans text-xs text-muted-foreground mb-4">{project.subtitle}</p>
         )}
 
-        {/* description */}
-        <p className="text-sm text-text-secondary leading-[1.85] mb-6 flex-1">
+        <p className="font-sans text-sm text-muted-foreground leading-[1.85] mb-6 flex-1">
           {project.description}
         </p>
 
-        {/* stack pills */}
         <div className="flex flex-wrap gap-2 mb-6">
           {project.stack.map((tech) => (
-            <span key={tech} className="tag-mono">
+            <Badge
+              key={tech}
+              variant="secondary"
+              className="font-sans rounded-lg text-[0.6875rem]"
+            >
               {tech}
-            </span>
+            </Badge>
           ))}
         </div>
 
-        {/* stats */}
         {project.stats && (
-          <div className="flex flex-wrap gap-5 mb-6 font-mono-tech text-xs text-text-secondary">
+          <div className="flex flex-wrap gap-5 mb-6 font-sans text-xs text-muted-foreground">
             {project.stats.map((stat) => (
               <span key={stat.label} className="flex items-center gap-1.5">
-                {stat.label.includes('star') && <Star size={11} className="text-accent" />}
-                {stat.label.includes('download') && <Download size={11} className="text-accent" />}
-                <strong className="text-text-primary">{stat.value}</strong>
+                {stat.label.includes('star') && <Star size={11} className="text-brand" />}
+                {stat.label.includes('download') && <Download size={11} className="text-brand" />}
+                <strong className="text-foreground">{stat.value}</strong>
                 &nbsp;{stat.label}
               </span>
             ))}
           </div>
         )}
 
-        {/* links */}
-        <div className="flex gap-3 pt-5 border-t border-border-muted mt-auto">
+        <div className="flex gap-3 pt-5 border-t border-border mt-auto">
           {project.links.github && (
-            <a
-              href={project.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost text-xs py-2 px-4 inline-flex items-center gap-2"
-            >
-              <GithubIcon style={{ width: 13, height: 13 }} />
-              GitHub
-            </a>
+            <Button variant="outline" size="sm" asChild>
+              <a href={project.links.github} target="_blank" rel="noopener noreferrer">
+                <GithubIcon style={{ width: 13, height: 13 }} />
+                GitHub
+              </a>
+            </Button>
           )}
           {project.links.live && (
-            <a
-              href={project.links.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost text-xs py-2 px-4 inline-flex items-center gap-2"
-            >
-              <ExternalLink size={13} />
-              Live Docs
-            </a>
+            <Button variant="outline" size="sm" asChild>
+              <a href={project.links.live} target="_blank" rel="noopener noreferrer">
+                <ExternalLink size={13} />
+                Live Docs
+              </a>
+            </Button>
           )}
         </div>
       </div>
@@ -95,7 +90,6 @@ function ProjectsDesktop() {
 
   return (
     <div className="hidden md:grid grid-cols-[1fr_1.6fr] gap-6 items-start">
-      {/* ── Left: project list ── */}
       <div className="flex flex-col gap-1 sticky top-28">
         {projects.map((project, i) => {
           const barColor = ACCENT_BAR[project.accent] ?? ACCENT_BAR.purple
@@ -106,10 +100,8 @@ function ProjectsDesktop() {
               key={project.title}
               onHoverStart={() => setActive(i)}
               onClick={() => setActive(i)}
-              className="group relative text-left rounded-xl px-5 py-4 outline-none overflow-hidden"
-              style={{ cursor: 'default' }}
+              className="group relative text-left rounded-xl px-5 py-4 outline-none overflow-hidden cursor-pointer"
             >
-              {/* sliding highlight — same layoutId pattern as mobile pill */}
               {isActive && (
                 <motion.span
                   layoutId="desktop-active-bg"
@@ -124,7 +116,6 @@ function ProjectsDesktop() {
                 />
               )}
 
-              {/* left accent bar — slides with the background */}
               {isActive && (
                 <motion.span
                   layoutId="desktop-active-bar"
@@ -136,15 +127,15 @@ function ProjectsDesktop() {
 
               <div className="relative z-10 pl-1">
                 <span
-                  className={`font-display text-[15px] font-semibold transition-colors duration-200 ${
+                  className={`font-heading text-[15px] font-semibold transition-colors duration-200 ${
                     isActive
-                      ? 'text-text-primary'
-                      : 'text-text-secondary group-hover:text-text-primary'
+                      ? 'text-foreground'
+                      : 'text-muted-foreground group-hover:text-foreground'
                   }`}
                 >
                   {project.title}
                 </span>
-                <p className="font-mono-tech text-[11px] text-text-tertiary leading-snug line-clamp-1 mt-0.5">
+                <p className="font-sans text-[11px] text-muted-foreground leading-snug line-clamp-1 mt-0.5">
                   {project.subtitle ?? project.tag}
                 </p>
               </div>
@@ -153,7 +144,6 @@ function ProjectsDesktop() {
         })}
       </div>
 
-      {/* ── Right: detail panel ── */}
       <div className="min-h-[460px]">
         <AnimatePresence mode="wait">
           <ProjectDetail key={active} project={projects[active]} />
@@ -168,8 +158,7 @@ function ProjectsMobile() {
 
   return (
     <div className="md:hidden flex flex-col gap-2">
-      {/* Tab strip */}
-      <div className="relative grid grid-cols-2 gap-1 p-1 rounded-xl bg-[color-mix(in_srgb,var(--accent)_6%,transparent)] overflow-x-auto scrollbar-none">
+      <div className="relative grid grid-cols-2 gap-1 p-1 rounded-xl bg-[color-mix(in_srgb,var(--brand)_6%,transparent)] overflow-x-auto scrollbar-none">
         {projects.map((project, i) => {
           const barColor = ACCENT_BAR[project.accent] ?? ACCENT_BAR.purple
           const isActive = active === i
@@ -179,14 +168,14 @@ function ProjectsMobile() {
               onClick={() => setActive(i)}
               className="relative w-full z-10 shrink-0 px-4 py-2 rounded-lg font-medium text-sm transition-colors duration-150 outline-none"
               style={{
-                color: isActive ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                color: isActive ? 'var(--foreground)' : 'var(--muted-foreground)',
               }}
               transition={{ type: 'spring', stiffness: 420, damping: 36 }}
             >
               {isActive && (
                 <motion.span
                   layoutId="tab-pill"
-                  className="absolute inset-0 rounded-lg z-[-1] bg-accent-strong"
+                  className="absolute inset-0 rounded-lg z-[-1]"
                   style={{ background: `color-mix(in srgb, ${barColor} 10%, transparent)` }}
                   transition={{ type: 'spring', stiffness: 420, damping: 36 }}
                 />
@@ -197,7 +186,6 @@ function ProjectsMobile() {
         })}
       </div>
 
-      {/* Tab content */}
       <AnimatePresence mode="wait">
         <motion.div
           key={active}
@@ -212,8 +200,6 @@ function ProjectsMobile() {
     </div>
   )
 }
-
-// ─── Section export ────────────────────────────────────────────────────────────
 
 export function Projects() {
   return (

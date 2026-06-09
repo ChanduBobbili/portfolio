@@ -29,13 +29,13 @@ export function ThemeToggle() {
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
     >
       <span
-        className="absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-[var(--accent)] flex items-center justify-center transition-transform duration-300"
+        className="absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-primary flex items-center justify-center transition-transform duration-300"
         style={{ transform: isDark ? 'translateX(22px)' : 'translateX(0)' }}
       >
         {isDark ? (
-          <Moon size={12} className="text-[var(--btn-primary-text)]" />
+          <Moon size={12} className="text-primary-foreground" />
         ) : (
-          <Sun size={12} className="text-[var(--btn-primary-text)]" />
+          <Sun size={12} className="text-primary-foreground" />
         )}
       </span>
     </button>

@@ -1,20 +1,11 @@
 import type { Metadata } from 'next'
-import { Exo_2, Inter, JetBrains_Mono } from 'next/font/google'
+import { JetBrains_Mono, Outfit } from 'next/font/google'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { cn } from '@/lib/utils'
 
-const exo = Exo_2({
-  variable: '--font-exo',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-})
-
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
-  weight: ['400', '500'],
-})
+const outfit = Outfit({ subsets: ['latin'], variable: '--font-sans' })
 
 const jetbrains = JetBrains_Mono({
   variable: '--font-jetbrains',
@@ -78,10 +69,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${exo.variable} ${inter.variable} ${jetbrains.variable} h-full antialiased`}
+      className={cn('h-full antialiased font-sans', jetbrains.variable, outfit.variable)}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-bg-base text-text-primary">
+      <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

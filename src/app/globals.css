@@ -1,10 +1,47 @@
 @import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
-@variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:is(.dark *));
 
 /* ─── LIGHT THEME — 60% #3E92CC · 30% #E8F2FF · 10% #13293D ─────────────── */
 :root,
 .light {
+  /* shadcn semantic tokens */
+  --background: #3e92cc;
+  --foreground: #13293d;
+  --card: rgba(255, 255, 255, 0.78);
+  --card-foreground: #13293d;
+  --popover: #ffffff;
+  --popover-foreground: #13293d;
+  --primary: #13293d;
+  --primary-foreground: #ffffff;
+  --secondary: #e8f2ff;
+  --secondary-foreground: #13293d;
+  --muted: #d4e8f9;
+  --muted-foreground: #5a7a96;
+  --accent: color-mix(in srgb, #3e92cc 15%, #e8f2ff);
+  --accent-foreground: #13293d;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: rgba(19, 41, 61, 0.14);
+  --input: rgba(19, 41, 61, 0.14);
+  --ring: #3e92cc;
+  --radius: 0.625rem;
+  --chart-1: oklch(0.809 0.105 251.813);
+  --chart-2: oklch(0.623 0.214 259.815);
+  --chart-3: oklch(0.546 0.245 262.881);
+  --chart-4: oklch(0.488 0.243 264.376);
+  --chart-5: oklch(0.424 0.199 265.638);
+  --sidebar: #e8f2ff;
+  --sidebar-foreground: #13293d;
+  --sidebar-primary: #13293d;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: color-mix(in srgb, #3e92cc 15%, #e8f2ff);
+  --sidebar-accent-foreground: #13293d;
+  --sidebar-border: rgba(19, 41, 61, 0.14);
+  --sidebar-ring: #3e92cc;
+
+  /* space extension tokens */
   --bg-base: #3e92cc;
   --bg-section-alt: #e8f2ff;
   --bg-surface: #ffffff;
@@ -19,20 +56,14 @@
   --text-secondary: #2a4a66;
   --text-tertiary: #5a7a96;
 
-  --accent: #13293d;
-  --accent-strong: #1a3a52;
-  --accent-sky: #3e92cc;
-  --accent-soft: #bad8f0;
+  --brand: #13293d;
+  --brand-strong: #1a3a52;
+  --brand-sky: #3e92cc;
+  --brand-soft: #bad8f0;
 
   --glow: 0 8px 32px rgba(19, 41, 61, 0.14);
   --glow-hover: 0 16px 48px rgba(19, 41, 61, 0.2);
   --glow-radial: radial-gradient(ellipse at center, rgba(62, 146, 204, 0.28) 0%, transparent 70%);
-
-  --btn-primary-bg: #13293d;
-  --btn-primary-hover: #1a3a52;
-  --btn-primary-text: #ffffff;
-  --btn-ghost-border: rgba(19, 41, 61, 0.35);
-  --btn-ghost-text: #13293d;
 
   --nav-bg: rgba(62, 146, 204, 0.88);
   --nav-border: rgba(19, 41, 61, 0.14);
@@ -47,6 +78,40 @@
 
 /* ─── DARK THEME — 60% #13293D · 30% #E8F2FF · 10% #3E92CC ─────────────── */
 .dark {
+  /* shadcn semantic tokens */
+  --background: #13293d;
+  --foreground: #e8f2ff;
+  --card: #1a3550;
+  --card-foreground: #e8f2ff;
+  --popover: #1a3550;
+  --popover-foreground: #e8f2ff;
+  --primary: #3e92cc;
+  --primary-foreground: #13293d;
+  --secondary: #1a3550;
+  --secondary-foreground: #e8f2ff;
+  --muted: #1f3f5c;
+  --muted-foreground: #6a8fad;
+  --accent: #1f3f5c;
+  --accent-foreground: #e8f2ff;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: rgba(62, 146, 204, 0.16);
+  --input: rgba(62, 146, 204, 0.16);
+  --ring: #3e92cc;
+  --chart-1: oklch(0.809 0.105 251.813);
+  --chart-2: oklch(0.623 0.214 259.815);
+  --chart-3: oklch(0.546 0.245 262.881);
+  --chart-4: oklch(0.488 0.243 264.376);
+  --chart-5: oklch(0.424 0.199 265.638);
+  --sidebar: #1a3550;
+  --sidebar-foreground: #e8f2ff;
+  --sidebar-primary: #3e92cc;
+  --sidebar-primary-foreground: #13293d;
+  --sidebar-accent: #1f3f5c;
+  --sidebar-accent-foreground: #e8f2ff;
+  --sidebar-border: rgba(62, 146, 204, 0.16);
+  --sidebar-ring: #3e92cc;
+
+  /* space extension tokens */
   --bg-base: #13293d;
   --bg-section-alt: #e8f2ff;
   --bg-surface: #1a3550;
@@ -61,20 +126,14 @@
   --text-secondary: #a8c8e8;
   --text-tertiary: #6a8fad;
 
-  --accent: #3e92cc;
-  --accent-strong: #5ba8db;
-  --accent-sky: #7ec0e8;
-  --accent-soft: #1f3f5c;
+  --brand: #3e92cc;
+  --brand-strong: #5ba8db;
+  --brand-sky: #7ec0e8;
+  --brand-soft: #1f3f5c;
 
   --glow: 0 8px 32px rgba(62, 146, 204, 0.22);
   --glow-hover: 0 16px 48px rgba(62, 146, 204, 0.3);
   --glow-radial: radial-gradient(ellipse at center, rgba(62, 146, 204, 0.28) 0%, transparent 70%);
-
-  --btn-primary-bg: #3e92cc;
-  --btn-primary-hover: #5ba8db;
-  --btn-primary-text: #13293d;
-  --btn-ghost-border: rgba(62, 146, 204, 0.4);
-  --btn-ghost-text: #7ec0e8;
 
   --nav-bg: rgba(19, 41, 61, 0.9);
   --nav-border: rgba(62, 146, 204, 0.16);
@@ -88,45 +147,76 @@
 }
 
 @theme inline {
-  --color-bg-base: var(--bg-base);
+  /* shadcn color tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* space brand tokens */
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-sky: var(--brand-sky);
+  --color-brand-soft: var(--brand-soft);
+
+  /* space surface tokens */
   --color-bg-section-alt: var(--bg-section-alt);
   --color-bg-surface: var(--bg-surface);
   --color-bg-elevated: var(--bg-elevated);
 
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-tertiary: var(--text-tertiary);
-
-  --color-accent: var(--accent);
-  --color-accent-strong: var(--accent-strong);
-  --color-accent-sky: var(--accent-sky);
-
-  --font-display: var(--font-exo);
-  --font-sans: var(--font-inter);
+  /* fonts */
+  --font-sans: var(--font-sans);
   --font-mono: var(--font-jetbrains);
+  --font-heading: 'Apercu', sans-serif;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-body {
-  background-color: var(--bg-base);
-  color: var(--text-primary);
-  font-family: var(--font-inter), system-ui, sans-serif;
-  transition:
-    background-color 0.3s ease,
-    color 0.2s ease;
-}
-
 ::selection {
-  background: color-mix(in srgb, var(--accent) 25%, transparent);
-  color: var(--text-primary);
+  background: color-mix(in srgb, var(--brand) 25%, transparent);
+  color: var(--foreground);
 }
 
 /* ─── SECTION RHYTHM ─────────────────────────────────────────────────────── */
 .section-odd {
-  background-color: var(--bg-base);
+  background-color: var(--background);
 }
 .section-even {
   background-color: var(--bg-section-alt);
@@ -134,12 +224,12 @@ body {
 
 /* Dark even sections use light #E8F2FF — flip text to navy for contrast */
 .dark .section-even {
+  --foreground: #13293d;
+  --muted-foreground: #5a7a96;
   --text-primary: #13293d;
   --text-secondary: #2a4a66;
   --text-tertiary: #5a7a96;
-  --accent: #3e92cc;
-  --btn-ghost-text: #13293d;
-  --btn-ghost-border: rgba(19, 41, 61, 0.3);
+  --brand: #3e92cc;
   --border-default: rgba(19, 41, 61, 0.12);
   --border-muted: rgba(19, 41, 61, 0.08);
   --bg-glass: rgba(255, 255, 255, 0.65);
@@ -148,7 +238,7 @@ body {
 
 .section-odd + .section-even,
 .section-even + .section-odd {
-  box-shadow: inset 0 4px 12px -8px color-mix(in srgb, var(--accent) 8%, transparent);
+  box-shadow: inset 0 4px 12px -8px color-mix(in srgb, var(--brand) 8%, transparent);
 }
 
 section {
@@ -159,160 +249,6 @@ section {
   section {
     padding: 5rem 0;
   }
-}
-
-/* ─── TYPOGRAPHY UTILITIES ───────────────────────────────────────────────── */
-.font-display {
-  font-family: var(--font-exo), sans-serif;
-}
-.font-mono-tech {
-  font-family: var(--font-jetbrains), monospace;
-}
-
-.text-display-hero {
-  font-family: var(--font-exo), sans-serif;
-  font-size: clamp(2rem, 2.5vw, 3.5rem);
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  line-height: 1.05;
-}
-
-.text-section-title {
-  font-family: var(--font-exo), sans-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 1.15;
-}
-
-.text-section-title-gradient {
-  font-family: var(--font-exo), sans-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 1.15;
-  background-image: linear-gradient(
-    90deg,
-    var(--accent) 0%,
-    var(--text-primary) 35%,
-    var(--accent-sky) 65%,
-    var(--accent) 100%
-  );
-  background-size: 200% 200%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.label-mission {
-  font-family: var(--font-jetbrains), monospace;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-/* ─── GLASS / HELMET VISOR ───────────────────────────────────────────────── */
-.glass-card {
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-default);
-  border-radius: 20px;
-  box-shadow: var(--glow);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
-}
-
-.glass-card:hover {
-  box-shadow: var(--glow-hover);
-}
-
-/* ─── BUTTONS ────────────────────────────────────────────────────────────── */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 12px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  background: var(--btn-primary-bg);
-  color: var(--btn-primary-text);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
-}
-
-.btn-primary:hover {
-  background: var(--btn-primary-hover);
-  box-shadow: var(--glow);
-  transform: translateY(-2px);
-}
-
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 12px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  border: 1px solid var(--btn-ghost-border);
-  color: var(--btn-ghost-text);
-  background: transparent;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.btn-ghost:hover {
-  border-color: var(--accent);
-  box-shadow: var(--glow);
-  transform: translateY(-2px);
-}
-
-/* ─── PILLS & TAGS ───────────────────────────────────────────────────────── */
-.pill-stat {
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  font-family: var(--font-jetbrains), monospace;
-  font-size: 0.75rem;
-  background: color-mix(in srgb, var(--accent-soft) 40%, var(--bg-elevated));
-  border: 1px solid var(--border-muted);
-  color: var(--text-secondary);
-}
-
-.pill-stat strong {
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.tag-mono {
-  padding: 0.25rem 0.625rem;
-  border-radius: 8px;
-  font-family: var(--font-jetbrains), monospace;
-  font-size: 0.6875rem;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-muted);
-  color: var(--text-secondary);
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.tag-mono:hover {
-  border-color: var(--border-accent);
-  box-shadow: var(--glow);
-  transform: translateY(-2px);
 }
 
 /* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
@@ -403,4 +339,67 @@ section {
 ::-webkit-scrollbar-thumb {
   background: var(--border-accent);
   border-radius: 3px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    transition:
+      background-color 0.3s ease,
+      color 0.2s ease;
+  }
+  html {
+    @apply font-sans;
+  }
+
+  @font-face {
+    font-family: 'Apercu';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/apercu/apercu_regular_pro.otf') format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Apercu';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/apercu/apercu_regular_italic_pro.otf') format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Apercu';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/apercu/apercu_medium_pro.otf') format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Apercu';
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/apercu/apercu_medium_italic_pro.otf') format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Apercu';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/apercu/apercu_bold_pro.otf') format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Apercu';
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/apercu/apercu_bold_italic_pro.otf') format('opentype');
+  }
 }

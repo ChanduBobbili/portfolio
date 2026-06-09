@@ -9,16 +9,12 @@ export function Footer() {
   return (
     <footer
       className="section-even border-t py-2"
-      style={{ borderColor: 'color-mix(in srgb, var(--accent) 15%, transparent)' }}
+      style={{ borderColor: 'color-mix(in srgb, var(--brand) 15%, transparent)' }}
     >
       <div className="max-w-[1080px] mx-auto px-6 md:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="font-mono-tech text-xs text-text-tertiary">
+        <p className="font-sans text-xs text-muted-foreground">
           © {year} {personal.name}
         </p>
-
-        {/* <span className="text-text-tertiary text-lg" aria-hidden="true">
-          ✦
-        </span> */}
 
         <div className="flex items-center gap-4">
           <a
@@ -26,10 +22,10 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="text-text-tertiary hover:text-accent transition-colors duration-200"
+            className="text-muted-foreground hover:text-brand transition-colors duration-200"
             style={{ filter: 'none' }}
             onMouseEnter={(e) => {
-              ;(e.currentTarget as HTMLElement).style.filter = 'drop-shadow(0 0 6px var(--accent))'
+              ;(e.currentTarget as HTMLElement).style.filter = 'drop-shadow(0 0 6px var(--brand))'
             }}
             onMouseLeave={(e) => {
               ;(e.currentTarget as HTMLElement).style.filter = 'none'
@@ -42,9 +38,9 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="text-text-tertiary hover:text-accent transition-colors duration-200"
+            className="text-muted-foreground hover:text-brand transition-colors duration-200"
             onMouseEnter={(e) => {
-              ;(e.currentTarget as HTMLElement).style.filter = 'drop-shadow(0 0 6px var(--accent))'
+              ;(e.currentTarget as HTMLElement).style.filter = 'drop-shadow(0 0 6px var(--brand))'
             }}
             onMouseLeave={(e) => {
               ;(e.currentTarget as HTMLElement).style.filter = 'none'
