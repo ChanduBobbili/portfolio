@@ -3,21 +3,14 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { articles } from '@/data/portfolio'
+import { SectionTitle } from '@/components/ui/SectionTitle'
 
 export function TechnicalWriting() {
   return (
     <section id="writing" className="section-even relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         {/* <SectionLabel>TRANSMISSION LOG</SectionLabel> */}
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-section-title text-text-primary mb-4"
-        >
-          Technical Writing
-        </motion.h2>
+        <SectionTitle className="mb-4">Technical Writing</SectionTitle>
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}

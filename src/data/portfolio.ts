@@ -214,7 +214,7 @@ export const projects: Project[] = [
       'Published and maintained an open-source React component library with TypeScript-first architecture, tree-shaking support, CSS variable theming with Tailwind-ready customisation, and full WAI-ARIA accessibility compliance. Ships 13+ components as tree-shakeable scoped packages.',
     stack: ['TypeScript', 'React', 'Tailwind CSS', 'WAI-ARIA', 'Monorepo'],
     links: {
-      live: 'https://zenithui-docs.vercel.app',
+      live: 'https://zenithui.chandubobbili.dev',
       github: 'https://github.com/ChanduBobbili/ZenithUi',
     },
     featured: true,

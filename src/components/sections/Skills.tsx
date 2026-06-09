@@ -2,20 +2,13 @@
 
 import { motion } from 'framer-motion'
 import { skills } from '@/data/portfolio'
+import { SectionTitle } from '@/components/ui/SectionTitle'
 
 export function Skills() {
   return (
     <section id="skills" className="section-even relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-section-title text-text-primary mb-12"
-        >
-          Skills
-        </motion.h2>
+        <SectionTitle className="mb-12">Skills</SectionTitle>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {skills.map((group, gi) => (

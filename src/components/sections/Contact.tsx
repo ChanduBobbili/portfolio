@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Mail } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from '@/components/ui/SocialIcons'
 import { personal } from '@/data/portfolio'
+import { SectionTitle } from '@/components/ui/SectionTitle'
 
 export function Contact() {
   return (
@@ -24,17 +25,9 @@ export function Contact() {
             style={{ background: 'var(--glow-radial)' }}
           />
 
-          <h2 className="relative text-section-title text-text-primary mb-4">
-            Let&apos;s work{' '}
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage: 'linear-gradient(135deg, var(--accent), var(--accent-sky))',
-              }}
-            >
-              together
-            </span>
-          </h2>
+          <SectionTitle className="relative mb-4" reveal={false}>
+            Let&apos;s work together
+          </SectionTitle>
 
           <p className="relative text-text-secondary leading-[1.75] mb-8">
             Open to full-time roles, freelance projects, and interesting collaborations. Best way to

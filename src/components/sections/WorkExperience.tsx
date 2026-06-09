@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { experience } from '@/data/portfolio'
+import { SectionTitle } from '@/components/ui/SectionTitle'
 
 function groupExperience() {
   const groups: { company: string; entries: typeof experience }[] = []
@@ -31,15 +32,7 @@ export function WorkExperience() {
     <section id="work" className="section-odd relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         {/* <SectionLabel>MISSION LOG</SectionLabel> */}
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-section-title text-text-primary mb-14"
-        >
-          Work Experience
-        </motion.h2>
+        <SectionTitle className="mb-14">Work Experience</SectionTitle>
 
         <div ref={timelineRef} className="relative pl-8 sm:pl-10">
           {/* Background rail */}

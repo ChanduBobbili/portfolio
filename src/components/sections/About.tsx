@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Briefcase, GraduationCap } from 'lucide-react'
 import { personal } from '@/data/portfolio'
+import { SectionTitle } from '@/components/ui/SectionTitle'
 
 const infoCards = [
   { icon: Briefcase, label: 'Currently', value: personal.currentRole },
@@ -25,7 +26,9 @@ export function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-section-title text-text-primary mb-6">About Me</h2>
+            <SectionTitle className="mb-6" reveal={false}>
+              About Me
+            </SectionTitle>
             <p className="text-text-secondary text-base leading-[1.75] mb-8">{personal.about}</p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
