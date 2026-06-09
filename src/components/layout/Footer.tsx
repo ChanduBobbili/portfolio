@@ -1,21 +1,58 @@
 'use client'
 
-import { ArrowUp } from 'lucide-react'
+import { GithubIcon, LinkedinIcon } from '@/components/ui/SocialIcons'
+import { personal } from '@/data/portfolio'
 
 export function Footer() {
+  const year = new Date().getFullYear()
+
   return (
-    <footer className="border-t border-[var(--border-default)] bg-[var(--bg-surface)]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p className="text-sm text-[var(--text-tertiary)]">
-          © 2025 Bobbili Vijaya Chandu · Built with Next.js &amp; Tailwind
+    <footer
+      className="section-even border-t py-2"
+      style={{ borderColor: 'color-mix(in srgb, var(--accent) 15%, transparent)' }}
+    >
+      <div className="max-w-[1080px] mx-auto px-6 md:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p className="font-mono-tech text-xs text-text-tertiary">
+          © {year} {personal.name}
         </p>
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="flex items-center gap-1.5 text-sm text-[var(--accent-purple)] hover:underline transition-all cursor-pointer"
-        >
-          <ArrowUp size={14} />
-          Back to top
-        </button>
+
+        {/* <span className="text-text-tertiary text-lg" aria-hidden="true">
+          ✦
+        </span> */}
+
+        <div className="flex items-center gap-4">
+          <a
+            href={personal.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="text-text-tertiary hover:text-accent transition-colors duration-200"
+            style={{ filter: 'none' }}
+            onMouseEnter={(e) => {
+              ;(e.currentTarget as HTMLElement).style.filter = 'drop-shadow(0 0 6px var(--accent))'
+            }}
+            onMouseLeave={(e) => {
+              ;(e.currentTarget as HTMLElement).style.filter = 'none'
+            }}
+          >
+            <GithubIcon style={{ width: 18, height: 18 }} />
+          </a>
+          <a
+            href={personal.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="text-text-tertiary hover:text-accent transition-colors duration-200"
+            onMouseEnter={(e) => {
+              ;(e.currentTarget as HTMLElement).style.filter = 'drop-shadow(0 0 6px var(--accent))'
+            }}
+            onMouseLeave={(e) => {
+              ;(e.currentTarget as HTMLElement).style.filter = 'none'
+            }}
+          >
+            <LinkedinIcon style={{ width: 18, height: 18 }} />
+          </a>
+        </div>
       </div>
     </footer>
   )

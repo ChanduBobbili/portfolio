@@ -1,64 +1,43 @@
 'use client'
 
+import { useSyncExternalStore } from 'react'
 import { useTheme } from 'next-themes'
-import { Sun, Moon } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { Moon, Sun } from 'lucide-react'
+
+const subscribe = () => () => {}
+const getSnapshot = () => true
+const getServerSnapshot = () => false
+
+function useIsClient() {
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const isClient = useIsClient()
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setMounted(true)
-    }, 100)
-    return () => clearTimeout(timeout)
-  }, [])
-
-  if (!mounted) {
-    return (
-      <div className="w-9 h-9 rounded-lg border border-[var(--border-default)] bg-[var(--bg-surface)]" />
-    )
+  if (!isClient) {
+    return <div className="w-[52px] h-7 rounded-full bg-[var(--bg-elevated)]" />
   }
+
+  const isDark = theme === 'dark'
 
   return (
     <button
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="
-        relative w-9 h-9 rounded-lg flex items-center justify-center
-        border border-[var(--border-default)]
-        bg-[var(--bg-surface)]
-        hover:border-[var(--accent-purple)]
-        hover:shadow-[var(--glow-purple)]
-        transition-all duration-200
-        cursor-pointer
-      "
-      aria-label="Toggle theme"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      className="relative w-[52px] h-7 rounded-full border border-[var(--border-default)] bg-[var(--bg-elevated)] transition-colors duration-300"
+      aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
     >
-      <AnimatePresence mode="wait" initial={false}>
-        {theme === 'dark' ? (
-          <motion.span
-            key="moon"
-            initial={{ rotate: -90, opacity: 0 }}
-            animate={{ rotate: 0, opacity: 1 }}
-            exit={{ rotate: 90, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Moon size={16} className="text-[var(--accent-purple)]" />
-          </motion.span>
+      <span
+        className="absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-[var(--accent)] flex items-center justify-center transition-transform duration-300"
+        style={{ transform: isDark ? 'translateX(22px)' : 'translateX(0)' }}
+      >
+        {isDark ? (
+          <Moon size={12} className="text-[var(--btn-primary-text)]" />
         ) : (
-          <motion.span
-            key="sun"
-            initial={{ rotate: 90, opacity: 0 }}
-            animate={{ rotate: 0, opacity: 1 }}
-            exit={{ rotate: -90, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Sun size={16} className="text-[var(--accent-purple)]" />
-          </motion.span>
+          <Sun size={12} className="text-[var(--btn-primary-text)]" />
         )}
-      </AnimatePresence>
+      </span>
     </button>
   )
 }

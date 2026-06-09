@@ -3,7 +3,7 @@
 export const personal = {
   name: 'Bobbili Vijaya Chandu',
   shortName: 'Chandu',
-  role: 'Software Engineer',
+  role: 'Software Development Engineer',
   tagline: 'Building things that scale.',
   taglineAccent: 'scale.',
   subTagline: 'TypeScript · Go · React · Microservices',
@@ -15,12 +15,18 @@ export const personal = {
   openTo: 'Full-time · Remote · Relocation',
   education: 'B.Tech CSE, JNTUGV (2019–2023)',
   stats: [
-    { value: '3+', label: 'Years experience' },
-    { value: '4', label: 'Companies shipped at' },
-    { value: '1', label: 'Open-source lib' },
-    { value: '3', label: 'Technical articles' },
+    { value: '3+', label: 'Years' },
+    // { value: '4', label: 'Companies' },
+    { value: '1', label: 'OSS Lib' },
+    { value: '3', label: 'Articles' },
   ],
   about: `SDE based in Hyderabad with 3+ years building scalable systems — from real-time analytics platforms handling live production traffic, to open-source component libraries and Go CLI tools used by other developers. I care about clean architecture, measurable impact, and writing code that doesn't rot.`,
+  missionStats: [
+    { label: 'Systems Deployed', value: '6+' },
+    { label: 'npm Downloads / wk', value: '~1k' },
+    { label: 'Lighthouse Score Δ', value: '54 → 97' },
+    // { label: 'Test Coverage', value: '~90%' },
+  ],
 }
 
 // ─── WORK EXPERIENCE ──────────────────────────────────────────────────────

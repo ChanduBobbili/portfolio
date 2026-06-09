@@ -2,16 +2,16 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Mail } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { personal } from '@/data/portfolio'
 
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
   { label: 'Work', href: '#work' },
   { label: 'Skills', href: '#skills' },
+  { label: 'Projects', href: '#projects' },
   { label: 'Writing', href: '#writing' },
   { label: 'Contact', href: '#contact' },
 ]
@@ -24,35 +24,45 @@ export function Navbar() {
   const activeId = useScrollSpy(SECTION_IDS, 80)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60)
+    const onScroll = () => setScrolled(window.scrollY > 80)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   const scrollTo = (href: string) => {
     setMobileOpen(false)
-    const el = document.querySelector(href)
-    el?.scrollIntoView({ behavior: 'smooth' })
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'backdrop-blur-md border-b border-[var(--nav-border)]'
-          : 'border-b border-transparent'
-      }`}
-      style={{ backgroundColor: scrolled ? 'var(--nav-bg-scrolled)' : 'transparent' }}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      style={{
+        backgroundColor: scrolled ? 'var(--nav-bg)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
+        borderBottom: scrolled ? '1px solid var(--nav-border)' : '1px solid transparent',
+      }}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1080px] mx-auto px-6 md:px-12">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-lg font-semibold text-[var(--text-primary)] hover:opacity-80 transition-opacity cursor-pointer"
+            className="relative flex items-center gap-2 cursor-pointer group"
+            aria-label="Scroll to top"
           >
-            Chandu Bobbili
-            <span className="text-[var(--accent-purple)]">.</span>
+            <span className="font-display text-xl font-extrabold text-text-primary tracking-wide">
+              Chandu Bobbili
+            </span>
+            <span
+              className="absolute -right-3 -top-1 w-2 h-2 rounded-full animate-orbit"
+              style={{
+                background: 'var(--accent)',
+                boxShadow: '0 0 8px var(--accent)',
+                transformOrigin: '0px 14px',
+              }}
+            />
           </button>
 
           {/* Desktop nav */}
@@ -63,17 +73,15 @@ export function Navbar() {
                 <button
                   key={link.href}
                   onClick={() => scrollTo(link.href)}
-                  className={`relative px-3 py-1.5 text-sm font-medium transition-colors duration-200 cursor-pointer rounded-md ${
-                    isActive
-                      ? 'text-[var(--accent-purple)]'
-                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                  className={`relative px-3 py-1.5 font-mono-tech text-[11px] uppercase tracking-widest transition-colors cursor-pointer ${
+                    isActive ? 'text-accent' : 'text-text-secondary hover:text-text-primary'
                   }`}
                 >
                   {link.label}
                   {isActive && (
                     <motion.span
-                      layoutId="nav-underline"
-                      className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-[var(--accent-purple)]"
+                      layoutId="nav-dot"
+                      className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent"
                     />
                   )}
                 </button>
@@ -81,30 +89,18 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Right side */}
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle />
-            <a
-              href={`mailto:${personal.email}`}
-              className="
-                flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium
-                bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)]
-                hover:bg-[var(--btn-primary-hover)]
-                hover:shadow-[var(--glow-purple)]
-                transition-all duration-200
-              "
-            >
-              <Mail size={14} />
+            <a href={`mailto:${personal.email}`} className="btn-primary text-xs py-2 px-4">
               Hire me
             </a>
           </div>
 
-          {/* Mobile toggle */}
           <div className="flex md:hidden items-center gap-2">
             <ThemeToggle />
             <button
               onClick={() => setMobileOpen((v) => !v)}
-              className="w-9 h-9 flex items-center justify-center rounded-lg border border-[var(--border-default)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+              className="w-9 h-9 flex items-center justify-center rounded-xl border border-border-default text-text-secondary"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={18} /> : <Menu size={18} />}
@@ -113,47 +109,26 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            key="mobile-menu"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.18 }}
-            className="md:hidden border-t border-[var(--border-default)] bg-[var(--bg-surface)]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="md:hidden fixed inset-0 top-16 z-40 flex flex-col bg-bg-base items-center justify-center gap-6"
           >
-            <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-1">
-              {NAV_LINKS.map((link) => {
-                const isActive = activeId === link.href.replace('#', '')
-                return (
-                  <button
-                    key={link.href}
-                    onClick={() => scrollTo(link.href)}
-                    className={`text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
-                      isActive
-                        ? 'text-[var(--accent-purple)] bg-[var(--bg-elevated)]'
-                        : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]'
-                    }`}
-                  >
-                    {link.label}
-                  </button>
-                )
-              })}
-              <a
-                href={`mailto:${personal.email}`}
-                className="
-                  mt-2 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium
-                  bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)]
-                  hover:bg-[var(--btn-primary-hover)]
-                  transition-all duration-200
-                "
+            {NAV_LINKS.map((link) => (
+              <button
+                key={link.href}
+                onClick={() => scrollTo(link.href)}
+                className="font-mono-tech text-sm uppercase tracking-widest text-text-primary"
               >
-                <Mail size={14} />
-                Hire me
-              </a>
-            </div>
+                {link.label}
+              </button>
+            ))}
+            <a href={`mailto:${personal.email}`} className="btn-primary mt-4">
+              Hire me
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
