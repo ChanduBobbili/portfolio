@@ -1,13 +1,66 @@
 'use client'
 
+import { useState } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
 import { articles } from '@/data/portfolio'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { Badge } from '@/components/ui/badge'
-import { SpaceCard } from '@/components/ui/SpaceCard'
+import { WobbleCard } from '@/components/ui/wobble-card'
+import { ArticleDialog } from '@/components/ui/ArticleDialog'
+import { cn } from '@/lib/utils'
+
+const ARTICLE_BG: Record<string, string> = {
+  purple: 'bg-[#1a3550]',
+  cyan: 'bg-[#0d3d5c]',
+  green: 'bg-[#0f3d4a]',
+}
+
+const articleLayouts = [
+  {
+    key: 'seo',
+    colSpan: 'col-span-1 lg:col-span-2',
+    containerClassName: 'h-full min-h-[200px] lg:min-h-[300px]',
+    contentClassName: 'max-w-xs',
+    imageClassName:
+      'absolute -right-4 lg:-right-[40%] grayscale filter -bottom-10 object-contain rounded-2xl',
+    imageWidth: 500,
+    imageHeight: 500,
+  },
+  {
+    key: 'biome',
+    colSpan: 'col-span-1',
+    containerClassName: 'min-h-[200px]',
+    contentClassName: 'max-w-80',
+    imageClassName:
+      'absolute -right-4 -bottom-6 w-40 h-40 md:w-48 md:h-48 object-contain rounded-2xl grayscale filter opacity-90',
+    imageWidth: 300,
+    imageHeight: 300,
+  },
+  {
+    key: 'changesetgoo',
+    colSpan: 'col-span-1 lg:col-span-3',
+    containerClassName: 'min-h-[200px] lg:min-h-[600px] xl:min-h-[300px]',
+    contentClassName: 'max-w-sm',
+    imageClassName:
+      'absolute -right-10 md:-right-[40%] lg:-right-[20%] -bottom-10 object-contain rounded-2xl grayscale filter',
+    imageWidth: 500,
+    imageHeight: 500,
+  },
+] as const
+
+function getArticle(key: string) {
+  const article = articles.find((a) => {
+    if (key === 'seo') return a.title.toLowerCase().includes('seo')
+    if (key === 'biome') return a.title.toLowerCase().includes('biome')
+    return a.title.toLowerCase().includes('changesetgoo')
+  })
+  if (!article) throw new Error(`Article not found for key: ${key}`)
+  return article
+}
 
 export function TechnicalWriting() {
+  const [selectedArticle, setSelectedArticle] = useState<(typeof articles)[number] | null>(null)
+
   return (
     <section id="writing" className="section-even relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
@@ -38,47 +91,34 @@ export function TechnicalWriting() {
           </motion.a>
         </motion.p>
 
-        <div className="flex flex-col gap-2">
-          {articles.map((article, i) => (
-            <motion.a
-              key={article.title}
-              href={article.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: i * 0.2 }}
-              className="block"
-            >
-              <SpaceCard className="group p-5 flex flex-col transition-colors duration-200 ease-in-out hover:bg-brand-strong/10">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {article.tags.map((tag) => (
-                    <Badge key={tag} variant="secondary" className="font-sans rounded-lg text-[0.6875rem]">
-                      {tag}
-                    </Badge>
-                  ))}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 w-full">
+          {articleLayouts.map((layout) => {
+            const article = getArticle(layout.key)
+            const bgClass = ARTICLE_BG[article.accent] ?? ARTICLE_BG.purple
+
+            return (
+              <WobbleCard
+                key={layout.key}
+                containerClassName={cn(layout.containerClassName, layout.colSpan, bgClass)}
+                onClick={() => setSelectedArticle(article)}
+              >
+                <div className={layout.contentClassName}>
+                  <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white font-heading">
+                    {article.title}
+                  </h2>
+                  <p className="mt-4 text-left text-base/6 text-neutral-200 font-sans">
+                    {article.summary}
+                  </p>
                 </div>
-
-                <h3 className="font-heading text-base font-semibold text-foreground mb-3 leading-snug group-hover:text-bg-section-alt transition-colors duration-300 ease-in-out">
-                  {article.title}
-                </h3>
-
-                <p className="font-sans text-sm text-muted-foreground leading-[1.75] mb-5 flex-1 group-hover:text-bg-section-alt transition-colors duration-300 ease-in-out">
-                  {article.summary}
-                </p>
-
-                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand mt-auto group-hover:text-bg-section-alt transition-colors duration-300 ease-in-out">
-                  Read on DEV
-                  <ArrowRight
-                    size={14}
-                    className="transition-transform duration-200 group-hover:translate-x-1"
-                  />
-                </span>
-              </SpaceCard>
-            </motion.a>
-          ))}
+              </WobbleCard>
+            )
+          })}
         </div>
+
+        <ArticleDialog
+          article={selectedArticle}
+          onOpenChange={(open) => !open && setSelectedArticle(null)}
+        />
       </div>
     </section>
   )
