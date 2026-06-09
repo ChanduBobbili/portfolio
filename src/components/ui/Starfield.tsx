@@ -11,7 +11,13 @@ function parseStarColor(): [number, number, number] {
   return [96, 165, 250]
 }
 
-export function Starfield({ className = '', density = 48 }: { className?: string; density?: number }) {
+export function Starfield({
+  className = '',
+  density = 48,
+}: {
+  className?: string
+  density?: number
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {

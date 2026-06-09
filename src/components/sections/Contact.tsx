@@ -37,8 +37,8 @@ export function Contact() {
           </h2>
 
           <p className="relative text-text-secondary leading-[1.75] mb-8">
-            Open to full-time roles, freelance projects, and interesting collaborations.
-            Best way to reach me is email — I reply within 24 hours.
+            Open to full-time roles, freelance projects, and interesting collaborations. Best way to
+            reach me is email — I reply within 24 hours.
           </p>
 
           <div className="relative flex flex-col sm:flex-row gap-3 justify-center mb-6">
@@ -56,17 +56,15 @@ export function Contact() {
               GitHub
             </a>
             <a
-            href={personal.linkedin}
-           target="_blank"
+              href={personal.linkedin}
+              target="_blank"
               rel="noopener noreferrer"
               className="btn-ghost"
-          >
-            <LinkedinIcon style={{ width: 16, height: 16 }} />
-            LinkedIn 
-          </a>
+            >
+              <LinkedinIcon style={{ width: 16, height: 16 }} />
+              LinkedIn
+            </a>
           </div>
-
-          
         </motion.div>
       </div>
     </section>

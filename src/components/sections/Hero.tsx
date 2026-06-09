@@ -18,26 +18,45 @@ const fadeUp = {
 
 export function Hero() {
   return (
-    <section id="hero" className="section-odd relative min-h-screen flex items-center overflow-hidden pt-16">
+    <section
+      id="hero"
+      className="section-odd relative min-h-screen flex items-center overflow-hidden pt-16"
+    >
       <Starfield density={36} />
 
       <div className="relative max-w-7xl mx-auto px-4 py-20 w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left column */}
           <motion.div initial="hidden" animate="visible" className="max-w-2xl">
-            <motion.h1 custom={1} variants={fadeUp} className="text-display-hero text-text-primary mb-3">
+            <motion.h1
+              custom={1}
+              variants={fadeUp}
+              className="text-display-hero text-text-primary mb-3"
+            >
               {personal.name}
             </motion.h1>
 
-            <motion.p custom={2} variants={fadeUp} className="font-display text-lg font-semibold text-accent mb-4">
+            <motion.p
+              custom={2}
+              variants={fadeUp}
+              className="font-display text-lg font-semibold text-accent mb-4"
+            >
               {personal.role}
             </motion.p>
 
-            <motion.p custom={3} variants={fadeUp} className="text-lg text-text-secondary italic mb-2">
+            <motion.p
+              custom={3}
+              variants={fadeUp}
+              className="text-lg text-text-secondary italic mb-2"
+            >
               &ldquo;{personal.tagline}&rdquo;
             </motion.p>
 
-            <motion.p custom={4} variants={fadeUp} className="font-mono-tech text-sm text-text-tertiary mb-8">
+            <motion.p
+              custom={4}
+              variants={fadeUp}
+              className="font-mono-tech text-sm text-text-tertiary mb-8"
+            >
               {personal.subTagline}
             </motion.p>
 
@@ -46,7 +65,12 @@ export function Hero() {
                 <Mail size={16} />
                 Get in touch
               </a>
-              <a href={personal.github} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+              <a
+                href={personal.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-ghost"
+              >
                 <GithubIcon style={{ width: 16, height: 16 }} />
                 GitHub
               </a>

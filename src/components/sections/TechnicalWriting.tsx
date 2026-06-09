@@ -52,7 +52,9 @@ export function TechnicalWriting() {
             >
               <div className="flex flex-wrap gap-2 mb-4">
                 {article.tags.map((tag) => (
-                  <span key={tag} className="tag-mono">{tag}</span>
+                  <span key={tag} className="tag-mono">
+                    {tag}
+                  </span>
                 ))}
               </div>
 

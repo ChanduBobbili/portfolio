@@ -155,7 +155,7 @@ export const experience: ExperienceEntry[] = [
         name: 'Apxor Dashboard — CRA → Vite Migration',
         accent: 'cyan',
         description:
-          'Led the migration of Apxor\'s legacy Create React App dashboard to a modern Vite-based stack. Started by designing the new Stories feature UI in Figma, then drove the full codebase modernisation — achieving an 80% Lighthouse score improvement.',
+          "Led the migration of Apxor's legacy Create React App dashboard to a modern Vite-based stack. Started by designing the new Stories feature UI in Figma, then drove the full codebase modernisation — achieving an 80% Lighthouse score improvement.",
         stack: [
           'Vite',
           'React',
@@ -176,10 +176,10 @@ export const experience: ExperienceEntry[] = [
         name: 'Apxor Company Website',
         accent: 'green',
         description:
-          'Maintained and enhanced Apxor\'s public-facing marketing website on Webflow. Implemented a multi-tool analytics stack, monitored user behaviour, and generated insight reports that informed product and design decisions.',
+          "Maintained and enhanced Apxor's public-facing marketing website on Webflow. Implemented a multi-tool analytics stack, monitored user behaviour, and generated insight reports that informed product and design decisions.",
         stack: ['Webflow', 'Google Analytics', 'Google Tag Manager', 'Mixpanel', 'Apxor SDK'],
         bullets: [
-          'Maintained Apxor\'s Webflow website across all breakpoints; instrumented a multi-tool analytics stack (Google Analytics, GTM, Mixpanel, Apxor SDK) to track user behaviour.',
+          "Maintained Apxor's Webflow website across all breakpoints; instrumented a multi-tool analytics stack (Google Analytics, GTM, Mixpanel, Apxor SDK) to track user behaviour.",
           'Generated insight reports from traffic and performance analytics that directly informed product and design decisions.',
         ],
       },
@@ -254,17 +254,45 @@ export const skills = [
   {
     category: 'Go Internals',
     accent: 'cyan',
-    items: ['Goroutines', 'Channels', 'WaitGroup', 'Mutex', 'Worker Pools', 'Context Cancellation', 'gRPC'],
+    items: [
+      'Goroutines',
+      'Channels',
+      'WaitGroup',
+      'Mutex',
+      'Worker Pools',
+      'Context Cancellation',
+      'gRPC',
+    ],
   },
   {
     category: 'Frontend',
     accent: 'purple',
-    items: ['React.js', 'Next.js', 'TanStack', 'Zustand', 'Tailwind CSS', 'Shadcn UI', 'Vitest', 'Playwright', 'Webflow'],
+    items: [
+      'React.js',
+      'Next.js',
+      'TanStack',
+      'Zustand',
+      'Tailwind CSS',
+      'Shadcn UI',
+      'Vitest',
+      'Playwright',
+      'Webflow',
+    ],
   },
   {
     category: 'Backend & Messaging',
     accent: 'cyan',
-    items: ['Microservices', 'REST APIs', 'Node.js', 'Express.js', 'WebSockets', 'SSE', 'BFF Pattern', 'Kafka', 'gRPC'],
+    items: [
+      'Microservices',
+      'REST APIs',
+      'Node.js',
+      'Express.js',
+      'WebSockets',
+      'SSE',
+      'BFF Pattern',
+      'Kafka',
+      'gRPC',
+    ],
   },
   {
     category: 'Databases',
@@ -297,7 +325,7 @@ export const articles = [
   {
     title: 'Biome Has Entered the Chat: A New Tool to Replace ESLint and Prettier',
     summary:
-      'An introduction to Biome — a fast, unified linter and formatter written in Rust — and why it\'s a compelling replacement for the ESLint + Prettier combo.',
+      "An introduction to Biome — a fast, unified linter and formatter written in Rust — and why it's a compelling replacement for the ESLint + Prettier combo.",
     tags: ['Tooling', 'DX', 'Open Source'],
     accent: 'cyan',
     url: 'https://dev.to/chandu_bobbili_06/biome-has-entered-the-chat-a-new-tool-to-replace-eslint-and-prettier-1p8e',

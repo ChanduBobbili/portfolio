@@ -34,7 +34,9 @@ export function Skills() {
                 <div className="flex items-center gap-2.5">
                   <span
                     className="w-2 h-2 rounded-full shrink-0 bg-accent"
-                    style={{ boxShadow: '0 0 8px color-mix(in srgb, var(--accent) 50%, transparent)' }}
+                    style={{
+                      boxShadow: '0 0 8px color-mix(in srgb, var(--accent) 50%, transparent)',
+                    }}
                   />
                   <p className="font-mono-tech text-[11px] uppercase tracking-[0.12em] font-semibold text-accent">
                     {group.category}

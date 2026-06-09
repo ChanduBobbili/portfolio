@@ -29,9 +29,7 @@ export function BorderBeam({
   return (
     <div
       className={`pointer-events-none absolute inset-0 overflow-hidden ${
-        alwaysVisible
-          ? ''
-          : 'opacity-0 group-hover:opacity-100 transition-opacity duration-300'
+        alwaysVisible ? '' : 'opacity-0 group-hover:opacity-100 transition-opacity duration-300'
       } ${className}`}
       style={{ borderRadius }}
     >

@@ -24,7 +24,9 @@ export function ResumeDialog({ open, onClose, onMinimize }: ResumeDialogProps) {
   // Prevent body scroll when open
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [open])
 
   return (

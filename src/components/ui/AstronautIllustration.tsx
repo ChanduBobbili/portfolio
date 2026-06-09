@@ -14,10 +14,7 @@ export function AstronautIllustration({ className = '' }: { className?: string }
             className="absolute inset-0 rounded-full border border-dashed"
             style={{ borderColor: 'color-mix(in srgb, var(--accent) 25%, transparent)' }}
           />
-          <div
-            className="absolute inset-0 animate-orbit"
-            style={{ transformOrigin: 'center' }}
-          >
+          <div className="absolute inset-0 animate-orbit" style={{ transformOrigin: 'center' }}>
             <span
               className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full"
               style={{ background: 'var(--accent)', boxShadow: '0 0 12px var(--accent)' }}
@@ -61,22 +58,57 @@ export function AstronautIllustration({ className = '' }: { className?: string }
           strokeOpacity="0.5"
           strokeWidth="1.5"
         />
-        <rect x="132" y="268" width="56" height="44" rx="10"
+        <rect
+          x="132"
+          y="268"
+          width="56"
+          height="44"
+          rx="10"
           fill="color-mix(in srgb, var(--accent-soft) 50%, transparent)"
           stroke="var(--accent)"
           strokeOpacity="0.3"
         />
 
         {/* Shoulder patch */}
-        <circle cx="128" cy="262" r="10" fill="var(--accent)" fillOpacity="0.2" stroke="var(--accent)" strokeOpacity="0.5" />
-        <path d="M124 262 L128 258 L132 266" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <circle
+          cx="128"
+          cy="262"
+          r="10"
+          fill="var(--accent)"
+          fillOpacity="0.2"
+          stroke="var(--accent)"
+          strokeOpacity="0.5"
+        />
+        <path
+          d="M124 262 L128 258 L132 266"
+          stroke="var(--accent)"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
 
         {/* Arms */}
-        <path d="M118 255 C92 270 84 290 90 310" stroke="var(--accent)" strokeOpacity="0.45" strokeWidth="14" strokeLinecap="round" />
-        <path d="M202 255 C228 270 236 290 230 310" stroke="var(--accent)" strokeOpacity="0.45" strokeWidth="14" strokeLinecap="round" />
+        <path
+          d="M118 255 C92 270 84 290 90 310"
+          stroke="var(--accent)"
+          strokeOpacity="0.45"
+          strokeWidth="14"
+          strokeLinecap="round"
+        />
+        <path
+          d="M202 255 C228 270 236 290 230 310"
+          stroke="var(--accent)"
+          strokeOpacity="0.45"
+          strokeWidth="14"
+          strokeLinecap="round"
+        />
 
         {/* Helmet ring */}
-        <ellipse cx="160" cy="168" rx="78" ry="82"
+        <ellipse
+          cx="160"
+          cy="168"
+          rx="78"
+          ry="82"
           fill="color-mix(in srgb, var(--bg-elevated) 80%, transparent)"
           stroke="var(--accent)"
           strokeOpacity="0.55"
@@ -84,7 +116,12 @@ export function AstronautIllustration({ className = '' }: { className?: string }
         />
 
         {/* Visor glass */}
-        <rect x="98" y="108" width="124" height="96" rx="28"
+        <rect
+          x="98"
+          y="108"
+          width="124"
+          height="96"
+          rx="28"
           fill="color-mix(in srgb, var(--accent-sky) 15%, var(--bg-base))"
           stroke="var(--accent)"
           strokeOpacity="0.65"
@@ -99,20 +136,62 @@ export function AstronautIllustration({ className = '' }: { className?: string }
         <ellipse cx="175" cy="168" rx="18" ry="12" fill="var(--accent)" fillOpacity="0.12" />
 
         {/* Visor highlight */}
-        <path d="M108 118 C130 108 170 106 205 118" stroke="white" strokeOpacity="0.35" strokeWidth="3" strokeLinecap="round" />
+        <path
+          d="M108 118 C130 108 170 106 205 118"
+          stroke="white"
+          strokeOpacity="0.35"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
 
         {/* Antenna */}
-        <line x1="210" y1="118" x2="238" y2="88" stroke="var(--accent)" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" />
-        <circle cx="240" cy="86" r="5" fill="var(--accent-sky)" style={{ filter: 'drop-shadow(0 0 6px var(--accent-sky))' }} />
+        <line
+          x1="210"
+          y1="118"
+          x2="238"
+          y2="88"
+          stroke="var(--accent)"
+          strokeOpacity="0.5"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <circle
+          cx="240"
+          cy="86"
+          r="5"
+          fill="var(--accent-sky)"
+          style={{ filter: 'drop-shadow(0 0 6px var(--accent-sky))' }}
+        />
 
         {/* Backpack */}
-        <rect x="198" y="220" width="28" height="52" rx="8"
+        <rect
+          x="198"
+          y="220"
+          width="28"
+          height="52"
+          rx="8"
           fill="color-mix(in srgb, var(--accent) 12%, var(--bg-surface))"
           stroke="var(--accent)"
           strokeOpacity="0.35"
         />
-        <rect x="204" y="232" width="16" height="6" rx="2" fill="var(--accent)" fillOpacity="0.25" />
-        <rect x="204" y="246" width="16" height="6" rx="2" fill="var(--accent)" fillOpacity="0.25" />
+        <rect
+          x="204"
+          y="232"
+          width="16"
+          height="6"
+          rx="2"
+          fill="var(--accent)"
+          fillOpacity="0.25"
+        />
+        <rect
+          x="204"
+          y="246"
+          width="16"
+          height="6"
+          rx="2"
+          fill="var(--accent)"
+          fillOpacity="0.25"
+        />
       </svg>
     </div>
   )

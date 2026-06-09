@@ -26,9 +26,7 @@ export function About() {
             transition={{ duration: 0.5 }}
           >
             <h2 className="text-section-title text-text-primary mb-6">About Me</h2>
-            <p className="text-text-secondary text-base leading-[1.75] mb-8">
-              {personal.about}
-            </p>
+            <p className="text-text-secondary text-base leading-[1.75] mb-8">{personal.about}</p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {infoCards.map((card, i) => (
@@ -47,9 +45,7 @@ export function About() {
                       {card.label}
                     </span>
                   </div>
-                  <p className="text-sm font-medium text-text-primary leading-snug">
-                    {card.value}
-                  </p>
+                  <p className="text-sm font-medium text-text-primary leading-snug">{card.value}</p>
                 </motion.div>
               ))}
             </div>
@@ -63,9 +59,7 @@ export function About() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="glass-card p-6 lg:p-8"
           >
-            <h3 className="font-display text-xl font-bold text-text-primary mb-6">
-              Mission Stats
-            </h3>
+            <h3 className="font-display text-xl font-bold text-text-primary mb-6">Mission Stats</h3>
             <div className="flex flex-col">
               {personal.missionStats.map((stat, i) => (
                 <div
@@ -77,9 +71,7 @@ export function About() {
                   <span className="font-mono-tech text-xs text-text-tertiary uppercase tracking-wider">
                     {stat.label}
                   </span>
-                  <span className="font-display text-lg font-bold text-accent">
-                    {stat.value}
-                  </span>
+                  <span className="font-display text-lg font-bold text-accent">{stat.value}</span>
                 </div>
               ))}
             </div>

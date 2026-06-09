@@ -84,7 +84,9 @@ export function WorkExperience() {
                         style={{
                           background: isCurrent ? 'var(--accent)' : 'var(--bg-base)',
                           borderColor: 'var(--accent)',
-                          boxShadow: isCurrent ? '0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent)' : 'none',
+                          boxShadow: isCurrent
+                            ? '0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent)'
+                            : 'none',
                         }}
                       />
                     </div>
@@ -134,7 +136,7 @@ export function WorkExperience() {
                     </div>
                   </motion.article>
                 )
-              }),
+              })
             )}
           </div>
         </div>
