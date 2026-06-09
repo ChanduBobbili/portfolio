@@ -26,8 +26,8 @@ export function ArticleDialog({ article, onOpenChange }: ArticleDialogProps) {
     <Dialog open={!!article} onOpenChange={onOpenChange}>
       <DialogContent
         from="bottom"
-        className="sm:max-w-md p-0 rounded-t-none"
-        overlayClassName="bg-black/50 backdrop-blur-xs"
+        className="sm:max-w-md p-0 rounded-t-none border-none shadow-md shadow-accent"
+        overlayClassName="bg-background/50 backdrop-blur-xs md:backdrop-blur-sm"
         showCloseButton={false}
       >
         {article && (
@@ -53,7 +53,7 @@ export function ArticleDialog({ article, onOpenChange }: ArticleDialogProps) {
               </DialogHeader>
 
               <DialogFooter className="sm:justify-start">
-                <Button asChild variant="link" className="p-0">
+                <Button asChild variant="link" className="p-0 mr-auto">
                   <Link href={article.url} target="_blank" rel="noopener noreferrer">
                     Read on DEV
                     <ArrowRight size={16} />

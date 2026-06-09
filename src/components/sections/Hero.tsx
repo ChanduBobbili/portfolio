@@ -22,7 +22,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="section-odd relative min-h-screen flex items-center overflow-hidden pt-16"
+      className="section-odd relative min-h-screen flex items-center overflow-hidden pt-16 pb-8 md:pb-20"
     >
       <Starfield density={36} />
 

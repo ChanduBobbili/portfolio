@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge'
 
 export function Skills() {
   return (
-    <section id="skills" className="section-even relative overflow-hidden">
+    <section id="skills" className="section-even relative overflow-hidden py-8 md:py-20">
       <div className="max-w-7xl mx-auto px-4">
         <SectionTitle className="mb-12">Skills</SectionTitle>
 

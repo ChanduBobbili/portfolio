@@ -203,7 +203,7 @@ function ProjectsMobile() {
 
 export function Projects() {
   return (
-    <section id="projects" className="section-odd relative overflow-hidden">
+    <section id="projects" className="section-odd relative overflow-hidden py-8 md:py-20">
       <div className="max-w-7xl mx-auto px-4">
         <SectionTitle className="mb-6 md:mb-12">Open Source Contributions</SectionTitle>
         <ProjectsDesktop />

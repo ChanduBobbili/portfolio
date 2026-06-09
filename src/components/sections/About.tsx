@@ -13,7 +13,7 @@ const infoCards = [
 
 export function About() {
   return (
-    <section id="about" className="section-even relative overflow-hidden">
+    <section id="about" className="section-even relative overflow-hidden py-8 md:py-20">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <motion.div

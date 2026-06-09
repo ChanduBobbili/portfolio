@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 
 export function Contact() {
   return (
-    <section id="contact" className="section-odd relative overflow-hidden">
+    <section id="contact" className="section-odd relative overflow-hidden py-8 md:py-20">
       <div className="max-w-5xl mx-auto px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

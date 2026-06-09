@@ -30,7 +30,7 @@ export function WorkExperience() {
   const groups = groupExperience()
 
   return (
-    <section id="work" className="section-odd relative overflow-hidden">
+    <section id="work" className="section-odd relative overflow-hidden py-8 md:py-20">
       <div className="max-w-7xl mx-auto px-4">
         <SectionTitle className="mb-14">Work Experience</SectionTitle>
 
