@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, Space_Grotesk } from 'next/font/google'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import { Analytics } from "@vercel/analytics/next"
 import './globals.css'
@@ -12,6 +12,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+})
+
+const spaceGrotesk = Space_Grotesk({
+  variable: '--font-space',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -40,7 +46,7 @@ export const metadata: Metadata = {
   },
   // manifest: '/manifest.json',
   icons: [
-    { rel: 'icon', url: '/favi/favicon.ico' },
+    { rel: 'icon', url: '/favicon.ico' },
     { rel: 'apple-touch-icon', url: '/favi/apple-touch-icon.png' },
     { rel: 'icon', type: 'image/png', url: '/favi/favicon-32x32.png', sizes: '32x32' },
     { rel: 'icon', type: 'image/png', url: '/favi/favicon-16x16.png', sizes: '16x16' },
@@ -70,7 +76,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-[var(--bg-base)] text-[var(--text-primary)]">

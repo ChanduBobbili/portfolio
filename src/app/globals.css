@@ -3,132 +3,191 @@
 /* ─── Dark mode via class strategy (next-themes uses .dark on <html>) ──── */
 @variant dark (&:where(.dark, .dark *));
 
-/* ─── DARK MODE (default / .dark class on <html>) ───────────────────────── */
+/* ══════════════════════════════════════════════════════════════════════════
+   DARK MODE — Deep Space Mission Control
+   ══════════════════════════════════════════════════════════════════════════ */
 :root,
 .dark {
-  --bg-base:        #080810;
-  --bg-surface:     #0F0F1C;
-  --bg-elevated:    #18182A;
-  --bg-subtle:      #13131F;
-  --bg-section-alt: #0C0C18;
+  /* ── Space Backgrounds ── */
+  --bg-base:         #04040E;
+  --bg-surface:      #07071A;
+  --bg-elevated:     #0C0C22;
+  --bg-subtle:       #060614;
+  --bg-section-alt:  #060610;
+  --bg-card:         #0A0A1E;
 
-  --border-default: #252538;
-  --border-muted:   #1C1C2E;
-  --border-neon:    #7C3AED33;
+  /* ── Space Borders ── */
+  --border-default:  #1C1C3C;
+  --border-muted:    #141428;
+  --border-bright:   #2C2C55;
+  --border-neon:     rgba(34, 211, 238, 0.18);
+  --border-stellar:  rgba(168, 85, 247, 0.18);
 
-  --text-primary:   #EEEEFF;
-  --text-secondary: #8888AA;
-  --text-tertiary:  #50506A;
+  /* ── Text ── */
+  --text-primary:    #E2E2FF;
+  --text-secondary:  #7878A8;
+  --text-tertiary:   #3C3C5E;
+  --text-dim:        #252545;
 
-  --accent-purple:  #A78BFA;
-  --accent-cyan:    #22D3EE;
-  --accent-green:   #34D399;
-  --accent-pink:    #F472B6;
+  /* ── Space Accent Colors ── */
+  --accent-stellar:  #22D3EE;   /* Electric cyan — primary */
+  --accent-nebula:   #A855F7;   /* Cosmic purple */
+  --accent-solar:    #FB923C;   /* Astronaut orange */
+  --accent-aurora:   #34D399;   /* Neon green */
+  --accent-star:     #FBBF24;   /* Gold star */
 
-  --glow-purple:    0 0 20px rgba(167,139,250,0.35), 0 0 50px rgba(167,139,250,0.15);
-  --glow-cyan:      0 0 20px rgba(34,211,238,0.35),  0 0 50px rgba(34,211,238,0.15);
-  --glow-green:     0 0 20px rgba(52,211,153,0.35),  0 0 50px rgba(52,211,153,0.15);
+  /* ── Legacy aliases for backward compat ── */
+  --accent-purple:   #A855F7;
+  --accent-cyan:     #22D3EE;
+  --accent-green:    #34D399;
+  --accent-pink:     #F472B6;
 
-  --card-shadow:       0 1px 3px rgba(0,0,0,0.5), 0 4px 20px rgba(0,0,0,0.3);
-  --card-shadow-hover: 0 8px 32px rgba(167,139,250,0.20), 0 2px 8px rgba(0,0,0,0.4);
+  /* ── Glows ── */
+  --glow-stellar:    0 0 15px rgba(34,211,238,0.55),  0 0 50px rgba(34,211,238,0.18);
+  --glow-nebula:     0 0 15px rgba(168,85,247,0.55),  0 0 50px rgba(168,85,247,0.18);
+  --glow-solar:      0 0 15px rgba(251,146,60,0.55),  0 0 50px rgba(251,146,60,0.18);
+  --glow-aurora:     0 0 15px rgba(52,211,153,0.55),  0 0 50px rgba(52,211,153,0.18);
+  --glow-purple:     0 0 15px rgba(168,85,247,0.55),  0 0 50px rgba(168,85,247,0.18);
+  --glow-cyan:       0 0 15px rgba(34,211,238,0.55),  0 0 50px rgba(34,211,238,0.18);
+  --glow-green:      0 0 15px rgba(52,211,153,0.55),  0 0 50px rgba(52,211,153,0.18);
 
-  --btn-primary-bg:            #7C3AED;
-  --btn-primary-hover:         #6D28D9;
-  --btn-primary-text:          #FFFFFF;
-  --btn-secondary-border:      #252538;
-  --btn-secondary-text:        #EEEEFF;
-  --btn-secondary-hover-border:#A78BFA;
+  /* ── Card Shadows ── */
+  --card-shadow:       0 2px 8px rgba(0,0,0,0.8),   0 1px 3px rgba(0,0,0,0.6);
+  --card-shadow-hover: 0 8px 32px rgba(34,211,238,0.12), 0 2px 8px rgba(0,0,0,0.8);
 
-  --nav-bg-scrolled: rgba(8, 8, 16, 0.88);
-  --nav-border:      #252538;
+  /* ── Buttons ── */
+  --btn-primary-bg:             #0E7490;
+  --btn-primary-hover:          #0891B2;
+  --btn-primary-text:           #FFFFFF;
+  --btn-secondary-border:       #1C1C3C;
+  --btn-secondary-text:         #E2E2FF;
+  --btn-secondary-hover-border: #22D3EE;
 
-  --dot-active:   #A78BFA;
-  --dot-inactive: #252538;
+  /* ── Navigation ── */
+  --nav-bg-scrolled: rgba(4, 4, 14, 0.92);
+  --nav-border:      #1C1C3C;
 
-  --gradient-hero:     radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124,58,237,0.22) 0%, transparent 70%);
-  --gradient-glow-top: radial-gradient(ellipse 60% 40% at 80% 20%, rgba(34,211,238,0.14) 0%, transparent 60%);
+  /* ── Dots ── */
+  --dot-active:   #22D3EE;
+  --dot-inactive: #1C1C3C;
+
+  /* ── Background Gradients ── */
+  --gradient-hero:     radial-gradient(ellipse 90% 70% at 65% 0%, rgba(168,85,247,0.14) 0%, rgba(34,211,238,0.06) 50%, transparent 70%);
+  --gradient-glow-top: radial-gradient(ellipse 60% 40% at 25% 25%, rgba(34,211,238,0.08) 0%, transparent 60%);
 }
 
-/* ─── LIGHT MODE (.light class on <html>) ───────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════════════════
+   LIGHT MODE — Daylight Space Exploration
+   SpaceX meets Apple Vision Pro
+   ══════════════════════════════════════════════════════════════════════════ */
 .light {
-  /* Rich, purple-tinted backgrounds — not plain white */
-  --bg-base:        #F6F5FE;
-  --bg-surface:     #FFFFFF;
-  --bg-elevated:    #ECEAF8;
-  --bg-subtle:      #F1EFF9;
-  --bg-section-alt: #EAE7F5;
+  /* ── Pearl White + Cosmic Blue Backgrounds ── */
+  --bg-base:         #EEF2FF;
+  --bg-surface:      #FFFFFF;
+  --bg-elevated:     #E2EAFF;
+  --bg-subtle:       #F4F7FF;
+  --bg-section-alt:  #E8EEFF;
+  --bg-card:         #FAFBFF;
 
-  /* Purple-tinted borders for definition */
-  --border-default: #D8D4EE;
-  --border-muted:   #E5E2F2;
-  --border-neon:    #7C3AED28;
+  /* ── Space Borders ── */
+  --border-default:  #C0CCEE;
+  --border-muted:    #D8E2F8;
+  --border-bright:   #9AAADE;
+  --border-neon:     rgba(14, 116, 144, 0.20);
+  --border-stellar:  rgba(124, 58, 237, 0.16);
 
-  /* Strong, legible text */
-  --text-primary:   #0A0818;
-  --text-secondary: #46406E;
-  --text-tertiary:  #8880AA;
+  /* ── Rich, readable text ── */
+  --text-primary:    #080D2C;
+  --text-secondary:  #3050A8;
+  --text-tertiary:   #6878B8;
+  --text-dim:        #9898C0;
 
-  /* Vibrant, rich accent colors */
-  --accent-purple:  #7C3AED;
-  --accent-cyan:    #0E7490;
-  --accent-green:   #047857;
-  --accent-pink:    #BE185D;
+  /* ── Deep Space Colors for Light Background ── */
+  --accent-stellar:  #0E7490;   /* Deep space teal */
+  --accent-nebula:   #7C3AED;   /* Cosmic violet */
+  --accent-solar:    #EA580C;   /* Sunrise orange */
+  --accent-aurora:   #059669;   /* Earth green */
+  --accent-star:     #D97706;   /* Amber gold */
 
-  /* Proper depth shadows */
-  --glow-purple:    0 4px 20px rgba(124,58,237,0.20), 0 1px 4px rgba(124,58,237,0.10);
-  --glow-cyan:      0 4px 20px rgba(14,116,144,0.20),  0 1px 4px rgba(14,116,144,0.10);
-  --glow-green:     0 4px 20px rgba(4,120,87,0.20),    0 1px 4px rgba(4,120,87,0.10);
+  /* ── Legacy aliases ── */
+  --accent-purple:   #7C3AED;
+  --accent-cyan:     #0E7490;
+  --accent-green:    #059669;
+  --accent-pink:     #BE185D;
 
-  --card-shadow:       0 1px 3px rgba(10,8,24,0.07), 0 4px 16px rgba(10,8,24,0.05);
-  --card-shadow-hover: 0 12px 40px rgba(124,58,237,0.14), 0 4px 12px rgba(10,8,24,0.06);
+  /* ── Subtle Glows for Light ── */
+  --glow-stellar:    0 4px 20px rgba(14,116,144,0.25),  0 1px 6px rgba(14,116,144,0.15);
+  --glow-nebula:     0 4px 20px rgba(124,58,237,0.22),  0 1px 6px rgba(124,58,237,0.12);
+  --glow-solar:      0 4px 20px rgba(234,88,12,0.22),   0 1px 6px rgba(234,88,12,0.12);
+  --glow-aurora:     0 4px 20px rgba(5,150,105,0.22),   0 1px 6px rgba(5,150,105,0.12);
+  --glow-purple:     0 4px 20px rgba(124,58,237,0.22),  0 1px 6px rgba(124,58,237,0.12);
+  --glow-cyan:       0 4px 20px rgba(14,116,144,0.25),  0 1px 6px rgba(14,116,144,0.15);
+  --glow-green:      0 4px 20px rgba(5,150,105,0.22),   0 1px 6px rgba(5,150,105,0.12);
 
-  --btn-primary-bg:            #7C3AED;
-  --btn-primary-hover:         #6D28D9;
-  --btn-primary-text:          #FFFFFF;
-  --btn-secondary-border:      #D8D4EE;
-  --btn-secondary-text:        #0A0818;
-  --btn-secondary-hover-border:#7C3AED;
+  /* ── Card Shadows ── */
+  --card-shadow:       0 1px 4px rgba(8,13,44,0.08),  0 4px 16px rgba(8,13,44,0.05);
+  --card-shadow-hover: 0 12px 40px rgba(14,116,144,0.16), 0 4px 12px rgba(8,13,44,0.06);
 
-  --nav-bg-scrolled: rgba(246, 245, 254, 0.93);
-  --nav-border:      #D8D4EE;
+  /* ── Buttons ── */
+  --btn-primary-bg:             #0E7490;
+  --btn-primary-hover:          #0891B2;
+  --btn-primary-text:           #FFFFFF;
+  --btn-secondary-border:       #C0CCEE;
+  --btn-secondary-text:         #080D2C;
+  --btn-secondary-hover-border: #0E7490;
 
-  --dot-active:   #7C3AED;
-  --dot-inactive: #D8D4EE;
+  /* ── Navigation ── */
+  --nav-bg-scrolled: rgba(238, 242, 255, 0.96);
+  --nav-border:      #C0CCEE;
 
-  --gradient-hero:     radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124,58,237,0.14) 0%, transparent 70%);
-  --gradient-glow-top: radial-gradient(ellipse 60% 40% at 80% 20%, rgba(14,116,144,0.10) 0%, transparent 60%);
+  /* ── Dots ── */
+  --dot-active:   #0E7490;
+  --dot-inactive: #C0CCEE;
+
+  /* ── Background Gradients ── */
+  --gradient-hero:     radial-gradient(ellipse 90% 70% at 65% 0%, rgba(124,58,237,0.09) 0%, rgba(14,116,144,0.05) 50%, transparent 70%);
+  --gradient-glow-top: radial-gradient(ellipse 60% 40% at 25% 25%, rgba(14,116,144,0.06) 0%, transparent 60%);
 }
 
-/* ─── EXPOSE TOKENS TO TAILWIND v4 UTILITIES ────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════════════════
+   EXPOSE TOKENS TO TAILWIND v4 UTILITIES
+   ══════════════════════════════════════════════════════════════════════════ */
 @theme inline {
-  --color-bg-base:        var(--bg-base);
-  --color-bg-surface:     var(--bg-surface);
-  --color-bg-elevated:    var(--bg-elevated);
-  --color-bg-subtle:      var(--bg-subtle);
-  --color-bg-section-alt: var(--bg-section-alt);
+  --color-bg-base:         var(--bg-base);
+  --color-bg-surface:      var(--bg-surface);
+  --color-bg-elevated:     var(--bg-elevated);
+  --color-bg-subtle:       var(--bg-subtle);
+  --color-bg-section-alt:  var(--bg-section-alt);
 
-  --color-border-default: var(--border-default);
-  --color-border-muted:   var(--border-muted);
-  --color-border-neon:    var(--border-neon);
+  --color-border-default:  var(--border-default);
+  --color-border-muted:    var(--border-muted);
+  --color-border-neon:     var(--border-neon);
 
-  --color-text-primary:   var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-tertiary:  var(--text-tertiary);
+  --color-text-primary:    var(--text-primary);
+  --color-text-secondary:  var(--text-secondary);
+  --color-text-tertiary:   var(--text-tertiary);
 
-  --color-accent-purple:  var(--accent-purple);
-  --color-accent-cyan:    var(--accent-cyan);
-  --color-accent-green:   var(--accent-green);
-  --color-accent-pink:    var(--accent-pink);
+  --color-accent-purple:   var(--accent-purple);
+  --color-accent-cyan:     var(--accent-cyan);
+  --color-accent-green:    var(--accent-green);
+  --color-accent-pink:     var(--accent-pink);
+  --color-accent-stellar:  var(--accent-stellar);
+  --color-accent-nebula:   var(--accent-nebula);
+  --color-accent-solar:    var(--accent-solar);
 
-  --shadow-neon-purple: var(--glow-purple);
-  --shadow-neon-cyan:   var(--glow-cyan);
-  --shadow-neon-green:  var(--glow-green);
+  --shadow-neon-purple:  var(--glow-purple);
+  --shadow-neon-cyan:    var(--glow-cyan);
+  --shadow-neon-green:   var(--glow-green);
+  --shadow-neon-stellar: var(--glow-stellar);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-space);
 }
 
-/* ─── SHARED BASE STYLES ─────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════════════════
+   SHARED BASE STYLES
+   ══════════════════════════════════════════════════════════════════════════ */
 html {
   scroll-behavior: smooth;
 }
@@ -140,84 +199,148 @@ body {
 }
 
 ::selection {
-  background: rgba(167,139,250,0.25);
-  color: var(--accent-purple);
+  background: rgba(34,211,238,0.22);
+  color: var(--accent-stellar);
 }
 
 .light ::selection {
-  background: rgba(124,58,237,0.15);
-  color: #5B21B6;
+  background: rgba(14,116,144,0.15);
+  color: #0E7490;
 }
 
 section {
   padding: 5rem 0;
+  position: relative;
 }
 
-/* ─── SECTION ALT BACKGROUND UTILITY ─────────────────────────────────────── */
-.section-alt {
-  background-color: var(--bg-section-alt);
-  box-shadow: inset 0 1px 0 var(--border-muted), inset 0 -1px 0 var(--border-muted);
+.font-display {
+  font-family: var(--font-space), var(--font-geist-sans), sans-serif;
 }
 
-/* ─── GLOW UTILITIES ──────────────────────────────────────────────────────── */
-.neon-glow-purple { box-shadow: var(--glow-purple); }
-.neon-glow-cyan   { box-shadow: var(--glow-cyan); }
-.neon-glow-green  { box-shadow: var(--glow-green); }
-
-/* ─── CARD BASE UTILITY ───────────────────────────────────────────────────── */
-.card-base {
-  box-shadow: var(--card-shadow);
-  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+/* Mission control section divider */
+.sector-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--accent-stellar) 40%, transparent) 20%,
+    color-mix(in srgb, var(--accent-nebula) 40%, transparent) 80%,
+    transparent
+  );
 }
 
-.card-base:hover {
-  box-shadow: var(--card-shadow-hover);
-}
-
-/* ─── SCROLLBAR ───────────────────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
+/* ══════════════════════════════════════════════════════════════════════════
+   SCROLLBAR
+   ══════════════════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar       { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
   background: var(--border-default);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-purple);
+  background: var(--accent-stellar);
 }
 
-/* ─── KEYFRAMES ───────────────────────────────────────────────────────────── */
-@keyframes aurora {
-  0%, 100% { background-position: 0% 50%; }
-  50%       { background-position: 100% 50%; }
+/* ══════════════════════════════════════════════════════════════════════════
+   SPACE DESIGN UTILITIES
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Section alternate background */
+.section-alt {
+  background-color: var(--bg-section-alt);
+  box-shadow: inset 0 1px 0 var(--border-muted), inset 0 -1px 0 var(--border-muted);
 }
 
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33%       { transform: translateY(-16px) rotate(5deg); }
-  66%       { transform: translateY(-8px) rotate(-3deg); }
+/* Glass Panel — glassmorphism */
+.glass-panel {
+  background: rgba(7, 7, 26, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.light .glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(192, 204, 238, 0.9);
 }
 
-@keyframes float-medium {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50%       { transform: translateY(-22px) scale(1.06); }
+/* Mission Card — base card */
+.card-base {
+  box-shadow: var(--card-shadow);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+.card-base:hover {
+  box-shadow: var(--card-shadow-hover);
 }
 
-@keyframes pulse-ring {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50%       { opacity: 0.7; transform: scale(1.04); }
+/* Mission Panel — for cards that should look like dashboard panels */
+.mission-panel {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.mission-panel:hover {
+  border-color: var(--accent-stellar);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-stellar);
 }
 
-.animate-float-slow   { animation: float-slow   14s ease-in-out infinite; }
-.animate-float-medium { animation: float-medium 10s ease-in-out infinite; }
-.animate-pulse-ring   { animation: pulse-ring    3s ease-in-out infinite; }
+/* Glow utilities */
+.neon-glow-purple  { box-shadow: var(--glow-purple);  }
+.neon-glow-cyan    { box-shadow: var(--glow-cyan);    }
+.neon-glow-green   { box-shadow: var(--glow-green);   }
+.neon-glow-stellar { box-shadow: var(--glow-stellar); }
+.neon-glow-nebula  { box-shadow: var(--glow-nebula);  }
+.neon-glow-solar   { box-shadow: var(--glow-solar);   }
 
-/* ─── GRADIENT ACCENT LINE (card top border) ──────────────────────────────── */
+/* Holographic gradient text */
+.holo-text {
+  background: linear-gradient(135deg, var(--accent-stellar), var(--accent-nebula), var(--accent-stellar));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: holo-shift 4s ease infinite;
+}
+
+/* Scanner line overlay */
+.scanner-line {
+  position: relative;
+  overflow: hidden;
+}
+.scanner-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(34,211,238,0.12), transparent);
+  animation: scanner-sweep 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Accent top border lines */
+.accent-line-stellar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-stellar), var(--accent-nebula), transparent);
+  border-radius: inherit;
+}
+
 .accent-line-purple::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, rgba(167,139,250,0.8), rgba(167,139,250,0.3), transparent);
+  background: linear-gradient(90deg, rgba(168,85,247,0.85), rgba(168,85,247,0.3), transparent);
   border-radius: inherit;
 }
 
@@ -226,7 +349,7 @@ section {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, rgba(34,211,238,0.8), rgba(34,211,238,0.3), transparent);
+  background: linear-gradient(90deg, rgba(34,211,238,0.85), rgba(34,211,238,0.3), transparent);
   border-radius: inherit;
 }
 
@@ -235,11 +358,11 @@ section {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, rgba(52,211,153,0.8), rgba(52,211,153,0.3), transparent);
+  background: linear-gradient(90deg, rgba(52,211,153,0.85), rgba(52,211,153,0.3), transparent);
   border-radius: inherit;
 }
 
-/* ─── DARK MODE SCANLINES (subtle texture) ───────────────────────────────── */
+/* Dark mode scanlines texture */
 .dark .scanlines::after {
   content: '';
   position: absolute;
@@ -254,3 +377,115 @@ section {
   pointer-events: none;
   border-radius: inherit;
 }
+
+/* Signal ring — expanding pulse */
+.signal-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--accent-stellar);
+  animation: signal-wave 2.5s ease-out infinite;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   KEYFRAMES
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Aurora background shift */
+@keyframes aurora {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* Star twinkling */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50%       { opacity: 0.9;  transform: scale(1.5); }
+}
+
+/* Slow floating (astronaut, blobs) */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-18px) rotate(4deg); }
+  66%       { transform: translateY(-8px) rotate(-2deg); }
+}
+
+@keyframes float-medium {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-24px) scale(1.04); }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-14px); }
+}
+
+/* Orbital spin */
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Satellite counter-rotation (keeps content upright on orbiting ring) */
+@keyframes satellite-counter {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to   { transform: translateX(-50%) rotate(-360deg); }
+}
+
+/* Glow pulse */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1;   }
+}
+
+/* Breathing pulse ring */
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 0.8; transform: scale(1.06); }
+}
+
+/* Signal / transmission expand */
+@keyframes signal-wave {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  100% { transform: scale(2.8); opacity: 0;   }
+}
+
+/* Scanner beam sweep */
+@keyframes scanner-sweep {
+  0%   { left: -60%; opacity: 0;   }
+  10%  { opacity: 1;  }
+  90%  { opacity: 1;  }
+  100% { left: 160%;  opacity: 0;  }
+}
+
+/* Holographic gradient shift */
+@keyframes holo-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* Nebula drift */
+@keyframes nebula-drift {
+  0%, 100% { transform: translateX(0) scale(1);    opacity: 0.6; }
+  50%       { transform: translateX(30px) scale(1.06); opacity: 0.9; }
+}
+
+/* Timeline fill grow */
+@keyframes timeline-grow {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ANIMATION UTILITY CLASSES
+   ══════════════════════════════════════════════════════════════════════════ */
+.animate-float-slow     { animation: float-slow     14s ease-in-out infinite; }
+.animate-float-medium   { animation: float-medium   10s ease-in-out infinite; }
+.animate-float-gentle   { animation: float-gentle    8s ease-in-out infinite; }
+.animate-pulse-ring     { animation: pulse-ring       3s ease-in-out infinite; }
+.animate-orbit          { animation: orbit-spin      20s linear infinite; }
+.animate-orbit-slow     { animation: orbit-spin      38s linear infinite; }
+.animate-glow-pulse     { animation: glow-pulse       2s ease-in-out infinite; }
+.animate-twinkle        { animation: twinkle          3s ease-in-out infinite; }
+.animate-signal         { animation: signal-wave    2.5s ease-out  infinite; }
+.animate-scanner        { animation: scanner-sweep  3.5s ease-in-out infinite; }
+.animate-nebula         { animation: nebula-drift    25s ease-in-out infinite; }

@@ -1,81 +1,60 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowUpRight, FileText } from 'lucide-react'
+import { ArrowUpRight, Radio } from 'lucide-react'
+import { SectionHeader } from '@/components/ui/SectionHeader'
+import { HudPanel } from '@/components/ui/HudPanel'
 import { articles } from '@/data/portfolio'
 
-const ACCENT: Record<string, { color: string; glow: string; bg: string; gradient: string }> = {
+const ACCENT_MAP: Record<string, { color: string; glow: string; bg: string; border: string }> = {
   purple: {
-    color:    'var(--accent-purple)',
-    glow:     'var(--glow-purple)',
-    bg:       'rgba(167,139,250,0.12)',
-    gradient: 'linear-gradient(90deg, rgba(167,139,250,0.8), rgba(167,139,250,0.25), transparent)',
+    color: 'var(--accent-nebula)',
+    glow: 'var(--glow-nebula)',
+    bg: 'rgba(168,85,247,0.08)',
+    border: 'rgba(168,85,247,0.25)',
   },
   cyan: {
-    color:    'var(--accent-cyan)',
-    glow:     'var(--glow-cyan)',
-    bg:       'rgba(34,211,238,0.12)',
-    gradient: 'linear-gradient(90deg, rgba(34,211,238,0.8), rgba(34,211,238,0.25), transparent)',
+    color: 'var(--accent-stellar)',
+    glow: 'var(--glow-stellar)',
+    bg: 'rgba(34,211,238,0.08)',
+    border: 'rgba(34,211,238,0.25)',
   },
   green: {
-    color:    'var(--accent-green)',
-    glow:     'var(--glow-green)',
-    bg:       'rgba(52,211,153,0.12)',
-    gradient: 'linear-gradient(90deg, rgba(52,211,153,0.8), rgba(52,211,153,0.25), transparent)',
+    color: 'var(--accent-aurora)',
+    glow: 'var(--glow-aurora)',
+    bg: 'rgba(52,211,153,0.08)',
+    border: 'rgba(52,211,153,0.25)',
   },
 }
 
 export function TechnicalWriting() {
   return (
-    <section id="writing" className="py-24 section-alt relative overflow-hidden">
-      {/* Background decoration */}
-      <div
-        className="absolute bottom-0 right-0 w-64 h-64 rounded-full pointer-events-none opacity-[0.03] dark:opacity-[0.05] blur-[70px]"
-        style={{ background: 'radial-gradient(circle, var(--accent-cyan), transparent 70%)' }}
-      />
-
+    <section id="writing" className="py-24 relative overflow-hidden">
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="text-xs font-mono uppercase tracking-widest text-[var(--accent-purple)] mb-3"
-        >
-          Technical Writing
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-3xl sm:text-4xl font-semibold text-[var(--text-primary)] mb-3"
-        >
-          Articles I&apos;ve written
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-[var(--text-secondary)] mb-12"
-        >
-          Published on{' '}
-          <a
-            href="https://dev.to/chandu_bobbili_06"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[var(--accent-purple)] hover:underline font-medium"
-          >
-            DEV Community
-          </a>{' '}
-          — covering frontend tooling, SEO, and open-source development.
-        </motion.p>
+        <SectionHeader
+          sector="Sector 05 — Field Transmissions"
+          title="Signal log"
+          subtitle={
+            <>
+              Broadcasts from{' '}
+              <a
+                href="https://dev.to/chandu_bobbili_06"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:opacity-80 transition-opacity"
+                style={{ color: 'var(--accent-stellar)' }}
+              >
+                DEV Community
+              </a>{' '}
+              — intercepted and archived.
+            </>
+          }
+        />
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4">
           {articles.map((article, i) => {
-            const a = ACCENT[article.accent] ?? ACCENT.purple
+            const a = ACCENT_MAP[article.accent] ?? ACCENT_MAP.purple
+            const hudAccent = article.accent === 'purple' ? 'nebula' : article.accent === 'green' ? 'aurora' : 'stellar'
 
             return (
               <motion.a
@@ -86,61 +65,58 @@ export function TechnicalWriting() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.09, ease: [0.0, 0.0, 0.2, 1] }}
+                transition={{ duration: 0.45, delay: i * 0.08 }}
                 whileHover={{ x: 4 }}
-                className="group relative flex items-start gap-4 p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-default)] card-base hover:border-[var(--border-neon)] transition-all duration-300 overflow-hidden"
-                onMouseEnter={(e) => {
-                  ;(e.currentTarget as HTMLElement).style.boxShadow = a.glow
-                  ;(e.currentTarget as HTMLElement).style.borderColor = `color-mix(in srgb, ${a.color} 40%, transparent)`
-                }}
-                onMouseLeave={(e) => {
-                  ;(e.currentTarget as HTMLElement).style.boxShadow = ''
-                  ;(e.currentTarget as HTMLElement).style.borderColor = ''
-                }}
+                className="block group"
               >
-                {/* Gradient accent top line */}
-                <div
-                  className="absolute top-0 left-0 right-0 h-[1.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: a.gradient }}
-                />
-
-                {/* Number label */}
-                <span className="absolute top-4 right-14 text-[10px] font-mono text-[var(--text-tertiary)] opacity-0 group-hover:opacity-60 transition-opacity duration-300 tabular-nums">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-
-                {/* Icon block */}
-                <div
-                  className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center mt-0.5 transition-all duration-300 group-hover:scale-110"
-                  style={{ backgroundColor: a.bg }}
+                <HudPanel
+                  header={`Transmission ${String(i + 1).padStart(2, '0')}`}
+                  code={`TX-${String(i + 1).padStart(3, '0')}`}
+                  accent={hudAccent}
+                  className="transition-all duration-300 group-hover:neon-glow-stellar"
                 >
-                  <FileText size={17} style={{ color: a.color }} />
-                </div>
+                  <div className="p-5 flex items-start gap-4">
+                    <div
+                      className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                      style={{ background: a.bg, border: `1px solid ${a.border}` }}
+                    >
+                      <Radio size={18} style={{ color: a.color }} />
+                    </div>
 
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-base font-semibold text-[var(--text-primary)] mb-1.5 group-hover:text-[var(--accent-purple)] transition-colors leading-snug">
-                    {article.title}
-                  </h3>
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-3">
-                    {article.summary}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {article.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-0.5 rounded-md text-[11px] font-mono text-[var(--text-tertiary)] bg-[var(--bg-elevated)] border border-[var(--border-default)]"
+                    <div className="flex-1 min-w-0">
+                      <h3
+                        className="text-base font-bold text-[var(--text-primary)] mb-1.5 leading-snug group-hover:text-[var(--accent-stellar)] transition-colors"
+                        style={{ fontFamily: 'var(--font-space)' }}
                       >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                        {article.title}
+                      </h3>
+                      <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-3 font-mono">
+                        {article.summary}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {article.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-0.5 rounded-md text-[10px] font-mono border"
+                            style={{
+                              background: 'var(--bg-elevated)',
+                              borderColor: 'var(--border-muted)',
+                              color: 'var(--text-dim)',
+                            }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
 
-                {/* Arrow */}
-                <div className="shrink-0 text-[var(--text-tertiary)] group-hover:text-[var(--accent-purple)] transition-all duration-200 mt-0.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                  <ArrowUpRight size={18} />
-                </div>
+                    <ArrowUpRight
+                      size={18}
+                      className="shrink-0 mt-1 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      style={{ color: 'var(--text-dim)' }}
+                    />
+                  </div>
+                </HudPanel>
               </motion.a>
             )
           })}
