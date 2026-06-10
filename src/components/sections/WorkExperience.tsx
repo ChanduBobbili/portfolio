@@ -32,7 +32,9 @@ export function WorkExperience() {
   return (
     <section id="work" className="section-odd relative overflow-hidden py-8 md:py-20">
       <div className="max-w-7xl mx-auto px-4">
-        <SectionTitle className="mb-14">Work Experience</SectionTitle>
+        <SectionTitle className="mb-2 md:mb-6" reveal={false}>
+          Work Experience
+        </SectionTitle>
 
         <div ref={timelineRef} className="relative pl-8 sm:pl-10">
           <div

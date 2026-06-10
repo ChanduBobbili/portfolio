@@ -23,7 +23,7 @@ export function Contact() {
             style={{ background: 'var(--glow-radial)' }}
           />
 
-          <SectionTitle className="relative mb-4" reveal={false}>
+          <SectionTitle className="mb-2 md:mb-6" reveal={false}>
             Let&apos;s work together
           </SectionTitle>
 

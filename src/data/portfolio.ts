@@ -251,19 +251,19 @@ export const skills = [
     accent: 'purple',
     items: ['TypeScript', 'Go', 'JavaScript (ES6+)', 'Python', 'HTML', 'CSS'],
   },
-  {
-    category: 'Go Internals',
-    accent: 'cyan',
-    items: [
-      'Goroutines',
-      'Channels',
-      'WaitGroup',
-      'Mutex',
-      'Worker Pools',
-      'Context Cancellation',
-      'gRPC',
-    ],
-  },
+  // {
+  //   category: 'Go Internals',
+  //   accent: 'cyan',
+  //   items: [
+  //     'Goroutines',
+  //     'Channels',
+  //     'WaitGroup',
+  //     'Mutex',
+  //     'Worker Pools',
+  //     'Context Cancellation',
+  //     'gRPC',
+  //   ],
+  // },
   {
     category: 'Frontend',
     accent: 'purple',

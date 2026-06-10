@@ -62,7 +62,9 @@ export function TechnicalWriting() {
   return (
     <section id="writing" className="section-even relative overflow-hidden py-8 md:py-20">
       <div className="max-w-7xl mx-auto px-4">
-        <SectionTitle className="mb-4">Technical Writing</SectionTitle>
+        <SectionTitle className="mb-2 md:mb-6" reveal={false}>
+          Technical Writing
+        </SectionTitle>
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}

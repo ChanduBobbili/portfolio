@@ -1,65 +1,203 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import {
+  Boxes,
+  Cloud,
+  Code2,
+  Cpu,
+  Database,
+  LayoutGrid,
+  Server,
+  type LucideIcon,
+} from 'lucide-react'
 import { skills } from '@/data/portfolio'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { SpaceCard } from '@/components/ui/SpaceCard'
 import { Badge } from '@/components/ui/badge'
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionPanel,
+} from '@/components/animate-ui/components/base/accordion'
+import DomeGallery from '@/components/DomeGallery'
+import { cn } from '@/lib/utils'
+import { useDeviceType } from '@zenithui/utils'
+
+const skillIconSlugs = [
+  'typescript',
+  'go',
+  'javascript',
+  'python',
+  'html5',
+  'css',
+  'react',
+  'nextdotjs',
+  'tailwindcss',
+  'webflow',
+  // 'shadcnui',
+  'nodedotjs',
+  'express',
+  'docker',
+  'kubernetes',
+  'googlecloud',
+  'postgresql',
+  'mongodb',
+  'clickhouse',
+  'redis',
+  // 'kafka',
+  // 'grpc',
+  'githubactions',
+  'git',
+  // 'vitest',
+  // 'playwright',
+  'figma',
+]
+
+const domeImages = skillIconSlugs.map((slug) => ({
+  src: `https://cdn.simpleicons.org/${slug}/${slug}.svg`,
+  alt: slug,
+}))
+
+type CategoryMeta = {
+  icon: LucideIcon
+  iconBg: string
+  iconColor: string
+}
+
+const categoryMeta: Record<string, CategoryMeta> = {
+  Languages: {
+    icon: Code2,
+    iconBg: 'bg-sky-500/15',
+    iconColor: 'text-sky-500',
+  },
+  'Go Internals': {
+    icon: Cpu,
+    iconBg: 'bg-cyan-500/15',
+    iconColor: 'text-cyan-500',
+  },
+  Frontend: {
+    icon: LayoutGrid,
+    iconBg: 'bg-emerald-500/15',
+    iconColor: 'text-emerald-500',
+  },
+  'Backend & Messaging': {
+    icon: Server,
+    iconBg: 'bg-violet-500/15',
+    iconColor: 'text-violet-500',
+  },
+  Databases: {
+    icon: Database,
+    iconBg: 'bg-orange-500/15',
+    iconColor: 'text-orange-500',
+  },
+  'DevOps & Cloud': {
+    icon: Cloud,
+    iconBg: 'bg-rose-500/15',
+    iconColor: 'text-rose-500',
+  },
+  Other: {
+    icon: Boxes,
+    iconBg: 'bg-amber-500/15',
+    iconColor: 'text-amber-500',
+  },
+}
+
+const defaultMeta: CategoryMeta = {
+  icon: Boxes,
+  iconBg: 'bg-muted',
+  iconColor: 'text-muted-foreground',
+}
+
+function categoryToValue(category: string) {
+  return category
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}
 
 export function Skills() {
+  const deviceType = useDeviceType()
+
   return (
     <section id="skills" className="section-even relative overflow-hidden py-8 md:py-20">
       <div className="max-w-7xl mx-auto px-4">
-        <SectionTitle className="mb-12">Skills</SectionTitle>
+        <SectionTitle className="mb-2 md:mb-6" reveal={false}>
+          Skills
+        </SectionTitle>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {skills.map((group, gi) => (
-            <motion.div
-              key={group.category}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: gi * 0.07, ease: [0, 0, 0.2, 1] }}
-              whileHover={{ y: -4 }}
-            >
-              <SpaceCard
-                className="overflow-hidden flex flex-col"
-                style={{ borderColor: 'color-mix(in srgb, var(--brand) 20%, transparent)' }}
-              >
-                <div className="px-5 pt-5 pb-4 border-b border-border">
-                  <div className="flex items-center gap-2.5">
-                    <span
-                      className="w-2 h-2 rounded-full shrink-0 bg-brand"
-                      style={{
-                        boxShadow: '0 0 8px color-mix(in srgb, var(--brand) 50%, transparent)',
-                      }}
-                    />
-                    <p className="font-sans text-[11px] uppercase tracking-[0.12em] font-semibold text-brand">
-                      {group.category}
-                    </p>
-                  </div>
-                </div>
+        <div className="grid lg:grid-cols-2 gap-0 lg:gap-16 items-start justify-items-center">
+          <Accordion multiple={false} defaultValue={['languages']} className="w-full">
+            {skills.map((group) => {
+              const value = categoryToValue(group.category)
+              const meta = categoryMeta[group.category] ?? defaultMeta
+              const Icon = meta.icon
 
-                <div className="p-5">
-                  <div className="flex flex-wrap gap-2">
-                    {group.items.map((item, ii) => (
-                      <motion.span
-                        key={item}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.28, delay: gi * 0.04 + ii * 0.03 }}
+              return (
+                <AccordionItem
+                  key={group.category}
+                  value={value}
+                  className="mb-3 overflow-hidden rounded-xl border border-border bg-card border-b! last:border-b!"
+                >
+                  <AccordionTrigger className="items-center px-4 py-4 hover:no-underline">
+                    <div className="flex flex-1 items-center gap-3">
+                      <span
+                        className={cn(
+                          'flex size-9 shrink-0 items-center justify-center rounded-lg',
+                          meta.iconBg
+                        )}
                       >
-                        <Badge variant="secondary" className="font-sans rounded-lg text-[0.6875rem]">
+                        <Icon size={18} className={meta.iconColor} />
+                      </span>
+                      <span className="font-heading text-base font-semibold text-foreground">
+                        {group.category}
+                      </span>
+                    </div>
+                    <span className="mr-2 shrink-0 font-sans text-xs text-muted-foreground">
+                      {group.items.length} skills
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionPanel className="px-4 pb-4 pt-0">
+                    <div className="flex flex-wrap gap-2">
+                      {group.items.map((item) => (
+                        <Badge
+                          key={item}
+                          variant="outline"
+                          className={cn(
+                            'font-sans rounded-sm text-xs 2xl:text-sm px-3 py-3',
+                            group.accent
+                          )}
+                        >
                           {item}
                         </Badge>
-                      </motion.span>
-                    ))}
-                  </div>
-                </div>
-              </SpaceCard>
-            </motion.div>
-          ))}
+                      ))}
+                    </div>
+                  </AccordionPanel>
+                </AccordionItem>
+              )
+            })}
+          </Accordion>
+
+          <div
+            style={{
+              width:
+                deviceType === 'desktop' ? '600px' : deviceType === 'tablet' ? '600px' : '375px',
+              height:
+                deviceType === 'desktop' ? '500px' : deviceType === 'tablet' ? '400px' : '300px',
+            }}
+          >
+            <DomeGallery
+              images={domeImages}
+              grayscale={false}
+              minRadius={400}
+              maxVerticalRotationDeg={1}
+              dragDampening={2}
+              segments={deviceType === 'desktop' ? 32 : deviceType === 'tablet' ? 32 : 44}
+              imageBorderRadius="16px"
+              overlayBlurColor="transparent"
+              scrimColor="rgba(232, 242, 255, 0.5)"
+              openedImageBorderRadius="16px"
+            />
+          </div>
         </div>
       </div>
     </section>
