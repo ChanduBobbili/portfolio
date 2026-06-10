@@ -8,6 +8,7 @@ import { projects } from '@/data/portfolio'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 
 const ACCENT_BAR: Record<string, string> = {
   green: '#34D399',
@@ -25,42 +26,50 @@ function ProjectDetail({ project }: { project: (typeof projects)[number] }) {
       transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
       className="overflow-hidden flex flex-col h-full"
     >
-      <div className="p-2 flex flex-col flex-1">
-        <h3 className="font-heading text-2xl font-bold text-foreground mb-1 leading-tight">
+      <div className="p-2 md:p-4 flex flex-col flex-1 gap-0">
+        <h3 className="font-heading text-2xl xl:text-3xl font-bold text-foreground mb-1 leading-tight">
           {project.title}
         </h3>
         {project.subtitle && (
-          <p className="font-sans text-xs text-muted-foreground mb-4">{project.subtitle}</p>
+          <p className="font-sans text-xs lg:text-sm text-muted-foreground mb-4">
+            {project.subtitle}
+          </p>
         )}
 
-        <p className="font-sans text-sm text-muted-foreground leading-[1.85] mb-6 flex-1">
+        <p className="font-sans text-sm lg:text-base text-muted-foreground leading-[1.85] mb-2 md:mb-6 flex-1">
           {project.description}
         </p>
 
-        <div className="flex flex-wrap gap-2 mb-6">
+        <div className="flex flex-wrap gap-2 mb-3 md:mb-6">
           {project.stack.map((tech) => (
-            <Badge key={tech} variant="secondary" className="font-sans rounded-lg text-[0.6875rem]">
+            <Badge
+              key={tech}
+              variant="secondary"
+              className="font-sans rounded-md text-xs lg:text-sm md:py-3.5 md:px-4 py-3.5 px-4"
+            >
               {tech}
             </Badge>
           ))}
         </div>
 
         {project.stats && (
-          <div className="flex flex-wrap gap-5 mb-6 font-sans text-xs text-muted-foreground">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-5 mb-2 md:mb-5 font-sans text-sm text-muted-foreground">
             {project.stats.map((stat) => (
               <span key={stat.label} className="flex items-center gap-1.5">
-                {stat.label.includes('star') && <Star size={11} className="text-brand" />}
-                {stat.label.includes('download') && <Download size={11} className="text-brand" />}
-                <strong className="text-foreground">{stat.value}</strong>
+                {stat.label.includes('star') && <Star className="text-brand size-3 md:size-4" />}
+                {stat.label.includes('download') && (
+                  <Download className="text-brand size-3 md:size-4" />
+                )}
+                <strong className="text-foreground text-xs md:text-sm">{stat.value}</strong>
                 &nbsp;{stat.label}
               </span>
             ))}
           </div>
         )}
 
-        <div className="flex gap-3 pt-5 border-t border-border mt-auto">
+        <div className="flex gap-3 pt-4 border-t border-border mt-auto">
           {project.links.github && (
-            <Button variant="outline" size="sm" asChild>
+            <Button variant="outline" size="lg" asChild>
               <a href={project.links.github} target="_blank" rel="noopener noreferrer">
                 <GithubIcon style={{ width: 13, height: 13 }} />
                 GitHub
@@ -68,7 +77,7 @@ function ProjectDetail({ project }: { project: (typeof projects)[number] }) {
             </Button>
           )}
           {project.links.live && (
-            <Button variant="outline" size="sm" asChild>
+            <Button variant="outline" size="lg" asChild>
               <a href={project.links.live} target="_blank" rel="noopener noreferrer">
                 <ExternalLink size={13} />
                 Live Docs
@@ -96,6 +105,10 @@ function ProjectsDesktop() {
               key={project.title}
               onHoverStart={() => setActive(i)}
               onClick={() => setActive(i)}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.5, delay: i * 0.5, ease: 'easeInOut' }}
               className="group relative text-left rounded-xl px-5 py-4 outline-none overflow-hidden cursor-pointer"
             >
               {isActive && (
@@ -122,16 +135,15 @@ function ProjectsDesktop() {
               )}
 
               <div className="relative z-10 pl-1">
-                <span
-                  className={`font-heading text-[15px] font-semibold transition-colors duration-200 ${
-                    isActive
-                      ? 'text-foreground'
-                      : 'text-muted-foreground group-hover:text-foreground'
-                  }`}
+                <h5
+                  className={cn('font-heading text-lg font-medium transition-colors duration-200', {
+                    'text-foreground': isActive,
+                    'text-muted-foreground group-hover:text-foreground': !isActive,
+                  })}
                 >
                   {project.title}
-                </span>
-                <p className="font-sans text-[11px] text-muted-foreground leading-snug line-clamp-1 mt-0.5">
+                </h5>
+                <p className="font-sans text-sm text-muted-foreground leading-snug line-clamp-1 mt-1">
                   {project.subtitle ?? project.tag}
                 </p>
               </div>
@@ -140,7 +152,7 @@ function ProjectsDesktop() {
         })}
       </div>
 
-      <div className="min-h-[460px]">
+      <div className="min-h-[420px]">
         <AnimatePresence mode="wait">
           <ProjectDetail key={active} project={projects[active]} />
         </AnimatePresence>
@@ -200,13 +212,19 @@ function ProjectsMobile() {
 export function Projects() {
   return (
     <section id="projects" className="section-odd relative overflow-hidden py-8 md:py-20">
-      <div className="max-w-7xl mx-auto px-4">
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
+        className="max-w-7xl mx-auto px-4"
+      >
         <SectionTitle className="mb-2 md:mb-6" reveal={false}>
           Open Source Contributions
         </SectionTitle>
         <ProjectsDesktop />
         <ProjectsMobile />
-      </div>
+      </motion.div>
     </section>
   )
 }

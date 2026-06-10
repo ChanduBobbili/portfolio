@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { JetBrains_Mono, Outfit } from 'next/font/google'
+import { ClickSparkShell } from '@/components/layout/ClickSparkShell'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
@@ -79,7 +80,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange={false}
         >
-          {children}
+          <ClickSparkShell>{children}</ClickSparkShell>
         </ThemeProvider>
         <Analytics />
       </body>

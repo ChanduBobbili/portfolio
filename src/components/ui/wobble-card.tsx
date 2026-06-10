@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { motion } from 'motion/react'
+import { motion, MotionProps } from 'motion/react'
 import { cn } from '@/lib/utils'
 
 export const WobbleCard = ({
@@ -8,11 +8,13 @@ export const WobbleCard = ({
   containerClassName,
   className,
   onClick,
+  framerMotionProps = {},
 }: {
   children: React.ReactNode
   containerClassName?: string
   className?: string
   onClick?: () => void
+  framerMotionProps?: MotionProps
 }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
@@ -44,6 +46,7 @@ export const WobbleCard = ({
 
   return (
     <motion.div
+      {...framerMotionProps}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

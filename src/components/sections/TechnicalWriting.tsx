@@ -61,15 +61,22 @@ export function TechnicalWriting() {
 
   return (
     <section id="writing" className="section-even relative overflow-hidden py-8 md:py-20">
-      <div className="max-w-7xl mx-auto px-4">
-        <SectionTitle className="mb-2 md:mb-6" reveal={false}>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
+        className="max-w-7xl mx-auto px-4"
+      >
+        <SectionTitle className="mb-2" reveal={false}>
           Technical Writing
         </SectionTitle>
+
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45, delay: 0.08 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.45, delay: 0.35, ease: 'easeInOut' }}
           className="font-sans text-muted-foreground mb-4 md:mb-8"
         >
           Published on{' '}
@@ -92,13 +99,23 @@ export function TechnicalWriting() {
         </motion.p>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 w-full">
-          {articleLayouts.map((layout) => {
+          {articleLayouts.map((layout, i) => {
             const article = getArticle(layout.key)
             const bgClass = ARTICLE_BG[article.accent] ?? ARTICLE_BG.purple
 
             return (
               <WobbleCard
                 key={layout.key}
+                framerMotionProps={{
+                  initial: {
+                    opacity: 0,
+                    x: i === 0 ? -20 : i === 1 ? 20 : 0,
+                    y: i === 2 ? 20 : 0,
+                  },
+                  whileInView: { opacity: 1, x: 0, y: 0 },
+                  viewport: { once: true, amount: 0.25 },
+                  transition: { duration: 0.5, delay: 0.5, ease: 'easeInOut' },
+                }}
                 containerClassName={cn(layout.containerClassName, layout.colSpan, bgClass)}
                 onClick={() => setSelectedArticle(article)}
                 className={'flex flex-col h-full justify-center '}
@@ -131,7 +148,7 @@ export function TechnicalWriting() {
           article={selectedArticle}
           onOpenChange={(open) => !open && setSelectedArticle(null)}
         />
-      </div>
+      </motion.div>
     </section>
   )
 }
