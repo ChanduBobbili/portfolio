@@ -220,11 +220,15 @@ html {
 }
 .section-even {
   background-color: var(--bg-section-alt);
+  --card: rgba(255, 255, 255, 1);
 }
 
 /* Dark even sections use light #E8F2FF — flip text to navy for contrast */
 .dark .section-even {
+  --background: rgba(255, 255, 255, 1);
   --foreground: #13293d;
+  --card: rgba(255, 255, 255, 1);
+  --card-foreground: #13293d;
   --muted-foreground: #5a7a96;
   --text-primary: #13293d;
   --text-secondary: #2a4a66;

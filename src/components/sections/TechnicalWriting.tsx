@@ -20,8 +20,7 @@ const articleLayouts = [
     colSpan: 'col-span-1 lg:col-span-2',
     containerClassName: 'h-full min-h-[200px] lg:min-h-[300px]',
     contentClassName: 'max-w-md',
-    imageClassName:
-      'absolute -right-4 lg:-right-[40%] grayscale filter -bottom-10 object-contain rounded-2xl',
+    imageClassName: 'absolute right-4 bottom-4 w-[45%] h-[80%] object-contain rounded-2xl',
     imageWidth: 500,
     imageHeight: 500,
   },
@@ -110,6 +109,17 @@ export function TechnicalWriting() {
                     {article.summary}
                   </p>
                 </div>
+
+                {/* {layout.key !== 'biome' && (
+                  <Image
+                    src={article.image}
+                    alt={article.title}
+                    width={layout.imageWidth}
+                    height={layout.imageHeight}
+                    sizes="(max-width: 768px) 50vw, 500px"
+                    className={layout.imageClassName}
+                  />
+                )} */}
               </WobbleCard>
             )
           })}
