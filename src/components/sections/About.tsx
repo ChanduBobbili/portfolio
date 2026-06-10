@@ -35,11 +35,11 @@ const aboutOutputs: Record<number, string[]> = {
   ],
   2: [
     '✔ 08/2025 – present   Senior SDE @ Deepta AI',
-    '                      Klaritics analytics · Kafka · ClickHouse · GKE',
+    // '                      Klaritics analytics · Kafka · ClickHouse · GKE',
     '✔ 09/2024 – 07/2025   SDE @ Apxor Technology Solutions',
-    '                      Hearzap CMS · Go microservices · ~90% test coverage',
+    // '                      Hearzap CMS · Go microservices · ~90% test coverage',
     '✔ 07/2023 – 08/2024   Associate Web Dev @ Apxor Technology Solutions',
-    '                      CRA → Vite · Lighthouse 54 → 97 (+80%)',
+    // '                      CRA → Vite · Lighthouse 54 → 97 (+80%)',
   ],
   3: [
     '✔ Lighthouse score    54 → 97   (+80%)',
@@ -51,7 +51,7 @@ const aboutOutputs: Record<number, string[]> = {
     'email   chandubobbili12@gmail.com',
     'github  github.com/ChanduBobbili',
     'linkedin  linkedin.com/in/chandu-bobbili-15863319b',
-    '✔ open to full-time · remote · relocation',
+    // '✔ open to full-time · remote · relocation',
   ],
 }
 
@@ -66,7 +66,7 @@ export function About() {
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
           >
-            <SectionTitle className="mb-2 md:mb-6" reveal={false}>
+            <SectionTitle className="mb-2 md:mb-6" sparkles>
               About Me
             </SectionTitle>
             <motion.p

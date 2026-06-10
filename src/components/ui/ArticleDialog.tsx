@@ -26,13 +26,13 @@ export function ArticleDialog({ article, onOpenChange }: ArticleDialogProps) {
     <Dialog open={!!article} onOpenChange={onOpenChange}>
       <DialogContent
         from="bottom"
-        className="sm:max-w-md p-0 rounded-t-none border-none shadow-md shadow-accent"
+        className="sm:max-w-md p-0 border-none bg-accent-foreground shadow-md shadow-accent"
         overlayClassName="bg-background/50 backdrop-blur-xs md:backdrop-blur-sm"
         showCloseButton={false}
       >
         {article && (
           <>
-            <div className="relative aspect-video max-h-64 w-full overflow-hidden">
+            <div className="relative aspect-video rounded-t-lg max-h-64 w-full overflow-hidden">
               <Image
                 src={article.image}
                 alt={article.title}
@@ -44,10 +44,10 @@ export function ArticleDialog({ article, onOpenChange }: ArticleDialogProps) {
 
             <div className="flex flex-col gap-1 px-4 pb-4">
               <DialogHeader>
-                <DialogTitle className="font-heading text-left leading-snug">
+                <DialogTitle className="font-heading text-left leading-snug text-muted/90 font-medium">
                   {article.title}
                 </DialogTitle>
-                <DialogDescription className="font-sans text-left leading-relaxed">
+                <DialogDescription className="font-sans text-left leading-relaxed text-muted-foreground">
                   {article.summary}
                 </DialogDescription>
               </DialogHeader>

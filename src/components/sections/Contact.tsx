@@ -23,9 +23,7 @@ export function Contact() {
             style={{ background: 'var(--glow-radial)' }}
           />
 
-          <SectionTitle className="mb-2 md:mb-6" reveal={false}>
-            Let&apos;s work together
-          </SectionTitle>
+          <SectionTitle className="mb-2 md:mb-6">Let&apos;s work together</SectionTitle>
 
           <p className="relative text-muted-foreground leading-[1.75] mb-8">
             Open to full-time roles, freelance projects, and interesting collaborations. Best way to

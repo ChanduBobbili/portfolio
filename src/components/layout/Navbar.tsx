@@ -89,14 +89,14 @@ export function Navbar() {
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
             <Button size="sm" asChild>
               <a href={`mailto:${personal.email}`}>Hire me</a>
             </Button>
           </div>
 
           <div className="flex md:hidden items-center gap-2">
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
             <button
               onClick={() => setMobileOpen((v) => !v)}
               className="w-9 h-9 flex items-center justify-center rounded-xl border border-border text-muted-foreground"
@@ -111,9 +111,10 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            transition={{ duration: 0.3, stiffness: 300, damping: 50, ease: 'easeInOut' }}
             className="md:hidden fixed inset-0 top-16 z-40 flex flex-col bg-background items-center justify-center gap-6"
           >
             {NAV_LINKS.map((link) => (

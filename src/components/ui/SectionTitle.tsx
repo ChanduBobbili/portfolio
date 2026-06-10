@@ -2,19 +2,22 @@
 
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { SparklesText } from './sparkles-text'
+import { useDeviceType } from '@zenithui/utils'
 
 interface SectionTitleProps {
   children: React.ReactNode
   className?: string
-  /** Fade/slide in when scrolled into view (default: true) */
-  reveal?: boolean
+  sparkles?: boolean
 }
 
-export function SectionTitle({ children, className = '' }: SectionTitleProps) {
-  return (
+export function SectionTitle({ children, className = '', sparkles = false }: SectionTitleProps) {
+  const deviceType = useDeviceType()
+
+  const content = () => (
     <motion.h2
       className={cn(
-        'font-heading text-[clamp(2rem,4vw,3rem)] font-bold tracking-[0.02em] leading-[1.15]',
+        'font-heading text-3xl md:text-4xl lg:text-5xl font-bold leading-tight',
         'bg-[linear-gradient(90deg,var(--brand)_0%,var(--foreground)_35%,var(--brand-sky)_65%,var(--brand)_100%)]',
         'bg-size-[200%_200%] bg-clip-text text-transparent',
         className
@@ -30,5 +33,11 @@ export function SectionTitle({ children, className = '' }: SectionTitleProps) {
     >
       {children}
     </motion.h2>
+  )
+
+  return sparkles ? (
+    <SparklesText sparklesCount={deviceType === 'desktop' ? 4 : 3}>{content()}</SparklesText>
+  ) : (
+    content()
   )
 }

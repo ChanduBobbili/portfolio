@@ -65,6 +65,7 @@
   --glow-hover: 0 16px 48px rgba(19, 41, 61, 0.2);
   --glow-radial: radial-gradient(ellipse at center, rgba(62, 146, 204, 0.28) 0%, transparent 70%);
 
+  --nav-height: 4rem;
   --nav-bg: rgba(62, 146, 204, 0.88);
   --nav-border: rgba(19, 41, 61, 0.14);
 
@@ -135,6 +136,7 @@
   --glow-hover: 0 16px 48px rgba(62, 146, 204, 0.3);
   --glow-radial: radial-gradient(ellipse at center, rgba(62, 146, 204, 0.28) 0%, transparent 70%);
 
+  --nav-height: 4rem;
   --nav-bg: rgba(19, 41, 61, 0.9);
   --nav-border: rgba(62, 146, 204, 0.16);
 

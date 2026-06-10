@@ -128,7 +128,7 @@ export function Skills() {
         transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
         className="max-w-7xl mx-auto px-4"
       >
-        <SectionTitle className="mb-2 md:mb-6" reveal={false}>
+        <SectionTitle className="mb-2 md:mb-6" sparkles>
           Skills
         </SectionTitle>
 
@@ -214,6 +214,12 @@ export function Skills() {
               overlayBlurColor="transparent"
               scrimColor="rgba(232, 242, 255, 0.5)"
               openedImageBorderRadius="16px"
+              openedImageHeight={
+                deviceType === 'desktop' ? '400px' : deviceType === 'tablet' ? '300px' : '200px'
+              }
+              openedImageWidth={
+                deviceType === 'desktop' ? '400px' : deviceType === 'tablet' ? '300px' : '200px'
+              }
             />
           </motion.div>
         </div>

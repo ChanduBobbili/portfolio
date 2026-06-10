@@ -68,9 +68,7 @@ export function TechnicalWriting() {
         transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
         className="max-w-7xl mx-auto px-4"
       >
-        <SectionTitle className="mb-2" reveal={false}>
-          Technical Writing
-        </SectionTitle>
+        <SectionTitle className="mb-2">Technical Writing</SectionTitle>
 
         <motion.p
           initial={{ opacity: 0, y: 12 }}
