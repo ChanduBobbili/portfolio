@@ -12,7 +12,6 @@ import {
 } from 'lucide-react'
 import { skills } from '@/data/portfolio'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { Badge } from '@/components/ui/badge'
 import {
   Accordion,
   AccordionItem,
@@ -172,16 +171,27 @@ export function Skills() {
                     <AccordionPanel className="px-4 pb-4 pt-0">
                       <div className="flex flex-wrap gap-2">
                         {group.items.map((item) => (
-                          <Badge
+                          <motion.p
                             key={item}
-                            variant="outline"
+                            custom={i}
                             className={cn(
-                              'font-sans rounded-sm text-xs 2xl:text-sm px-3 py-3',
-                              group.accent
+                              'font-sans rounded-sm text-xs 2xl:text-sm px-3 py-1',
+                              'bg-[linear-gradient(90deg,var(--brand)_0%,var(--foreground)_35%,var(--brand-sky)_65%,var(--brand)_100%)]',
+                              'bg-size-[200%_200%] bg-clip-text text-transparent',
+                              'border-2'
                             )}
+                            animate={{
+                              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                            }}
+                            transition={{
+                              duration: 6,
+                              ease: 'circInOut',
+                              repeat: Infinity,
+                              delay: i * 1,
+                            }}
                           >
                             {item}
-                          </Badge>
+                          </motion.p>
                         ))}
                       </div>
                     </AccordionPanel>
