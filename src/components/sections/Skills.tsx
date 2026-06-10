@@ -22,6 +22,7 @@ import {
 import DomeGallery from '@/components/DomeGallery'
 import { cn } from '@/lib/utils'
 import { useDeviceType } from '@zenithui/utils'
+import { motion } from 'framer-motion'
 
 const skillIconSlugs = [
   'typescript',
@@ -120,64 +121,81 @@ export function Skills() {
 
   return (
     <section id="skills" className="section-even relative overflow-hidden py-8 md:py-20">
-      <div className="max-w-7xl mx-auto px-4">
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
+        className="max-w-7xl mx-auto px-4"
+      >
         <SectionTitle className="mb-2 md:mb-6" reveal={false}>
           Skills
         </SectionTitle>
 
         <div className="grid lg:grid-cols-2 gap-0 lg:gap-16 items-start justify-items-center">
-          <Accordion multiple={false} defaultValue={['languages']} className="w-full">
-            {skills.map((group) => {
+          <Accordion multiple={false} className="w-full">
+            {skills.map((group, i) => {
               const value = categoryToValue(group.category)
               const meta = categoryMeta[group.category] ?? defaultMeta
               const Icon = meta.icon
 
               return (
-                <AccordionItem
+                <motion.div
                   key={group.category}
-                  value={value}
-                  className="mb-3 overflow-hidden rounded-xl border border-border bg-card border-b! last:border-b!"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.5, delay: i * 0.25, ease: 'easeInOut' }}
                 >
-                  <AccordionTrigger className="items-center px-4 py-4 hover:no-underline">
-                    <div className="flex flex-1 items-center gap-3">
-                      <span
-                        className={cn(
-                          'flex size-9 shrink-0 items-center justify-center rounded-lg',
-                          meta.iconBg
-                        )}
-                      >
-                        <Icon size={18} className={meta.iconColor} />
-                      </span>
-                      <span className="font-heading text-base font-semibold text-foreground">
-                        {group.category}
-                      </span>
-                    </div>
-                    <span className="mr-2 shrink-0 font-sans text-xs text-muted-foreground">
-                      {group.items.length} skills
-                    </span>
-                  </AccordionTrigger>
-                  <AccordionPanel className="px-4 pb-4 pt-0">
-                    <div className="flex flex-wrap gap-2">
-                      {group.items.map((item) => (
-                        <Badge
-                          key={item}
-                          variant="outline"
+                  <AccordionItem
+                    value={value}
+                    className="mb-3 overflow-hidden rounded-xl border border-border bg-card border-b! last:border-b!"
+                  >
+                    <AccordionTrigger className="items-center px-4 py-4 hover:no-underline">
+                      <div className="flex flex-1 items-center gap-3">
+                        <span
                           className={cn(
-                            'font-sans rounded-sm text-xs 2xl:text-sm px-3 py-3',
-                            group.accent
+                            'flex size-9 shrink-0 items-center justify-center rounded-lg',
+                            meta.iconBg
                           )}
                         >
-                          {item}
-                        </Badge>
-                      ))}
-                    </div>
-                  </AccordionPanel>
-                </AccordionItem>
+                          <Icon size={18} className={meta.iconColor} />
+                        </span>
+                        <h5 className="font-heading text-sm 2xl:text-base font-medium tracking-wide text-muted/90">
+                          {group.category}
+                        </h5>
+                      </div>
+                      <p className="mr-2 shrink-0 font-sans text-xs text-muted-foreground">
+                        {group.items.length} skills
+                      </p>
+                    </AccordionTrigger>
+                    <AccordionPanel className="px-4 pb-4 pt-0">
+                      <div className="flex flex-wrap gap-2">
+                        {group.items.map((item) => (
+                          <Badge
+                            key={item}
+                            variant="outline"
+                            className={cn(
+                              'font-sans rounded-sm text-xs 2xl:text-sm px-3 py-3',
+                              group.accent
+                            )}
+                          >
+                            {item}
+                          </Badge>
+                        ))}
+                      </div>
+                    </AccordionPanel>
+                  </AccordionItem>
+                </motion.div>
               )
             })}
           </Accordion>
 
-          <div
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.25, ease: 'easeInOut' }}
             style={{
               width:
                 deviceType === 'desktop' ? '600px' : deviceType === 'tablet' ? '600px' : '375px',
@@ -197,9 +215,9 @@ export function Skills() {
               scrimColor="rgba(232, 242, 255, 0.5)"
               openedImageBorderRadius="16px"
             />
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }
