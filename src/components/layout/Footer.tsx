@@ -11,12 +11,12 @@ export function Footer() {
       className="section-even border-t py-2"
       style={{ borderColor: 'color-mix(in srgb, var(--brand) 15%, transparent)' }}
     >
-      <div className="max-w-[1080px] mx-auto px-6 md:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="mx-auto px-4 md:px-12 flex flex-row items-center justify-between gap-4 md:gap-2">
         <p className="font-sans text-xs text-muted-foreground">
           © {year} {personal.name}
         </p>
 
-        <div className="flex items-center gap-4">
+        <div className="items-center gap-4 hidden md:flex">
           <a
             href={personal.github}
             target="_blank"

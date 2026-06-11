@@ -9,6 +9,7 @@ export const personal = {
   subTagline: 'TypeScript · Go · React · Microservices',
   location: 'Hyderabad, India',
   email: 'chandubobbili12@gmail.com',
+  whatsapp: '916305974480',
   github: 'https://github.com/ChanduBobbili',
   linkedin: 'https://linkedin.com/in/chandu-bobbili-15863319b',
   currentRole: 'Senior SDE @ Deepta AI',

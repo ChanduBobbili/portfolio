@@ -7,6 +7,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle'
 import { WobbleCard } from '@/components/ui/wobble-card'
 import { ArticleDialog } from '@/components/ui/ArticleDialog'
 import { cn } from '@/lib/utils'
+import { useDeviceType } from '@zenithui/utils'
 
 const ARTICLE_BG: Record<string, string> = {
   purple: 'bg-[#1a3550]',
@@ -18,7 +19,7 @@ const articleLayouts = [
   {
     key: 'seo',
     colSpan: 'col-span-1 lg:col-span-2',
-    containerClassName: 'h-full min-h-[200px] lg:min-h-[300px]',
+    containerClassName: 'min-h-[200px] lg:min-h-[300px]',
     contentClassName: 'max-w-md',
     imageClassName: 'absolute right-4 bottom-4 w-[45%] h-[80%] object-contain rounded-2xl',
     imageWidth: 500,
@@ -27,7 +28,7 @@ const articleLayouts = [
   {
     key: 'biome',
     colSpan: 'col-span-1',
-    containerClassName: 'min-h-[200px]',
+    containerClassName: 'min-h-[200px] lg:min-h-[300px]',
     contentClassName: 'max-w-80',
     imageClassName:
       'absolute -right-4 -bottom-6 w-40 h-40 md:w-48 md:h-48 object-contain rounded-2xl grayscale filter opacity-90',
@@ -37,7 +38,7 @@ const articleLayouts = [
   {
     key: 'changesetgoo',
     colSpan: 'col-span-1 lg:col-span-3',
-    containerClassName: 'min-h-[200px] lg:min-h-[600px] xl:min-h-[300px]',
+    containerClassName: 'min-h-[200px] lg:min-h-[300px]',
     contentClassName: 'max-w-lg',
     imageClassName:
       'absolute -right-10 md:-right-[40%] lg:-right-[20%] -bottom-10 object-contain rounded-2xl grayscale filter',
@@ -58,6 +59,8 @@ function getArticle(key: string) {
 
 export function TechnicalWriting() {
   const [selectedArticle, setSelectedArticle] = useState<(typeof articles)[number] | null>(null)
+  const deviceType = useDeviceType()
+  const isMobile = deviceType === 'largeMobile' || deviceType === 'smallMobile'
 
   return (
     <section id="writing" className="section-even relative overflow-hidden py-8 md:py-20">
@@ -96,7 +99,13 @@ export function TechnicalWriting() {
           </motion.a>
         </motion.p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 w-full">
+        <div
+          className={cn(
+            isMobile
+              ? '-mx-4 flex gap-3 overflow-x-auto px-4 scrollbar-none'
+              : 'grid grid-cols-1 lg:grid-cols-3 gap-3 w-full'
+          )}
+        >
           {articleLayouts.map((layout, i) => {
             const article = getArticle(layout.key)
             const bgClass = ARTICLE_BG[article.accent] ?? ARTICLE_BG.purple
@@ -111,10 +120,15 @@ export function TechnicalWriting() {
                     y: i === 2 ? 20 : 0,
                   },
                   whileInView: { opacity: 1, x: 0, y: 0 },
-                  viewport: { once: true, amount: 0.25 },
-                  transition: { duration: 0.5, delay: 0.5, ease: 'easeInOut' },
+                  viewport: { once: true, amount: isMobile ? 0 : 0.25 },
+                  transition: { duration: 0.5, delay: isMobile ? 0.25 : 0.5, ease: 'easeInOut' },
                 }}
-                containerClassName={cn(layout.containerClassName, layout.colSpan, bgClass)}
+                containerClassName={cn(
+                  layout.containerClassName,
+                  !isMobile && layout.colSpan,
+                  isMobile && 'w-[85vw] shrink-0',
+                  bgClass
+                )}
                 onClick={() => setSelectedArticle(article)}
                 className={'flex flex-col h-full justify-center '}
               >
