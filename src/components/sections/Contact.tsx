@@ -63,7 +63,7 @@ export function Contact() {
           color={ringColor}
           colorTwo={ringColorTwo}
           opacity={isDesktop ? 0.6 : 0.45}
-          ringCount={5}
+          ringCount={isDesktop ? 8 : 4}
           followMouse={isDesktop}
           speed={isDesktop ? 1 : 0.7}
           mouseInfluence={0.15}
