@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { articles } from '@/data/portfolio'
 import { SectionTitle } from '@/components/ui/SectionTitle'
@@ -8,6 +8,7 @@ import { WobbleCard } from '@/components/ui/wobble-card'
 import { ArticleDialog } from '@/components/ui/ArticleDialog'
 import { cn } from '@/lib/utils'
 import { useDeviceType } from '@zenithui/utils'
+import { VariableProximity } from '../ui/variable-proximity'
 
 const ARTICLE_BG: Record<string, string> = {
   purple: 'bg-[#1a3550]',
@@ -58,6 +59,7 @@ function getArticle(key: string) {
 }
 
 export function TechnicalWriting() {
+  const containerRef = useRef<HTMLDivElement>(null)
   const [selectedArticle, setSelectedArticle] = useState<(typeof articles)[number] | null>(null)
   const deviceType = useDeviceType()
   const isMobile = deviceType === 'largeMobile' || deviceType === 'smallMobile'
@@ -65,13 +67,24 @@ export function TechnicalWriting() {
   return (
     <section id="writing" className="section-even relative overflow-hidden py-8 md:py-20">
       <motion.div
+        ref={containerRef}
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
         className="max-w-7xl mx-auto px-4"
       >
-        <SectionTitle className="mb-2">Technical Writing</SectionTitle>
+        <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-brand">
+          <VariableProximity
+            label="Technical Writing"
+            containerRef={containerRef}
+            fromFontVariationSettings="'wght' 400, 'wdth' 100"
+            toFontVariationSettings="'wght' 900, 'wdth' 125"
+            radius={120}
+            falloff="gaussian"
+          />
+        </h2>
+        <SectionTitle className="mb-2">Articles I&apos;ve written </SectionTitle>
 
         <motion.p
           initial={{ opacity: 0, y: 12 }}

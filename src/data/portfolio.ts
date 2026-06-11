@@ -12,6 +12,7 @@ export const personal = {
   whatsapp: '916305974480',
   github: 'https://github.com/ChanduBobbili',
   linkedin: 'https://linkedin.com/in/chandu-bobbili-15863319b',
+  resume: 'https://drive.google.com/file/d/1zhpAwC_QXOsiDV4zdq7Dbn0GF-DPsMKa/view?usp=drivesdk',
   currentRole: 'Senior SDE @ Deepta AI',
   openTo: 'Full-time · Remote · Relocation',
   education: 'B.Tech CSE, JNTUGV (2019–2023)',

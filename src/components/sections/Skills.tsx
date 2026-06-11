@@ -22,6 +22,8 @@ import DomeGallery from '@/components/DomeGallery'
 import { cn } from '@/lib/utils'
 import { useDeviceType } from '@zenithui/utils'
 import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { VariableProximity } from '../ui/variable-proximity'
 
 const skillIconSlugs = [
   'typescript',
@@ -116,20 +118,30 @@ function categoryToValue(category: string) {
 }
 
 export function Skills() {
+  const containerRef = useRef<HTMLDivElement>(null)
   const deviceType = useDeviceType()
 
   return (
     <section id="skills" className="section-even relative overflow-hidden py-8 md:py-20">
       <motion.div
+        ref={containerRef}
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
         className="max-w-7xl mx-auto px-4"
       >
-        <SectionTitle className="mb-2 md:mb-6" sparkles>
-          Skills
-        </SectionTitle>
+        <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-brand">
+          <VariableProximity
+            label="Skills"
+            containerRef={containerRef}
+            fromFontVariationSettings="'wght' 400, 'wdth' 100"
+            toFontVariationSettings="'wght' 900, 'wdth' 125"
+            radius={120}
+            falloff="gaussian"
+          />
+        </h2>
+        <SectionTitle className="mb-2 md:mb-4">What I work with</SectionTitle>
 
         <div className="grid lg:grid-cols-2 gap-0 lg:gap-16 items-start justify-items-center">
           <Accordion multiple={false} className="w-full">

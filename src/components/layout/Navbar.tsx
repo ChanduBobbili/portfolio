@@ -1,13 +1,16 @@
 'use client'
 
-import { useState, useEffect, useRef, useLayoutEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowUpRight, Menu, X } from 'lucide-react'
+import { ArrowUpRight, Mail, Menu, X } from 'lucide-react'
+import Link from 'next/link'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
-import { Button } from '@/components/ui/button'
 import { personal } from '@/data/portfolio'
 import { HoverBorderGradient } from '../ui/hover-border-gradient'
+import { SparklesText } from '../ui/sparkles-text'
+import { RainbowButton } from '../ui/rainbow-button'
+import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
@@ -63,7 +66,6 @@ const mobileLinkVariants = {
 }
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const activeId = useScrollSpy(SECTION_IDS, 80)
@@ -71,20 +73,6 @@ export function Navbar() {
   useEffect(() => {
     const raf = requestAnimationFrame(() => setMounted(true))
     return () => cancelAnimationFrame(raf)
-  }, [])
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  useLayoutEffect(() => {
-    const top = document.getElementById('hero')?.getBoundingClientRect()?.top ?? 0
-    const t = setTimeout(() => {
-      setScrolled(top <= 0)
-    }, 0)
-    return () => clearTimeout(t)
   }, [])
 
   useEffect(() => {
@@ -102,34 +90,26 @@ export function Navbar() {
   }
 
   return (
-    <header
-      className="fixed top-0 left-0 right-0 z-110 transition-all duration-300"
-      style={{
-        backgroundColor: scrolled ? 'var(--nav-bg)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid var(--nav-border)' : '1px solid transparent',
-      }}
-    >
-      <div className="max-w-[1080px] mx-auto px-6 md:px-12">
+    <header className="max-w-7xl mx-auto fixed top-4 left-2 right-2 z-110 transition-all duration-300 bg-foreground/20 rounded-xl md:rounded-2xl backdrop-blur-md border border-border">
+      <div className="max-w-6xl mx-auto px-6 md:px-0">
         <div className="flex items-center justify-between h-16">
-          <button
+          <motion.button
+            type="button"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileTap={{ scale: 0.98 }}
+            transition={mobilePanelSpring}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="relative flex items-center gap-2 cursor-pointer group"
             aria-label="Scroll to top"
           >
-            <span className="font-heading text-xl font-extrabold text-foreground tracking-wide">
+            <SparklesText
+              sparklesCount={3}
+              className="text-xl font-bold text-foreground tracking-wide"
+            >
               Chandu Bobbili
-            </span>
-            <span
-              className="absolute -right-3 -top-1 w-2 h-2 rounded-full animate-orbit"
-              style={{
-                background: 'var(--brand)',
-                boxShadow: '0 0 8px var(--brand)',
-                transformOrigin: '0px 14px',
-              }}
-            />
-          </button>
+            </SparklesText>
+          </motion.button>
 
           <nav className="hidden md:flex items-center gap-1">
             {NAV_LINKS.map((link) => {
@@ -138,15 +118,16 @@ export function Navbar() {
                 <button
                   key={link.href}
                   onClick={() => scrollTo(link.href)}
-                  className={`relative px-3 py-1.5 font-sans text-[11px] uppercase tracking-widest transition-colors cursor-pointer ${
+                  className={cn(
+                    'relative px-3 py-1.5 font-mono text-xs transition-colors cursor-pointer',
                     isActive ? 'text-brand' : 'text-muted-foreground hover:text-foreground'
-                  }`}
+                  )}
                 >
                   {link.label}
                   {isActive && (
                     <motion.span
                       layoutId="nav-dot"
-                      className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand"
+                      className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-6 h-1 rounded-full bg-brand"
                     />
                   )}
                 </button>
@@ -156,16 +137,19 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center gap-3">
             {/* <ThemeToggle /> */}
-            <Button size="sm" asChild>
-              <a href={`mailto:${personal.email}`}>Hire me</a>
-            </Button>
+            <RainbowButton asChild size="sm" className="rounded-md">
+              <Link href={`mailto:${personal.email}`}>
+                <Mail size={16} />
+                Hire Me
+              </Link>
+            </RainbowButton>
           </div>
 
           <div className="flex md:hidden items-center gap-2">
             {/* <ThemeToggle /> */}
             <motion.button
               onClick={() => setMobileOpen((v) => !v)}
-              className="relative w-9 h-9 flex items-center justify-center rounded-xl border border-border bg-background/60 text-muted-foreground"
+              className="relative w-9 h-9 flex items-center justify-center rounded-md border border-foreground/20 text-foreground"
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
               whileTap={{ scale: 0.92 }}
@@ -197,7 +181,7 @@ export function Navbar() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.22 }}
                   onClick={() => setMobileOpen(false)}
-                  className="md:hidden fixed inset-0 z-100 bg-foreground/25 backdrop-blur-xs"
+                  className="md:hidden fixed inset-0 z-100 bg-background/25 backdrop-blur-xs"
                 />
 
                 <motion.nav
@@ -289,7 +273,7 @@ export function Navbar() {
                         as="a"
                         href={`mailto:${personal.email}`}
                         containerClassName="rounded-full w-full"
-                        className="h-10 w-full font-sans text-sm uppercase tracking-widest dark:bg-background bg-foreground text-background dark:text-foreground flex items-center justify-center gap-1"
+                        className="h-10 w-full font-sans text-sm uppercase tracking-widest bg-background text-foreground flex items-center justify-center gap-1"
                       >
                         Hire me
                         <ArrowUpRight size={14} />

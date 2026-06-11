@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, Star, Download } from 'lucide-react'
 import { GithubIcon } from '@/components/ui/SocialIcons'
@@ -9,6 +9,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import { VariableProximity } from '../ui/variable-proximity'
 
 const ACCENT_BAR: Record<string, string> = {
   green: '#34D399',
@@ -210,16 +211,30 @@ function ProjectsMobile() {
 }
 
 export function Projects() {
+  const containerRef = useRef<HTMLDivElement>(null)
   return (
     <section id="projects" className="section-odd relative overflow-hidden py-8 md:py-20">
       <motion.div
+        ref={containerRef}
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
         className="max-w-7xl mx-auto px-4"
       >
-        <SectionTitle className="mb-2 md:mb-6">Open Source Contributions</SectionTitle>
+        <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-brand">
+          <VariableProximity
+            label="Open Source Contributions"
+            containerRef={containerRef}
+            fromFontVariationSettings="'wght' 400, 'wdth' 100"
+            toFontVariationSettings="'wght' 900, 'wdth' 125"
+            radius={120}
+            falloff="gaussian"
+          />
+        </h2>
+
+        <SectionTitle className="mb-2 md:mb-6">Things I&apos;ve built</SectionTitle>
+
         <ProjectsDesktop />
         <ProjectsMobile />
       </motion.div>

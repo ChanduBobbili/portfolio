@@ -89,7 +89,7 @@ function getStickyTriggerLine() {
     getComputedStyle(document.documentElement).getPropertyValue('--nav-height')
   )
   const navPx = Number.isNaN(navHeight) ? 64 : navHeight * 16
-  return navPx + 8 + 24
+  return navPx + 8 + 24 + 16
 }
 
 function getViewportOccupancy(el: HTMLElement): number {
@@ -220,7 +220,7 @@ export function ExperienceStickyScroll({
 
         {/* Right: sticky company / role */}
         <div className="hidden w-[280px] shrink-0 lg:block">
-          <div className="sticky top-[calc(var(--nav-height)+0.5rem)] rounded-xl border border-border bg-card/75 p-6 backdrop-blur-sm">
+          <div className="sticky top-[calc(var(--nav-height)+1.5rem)] rounded-xl border border-border bg-card/75 p-6 backdrop-blur-sm">
             {activeEntry && (
               <motion.div
                 key={`${activeEntry.company}-${activeEntry.period}`}

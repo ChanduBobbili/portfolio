@@ -1,11 +1,13 @@
 'use client'
 
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Briefcase, GraduationCap } from 'lucide-react'
 import { personal } from '@/data/portfolio'
-import { SectionTitle } from '@/components/ui/SectionTitle'
 import { MagicCard } from '@/components/ui/magic-card'
 import { Terminal } from '@/components/ui/terminal'
+import { VariableProximity } from '@/components/ui/variable-proximity'
+import { SectionTitle } from '../ui/SectionTitle'
 
 const infoCards = [
   { icon: Briefcase, label: 'Currently', value: personal.currentRole },
@@ -56,19 +58,31 @@ const aboutOutputs: Record<number, string[]> = {
 }
 
 export function About() {
+  const containerRef = useRef<HTMLDivElement>(null)
+
   return (
     <section id="about" className="section-even relative overflow-hidden py-8 md:py-20">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-4 lg:gap-16 items-start">
           <motion.div
+            ref={containerRef}
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
           >
-            <SectionTitle className="mb-2 md:mb-6" sparkles>
-              About Me
-            </SectionTitle>
+            <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-brand">
+              <VariableProximity
+                label="About Me"
+                containerRef={containerRef}
+                fromFontVariationSettings="'wght' 400, 'wdth' 100"
+                toFontVariationSettings="'wght' 900, 'wdth' 125"
+                radius={120}
+                falloff="gaussian"
+              />
+            </h2>
+            <SectionTitle>A bit about me</SectionTitle>
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

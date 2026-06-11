@@ -1,15 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
-import { motion } from 'motion/react';
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
+import { motion } from 'motion/react'
+import { cn } from '@/lib/utils'
 
 interface TrueFocusProps {
-  sentence?: string;
-  separator?: string;
-  manualMode?: boolean;
-  blurAmount?: number;
-  borderColor?: string;
-  glowColor?: string;
-  animationDuration?: number;
-  pauseBetweenAnimations?: number;
+  sentence?: string
+  separator?: string
+  manualMode?: boolean
+  blurAmount?: number
+  borderColor?: string
+  glowColor?: string
+  animationDuration?: number
+  pauseBetweenAnimations?: number
+  className?: string
+  wordClassName?: string
 }
 
 interface FocusRect {
@@ -27,7 +32,9 @@ const TrueFocus: React.FC<TrueFocusProps> = ({
   borderColor = 'green',
   glowColor = 'rgba(0, 255, 0, 0.6)',
   animationDuration = 0.5,
-  pauseBetweenAnimations = 1
+  pauseBetweenAnimations = 1,
+  className,
+  wordClassName,
 }) => {
   const words = sentence.split(separator);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -79,7 +86,7 @@ const TrueFocus: React.FC<TrueFocusProps> = ({
 
   return (
     <div
-      className="relative flex gap-4 justify-center items-center flex-wrap"
+      className={cn('relative flex gap-4 justify-center items-center flex-wrap', className)}
       ref={containerRef}
       style={{ outline: 'none', userSelect: 'none' }}
     >
@@ -91,7 +98,7 @@ const TrueFocus: React.FC<TrueFocusProps> = ({
             ref={el => {
               wordRefs.current[index] = el;
             }}
-            className="relative text-[3rem] font-black cursor-pointer"
+            className={cn('relative text-[3rem] font-black cursor-pointer', wordClassName)}
             style={
               {
                 filter: manualMode
