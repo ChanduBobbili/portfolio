@@ -134,22 +134,6 @@ function HeroButtons({ className }: { className?: string }) {
         </Link>
       </MagneticButton>
 
-      {/* <NoiseBackground
-                containerClassName="w-fit rounded-lg p-1.5"
-                gradientColors={['rgb(255, 100, 150)', 'rgb(100, 150, 255)', 'rgb(255, 200, 100)']}
-                noiseIntensity={0.15}
-              >
-                <Link
-                  href={personal.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center gap-2 rounded-lg bg-background/90 px-6 text-sm font-medium text-foreground shadow-sm transition-all active:scale-[0.98]"
-                >
-                  <GithubIcon style={{ width: 16, height: 16 }} />
-                  GitHub
-                </Link>
-              </NoiseBackground> */}
-
       <RainbowButton size="lg" asChild>
         <Link href={personal.resume} target="_blank" rel="noopener noreferrer">
           <FileText size={16} />
