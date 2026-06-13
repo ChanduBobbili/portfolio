@@ -131,6 +131,7 @@ export function Skills() {
       className="section-even relative overflow-hidden py-8 md:py-20 antialiased"
     >
       <BackgroundBeams className="pointer-events-none" />
+      <div className="pointer-events-none absolute inset-0 bg-background/40" />
 
       <motion.div
         ref={containerRef}
@@ -140,7 +141,7 @@ export function Skills() {
         transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
         className="relative z-10 max-w-7xl mx-auto px-4"
       >
-        <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-brand">
+        <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-primary">
           <VariableProximity
             label="Skills"
             containerRef={containerRef}
@@ -181,7 +182,7 @@ export function Skills() {
                         >
                           <Icon size={18} className={meta.iconColor} />
                         </span>
-                        <h5 className="font-heading text-sm 2xl:text-base font-medium tracking-wide text-muted/90">
+                        <h5 className="font-heading text-sm 2xl:text-base font-medium tracking-wide text-muted-foreground">
                           {group.category}
                         </h5>
                       </div>
@@ -197,7 +198,7 @@ export function Skills() {
                             custom={i}
                             className={cn(
                               'font-sans rounded-sm text-xs 2xl:text-sm px-3 py-1',
-                              'bg-[linear-gradient(90deg,var(--brand)_0%,var(--foreground)_35%,var(--brand-sky)_65%,var(--brand)_100%)]',
+                              'bg-[linear-gradient(90deg,var(--primary)_0%,var(--foreground)_35%,var(--primary)_65%,var(--primary)_100%)]',
                               'bg-size-[200%_200%] bg-clip-text text-transparent',
                               'border-2'
                             )}
@@ -241,8 +242,8 @@ export function Skills() {
                 />
               ))}
             </Marquee>
-            <div className="from-bg-section-alt pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-linear-to-r"></div>
-            <div className="from-bg-section-alt pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-linear-to-l"></div>
+            <div className="from-background pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-linear-to-r"></div>
+            <div className="from-background pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-linear-to-l"></div>
           </motion.div>
 
           <motion.div
@@ -267,7 +268,7 @@ export function Skills() {
               segments={deviceType === 'desktop' ? 32 : deviceType === 'tablet' ? 32 : 44}
               imageBorderRadius="16px"
               overlayBlurColor="transparent"
-              scrimColor="rgba(232, 242, 255, 0.5)"
+              scrimColor="rgba(244, 245, 249, 0.6)"
               openedImageBorderRadius="16px"
               openedImageHeight={
                 deviceType === 'desktop' ? '400px' : deviceType === 'tablet' ? '300px' : '200px'

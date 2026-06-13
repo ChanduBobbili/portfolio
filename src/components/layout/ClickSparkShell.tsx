@@ -1,8 +1,6 @@
 'use client'
 
 import { useSyncExternalStore } from 'react'
-import { useTheme } from 'next-themes'
-
 import ClickSpark from '@/components/ClickSpark'
 
 function usePrefersReducedMotion() {
@@ -18,12 +16,11 @@ function usePrefersReducedMotion() {
 }
 
 export function ClickSparkShell({ children }: { children: React.ReactNode }) {
-  const { resolvedTheme } = useTheme()
   const reducedMotion = usePrefersReducedMotion()
 
   if (reducedMotion) return <>{children}</>
 
-  const sparkColor = resolvedTheme === 'dark' ? '#e8f2ff' : '#13293d'
+  const sparkColor = '#e8eaf2'
 
   return (
     <ClickSpark

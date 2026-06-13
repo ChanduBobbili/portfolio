@@ -53,13 +53,13 @@ export function ResumeDialog({ open, onClose, onMinimize }: ResumeDialogProps) {
             className="
               fixed inset-4 sm:inset-8 lg:inset-16 z-[101]
               flex flex-col
-              bg-[var(--bg-surface)] border border-[var(--border-default)]
+              bg-card border border-border
               rounded-2xl shadow-2xl overflow-hidden
             "
-            style={{ boxShadow: 'var(--glow-purple), 0 25px 50px rgba(0,0,0,0.5)' }}
+            style={{ boxShadow: '0 8px 32px rgba(56,189,248,0.12), 0 25px 50px rgba(0,0,0,0.5)' }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--border-default)] shrink-0">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-border shrink-0">
               <div className="flex items-center gap-3">
                 <div className="flex gap-1.5">
                   <button
@@ -77,7 +77,7 @@ export function ResumeDialog({ open, onClose, onMinimize }: ResumeDialogProps) {
                     className="w-3 h-3 rounded-full bg-[#FEBC2E] hover:brightness-90 transition-all cursor-pointer"
                   />
                 </div>
-                <span className="text-sm font-mono text-[var(--text-secondary)]">
+                <span className="text-sm font-mono text-muted-foreground">
                   Chandu_Bobbili_Resume.pdf
                 </span>
               </div>
@@ -86,9 +86,9 @@ export function ResumeDialog({ open, onClose, onMinimize }: ResumeDialogProps) {
                 download="Chandu_Bobbili_Resume.pdf"
                 className="
                   flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium
-                  border border-[var(--border-default)]
-                  text-[var(--text-secondary)]
-                  hover:border-[var(--accent-purple)] hover:text-[var(--accent-purple)]
+                  border border-border
+                  text-muted-foreground
+                  hover:border-primary hover:text-primary
                   transition-all duration-200
                 "
               >
@@ -98,7 +98,7 @@ export function ResumeDialog({ open, onClose, onMinimize }: ResumeDialogProps) {
             </div>
 
             {/* PDF Viewer */}
-            <div className="flex-1 bg-[var(--bg-subtle)] overflow-hidden">
+            <div className="flex-1 bg-muted overflow-hidden">
               <iframe
                 src="/Chandu_Bobbili_Resume.pdf#toolbar=0&navpanes=0&scrollbar=1&view=FitH"
                 className="w-full h-full"

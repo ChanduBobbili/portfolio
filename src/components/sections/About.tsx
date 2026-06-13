@@ -62,15 +62,19 @@ export function About() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section id="about" data-bg="light" className="section-even relative overflow-hidden py-8 md:py-20">
+    <section
+      id="about"
+      data-bg="light"
+      className="section-even relative overflow-hidden py-8 md:py-20"
+    >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
           className={cn(
             'absolute inset-0 bg-size-[40px_40px]',
-            'bg-[linear-gradient(to_right,var(--grid-dot)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-dot)_1px,transparent_1px)]'
+            'bg-[linear-gradient(to_right,rgba(15,16,20,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,16,20,0.06)_1px,transparent_1px)]'
           )}
         />
-        <div className="absolute inset-0 bg-bg-section-alt mask-[radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+        <div className="absolute inset-0 bg-background mask-[radial-gradient(ellipse_at_center,transparent_20%,black)]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4">
@@ -82,7 +86,7 @@ export function About() {
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
           >
-            <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-brand">
+            <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-primary">
               <VariableProximity
                 label="About Me"
                 containerRef={containerRef}
@@ -114,7 +118,7 @@ export function About() {
                   transition={{ duration: 0.5, delay: i * 0.5, ease: 'easeInOut' }}
                 >
                   <MagicCard
-                    className="rounded-lg border-2 border-border-default"
+                    className="rounded-lg border-2 border-border"
                     gradientFrom="#ee4f27"
                     gradientTo="#6b21ef"
                     gradientColor="#262626"
@@ -122,7 +126,7 @@ export function About() {
                   >
                     <div className="p-4">
                       <div className="flex items-center gap-2 mb-2">
-                        <card.icon size={14} className="text-brand" />
+                        <card.icon size={14} className="text-primary" />
                         <h5 className="font-heading text-sm font-light uppercase tracking-widest text-muted-foreground">
                           {card.label}
                         </h5>

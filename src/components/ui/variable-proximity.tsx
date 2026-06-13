@@ -178,7 +178,14 @@ export const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityPr
 
         letterRef.style.fontVariationSettings = newSettings
       })
-    }, [calculateFalloff, containerRef, fromFontVariationSettings, mousePositionRef, parsedSettings, radius])
+    }, [
+      calculateFalloff,
+      containerRef,
+      fromFontVariationSettings,
+      mousePositionRef,
+      parsedSettings,
+      radius,
+    ])
 
     useAnimationFrame(updateLetters)
 

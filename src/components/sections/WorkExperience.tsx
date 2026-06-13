@@ -20,7 +20,7 @@ export function WorkExperience() {
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="max-w-7xl mx-auto px-4"
       >
-        <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-brand">
+        <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-primary">
           <VariableProximity
             label="Work Experience"
             containerRef={containerRef}

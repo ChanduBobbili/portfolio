@@ -18,7 +18,7 @@ export function SectionTitle({ children, className = '', sparkles = false }: Sec
     <motion.h2
       className={cn(
         'font-heading text-3xl md:text-4xl lg:text-5xl font-bold leading-tight',
-        'bg-[linear-gradient(90deg,var(--brand)_0%,var(--foreground)_35%,var(--brand-sky)_65%,var(--brand)_100%)]',
+        'bg-[linear-gradient(90deg,var(--primary)_0%,var(--foreground)_35%,var(--primary)_65%,var(--primary)_100%)]',
         'bg-size-[200%_200%] bg-clip-text text-transparent',
         className
       )}

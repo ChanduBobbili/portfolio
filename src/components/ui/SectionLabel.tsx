@@ -24,8 +24,8 @@ export function SectionLabel({ children, className = '', sparkles = false }: Sec
         repeat: Infinity,
       }}
       className={cn(
-        'font-heading text-base font-bold tracking-normal text-brand',
-        'bg-[linear-gradient(90deg,var(--brand)_0%,var(--foreground)_35%,var(--brand-sky)_65%,var(--brand)_100%)]',
+        'font-heading text-base font-bold tracking-normal text-primary',
+        'bg-[linear-gradient(90deg,var(--primary)_0%,var(--foreground)_35%,var(--primary)_65%,var(--primary)_100%)]',
         'bg-size-[200%_200%] bg-clip-text text-transparent',
         className
       )}

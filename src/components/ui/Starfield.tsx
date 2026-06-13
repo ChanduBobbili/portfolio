@@ -5,10 +5,10 @@ import { useEffect, useRef } from 'react'
 type Star = { x: number; y: number; r: number; phase: number; speed: number }
 
 function parseStarColor(): [number, number, number] {
-  const raw = getComputedStyle(document.documentElement).getPropertyValue('--star-color').trim()
+  const raw = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim()
   const match = raw.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/)
   if (match) return [Number(match[1]), Number(match[2]), Number(match[3])]
-  return [96, 165, 250]
+  return [56, 189, 248]
 }
 
 export function Starfield({

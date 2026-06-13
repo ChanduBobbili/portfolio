@@ -65,7 +65,11 @@ export function TechnicalWriting() {
   const isMobile = deviceType === 'largeMobile' || deviceType === 'smallMobile'
 
   return (
-    <section id="writing" data-bg="light" className="section-even relative overflow-hidden py-8 md:py-20">
+    <section
+      id="writing"
+      data-bg="light"
+      className="section-even relative overflow-hidden py-8 md:py-20"
+    >
       <motion.div
         ref={containerRef}
         initial={{ opacity: 0, x: -20 }}
@@ -74,7 +78,7 @@ export function TechnicalWriting() {
         transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
         className="max-w-7xl mx-auto px-4"
       >
-        <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-brand">
+        <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-primary">
           <VariableProximity
             label="Technical Writing"
             containerRef={containerRef}
@@ -106,7 +110,7 @@ export function TechnicalWriting() {
               ease: 'circInOut',
               repeat: Infinity,
             }}
-            className="font-medium bg-linear-to-r bg-size-[200%_200%] bg-clip-text text-brand"
+            className="font-medium bg-linear-to-r bg-size-[200%_200%] bg-clip-text text-primary"
           >
             DEV Community
           </motion.a>
@@ -143,13 +147,13 @@ export function TechnicalWriting() {
                   bgClass
                 )}
                 onClick={() => setSelectedArticle(article)}
-                className={'flex flex-col h-full justify-center '}
+                className="flex flex-col h-full justify-center"
               >
                 <div className={layout.contentClassName}>
-                  <h2 className="text-left text-balance text-sm md:text-base lg:text-xl font-semibold tracking-[-0.015em] text-white font-heading">
+                  <h2 className="text-left text-balance text-sm md:text-base lg:text-xl font-semibold tracking-[-0.015em]  font-heading">
                     {article.title}
                   </h2>
-                  <p className="mt-4 text-left text-sm/6 text-muted/50 dark:text-accent-foreground/60 font-sans">
+                  <p className="mt-4 text-left text-sm/6 text-muted/65 font-sans">
                     {article.summary}
                   </p>
                 </div>

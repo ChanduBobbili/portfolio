@@ -54,7 +54,7 @@ export function Hero() {
                   transition: { duration: 0.5, delay: i * 0.15, ease: [0, 0, 0.2, 1] as const },
                 }),
               }}
-              className="font-sans text-xs md:text-base text-brand mb-3 leading-snug"
+              className="font-sans text-xs md:text-base text-primary mb-3 leading-snug"
             >
               I build production systems that scale and ship measurable results.
             </motion.p>
@@ -92,8 +92,8 @@ export function Hero() {
                 sentence="TypeScript · Go · React · Microservices."
                 separator=" · "
                 blurAmount={3}
-                borderColor="var(--brand)"
-                glowColor="color-mix(in srgb, var(--brand) 60%, transparent)"
+                borderColor="var(--primary)"
+                glowColor="color-mix(in srgb, var(--primary) 60%, transparent)"
                 animationDuration={0.4}
                 pauseBetweenAnimations={1.2}
                 className="justify-start gap-2 md:gap-3"

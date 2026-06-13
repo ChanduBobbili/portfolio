@@ -17,12 +17,12 @@ function EntryMeta({ entry, className }: { entry: ExperienceEntry; className?: s
           href={entry.companyUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-heading text-sm font-bold text-brand hover:underline"
+          className="font-heading text-sm font-bold text-primary hover:underline"
         >
           {entry.company}
         </Link>
       ) : (
-        <p className="font-heading text-sm font-bold text-brand">{entry.company}</p>
+        <p className="font-heading text-sm font-bold text-primary">{entry.company}</p>
       )}
 
       <h3 className="font-heading text-xl font-bold text-foreground leading-tight">{entry.role}</h3>
@@ -34,7 +34,7 @@ function EntryMeta({ entry, className }: { entry: ExperienceEntry; className?: s
           {entry.period}
         </span>
         {/* {entry.current && (
-          <span className="font-sans text-[10px] px-2 py-0.5 rounded-full text-brand border border-border">
+          <span className="font-sans text-[10px] px-2 py-0.5 rounded-full text-primary border border-border">
             CURRENT
           </span>
         )} */}
@@ -60,7 +60,7 @@ function ProjectList({ entry }: { entry: ExperienceEntry }) {
                 <Badge
                   key={tech}
                   variant="secondary"
-                  className="font-sans rounded-sm text-[0.625rem] px-2 py-0.5"
+                  className="font-sans rounded-sm text-xs px-2 py-1"
                 >
                   {tech}
                 </Badge>
@@ -73,7 +73,7 @@ function ProjectList({ entry }: { entry: ExperienceEntry }) {
                 key={bi}
                 className="flex gap-2.5 font-sans text-sm text-muted-foreground leading-relaxed"
               >
-                <span className="text-brand shrink-0 mt-0.5">▸</span>
+                <span className="text-primary shrink-0 mt-0.5">▸</span>
                 {bullet}
               </li>
             ))}
@@ -88,7 +88,7 @@ function getStickyTriggerLine() {
   const navHeight = parseFloat(
     getComputedStyle(document.documentElement).getPropertyValue('--nav-height')
   )
-  const navPx = Number.isNaN(navHeight) ? 64 : navHeight * 16
+  const navPx = Number.isNaN(navHeight) ? 64 : navHeight * 24
   return navPx + 8 + 24 + 16
 }
 
@@ -220,7 +220,7 @@ export function ExperienceStickyScroll({
 
         {/* Right: sticky company / role */}
         <div className="hidden w-[280px] shrink-0 lg:block">
-          <div className="sticky top-[calc(var(--nav-height)+1.5rem)] rounded-xl border border-border bg-card/75 p-6 backdrop-blur-sm">
+          <div className="sticky top-[calc(var(--nav-height)+1.5rem)] rounded-xl border border-border bg-card p-6 backdrop-blur-sm">
             {activeEntry && (
               <motion.div
                 key={`${activeEntry.company}-${activeEntry.period}`}
@@ -239,7 +239,7 @@ export function ExperienceStickyScroll({
           <div
             className="absolute left-1/2 top-4 bottom-4 w-px -translate-x-1/2"
             style={{
-              background: 'linear-gradient(180deg, var(--timeline-line), transparent)',
+              background: 'linear-gradient(180deg, rgba(56, 189, 248, 0.18), transparent)',
             }}
           />
           <motion.div
@@ -247,7 +247,7 @@ export function ExperienceStickyScroll({
             style={{
               bottom: '1rem',
               scaleY: fillScaleY,
-              background: 'var(--timeline-fill)',
+              background: 'linear-gradient(180deg, #38bdf8, #7dd3fc)',
             }}
           />
           {entries.map((entry, index) => {
@@ -269,10 +269,10 @@ export function ExperienceStickyScroll({
                     isActive ? 'scale-110' : 'scale-90 opacity-60'
                   )}
                   style={{
-                    background: isActive ? 'var(--brand)' : 'var(--bg-base)',
-                    borderColor: 'var(--brand)',
+                    background: isActive ? 'var(--primary)' : 'var(--background)',
+                    borderColor: 'var(--primary)',
                     boxShadow: isActive
-                      ? '0 0 0 4px color-mix(in srgb, var(--brand) 20%, transparent)'
+                      ? '0 0 0 4px color-mix(in srgb, var(--primary) 20%, transparent)'
                       : 'none',
                   }}
                 />

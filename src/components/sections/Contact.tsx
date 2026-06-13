@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { Mail } from 'lucide-react'
-import { useTheme } from 'next-themes'
 import { useDeviceType } from '@zenithui/utils'
 import MagicRings from '@/components/MagicRings'
 import { KineticText } from '@/components/ui/kinetic-text'
@@ -46,12 +45,11 @@ const CONTACT_LINKS = [
 ] as const
 
 export function Contact() {
-  const { resolvedTheme } = useTheme()
   const deviceType = useDeviceType()
   const isDesktop = deviceType === 'desktop'
 
-  const ringColor = resolvedTheme === 'dark' ? '#7ec0e8' : '#3e92cc'
-  const ringColorTwo = resolvedTheme === 'dark' ? '#3e92cc' : '#13293d'
+  const ringColor = '#7dd3fc'
+  const ringColorTwo = '#cfe2fa'
 
   return (
     <section
@@ -63,7 +61,7 @@ export function Contact() {
         <MagicRings
           color={ringColor}
           colorTwo={ringColorTwo}
-          opacity={isDesktop ? 0.6 : 0.45}
+          opacity={isDesktop ? 0.2 : 0.3}
           ringCount={isDesktop ? 8 : 4}
           followMouse={isDesktop}
           speed={isDesktop ? 1 : 0.7}
@@ -71,7 +69,7 @@ export function Contact() {
         />
       </div>
 
-      <div className="absolute inset-0 pointer-events-none bg-background/30 dark:bg-background/40" />
+      <div className="absolute inset-0 pointer-events-none bg-background/30" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -88,7 +86,7 @@ export function Contact() {
           />
         </div>
 
-        <p className="font-sans text-muted-foreground text-base md:text-lg leading-[1.75] mb-8 md:mb-10 max-w-xl mx-auto">
+        <p className="font-sans text-base md:text-lg leading-[1.75] mb-8 md:mb-10 max-w-xl mx-auto">
           Open to full-time roles, freelance projects, and interesting collaborations. Best way to
           reach me is email — I reply within 24 hours.
         </p>

@@ -21,8 +21,8 @@ export function ResumeFab({ onExpand }: ResumeFabProps) {
         className="
           flex items-center gap-2 px-5 py-3 rounded-full
           bg-primary text-primary-foreground
-          border border-brand
-          shadow-[var(--glow)]
+          border border-primary
+          shadow-[0_8px_32px_rgba(56,189,248,0.12)]
           hover:bg-primary/80
           transition-all duration-200
           text-sm font-medium

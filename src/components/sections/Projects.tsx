@@ -57,9 +57,9 @@ function ProjectDetail({ project }: { project: (typeof projects)[number] }) {
           <div className="flex flex-col md:flex-row gap-3 md:gap-5 mb-2 md:mb-5 font-sans text-sm text-muted-foreground">
             {project.stats.map((stat) => (
               <span key={stat.label} className="flex items-center gap-1.5">
-                {stat.label.includes('star') && <Star className="text-brand size-3 md:size-4" />}
+                {stat.label.includes('star') && <Star className="text-primary size-3 md:size-4" />}
                 {stat.label.includes('download') && (
-                  <Download className="text-brand size-3 md:size-4" />
+                  <Download className="text-primary size-3 md:size-4" />
                 )}
                 <strong className="text-foreground text-xs md:text-sm">{stat.value}</strong>
                 &nbsp;{stat.label}
@@ -167,7 +167,7 @@ function ProjectsMobile() {
 
   return (
     <div className="md:hidden flex flex-col gap-2">
-      <div className="relative grid grid-cols-2 gap-1 p-1 rounded-xl bg-[color-mix(in_srgb,var(--brand)_6%,transparent)] overflow-x-auto scrollbar-none">
+      <div className="relative grid grid-cols-2 gap-1 p-1 rounded-xl bg-[color-mix(in_srgb,var(--primary)_6%,transparent)] overflow-x-auto scrollbar-none">
         {projects.map((project, i) => {
           const barColor = ACCENT_BAR[project.accent] ?? ACCENT_BAR.purple
           const isActive = active === i
@@ -213,16 +213,30 @@ function ProjectsMobile() {
 export function Projects() {
   const containerRef = useRef<HTMLDivElement>(null)
   return (
-    <section id="projects" data-bg="dark" className="section-odd relative overflow-hidden py-8 md:py-20">
+    <section
+      id="projects"
+      data-bg="dark"
+      className="section-odd relative overflow-hidden py-8 md:py-20"
+    >
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div
+          className={cn(
+            'absolute inset-0 bg-size-[40px_40px]',
+            'bg-[linear-gradient(to_right,rgba(56,189,248,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(56,189,248,0.08)_1px,transparent_1px)]'
+          )}
+        />
+        <div className="absolute inset-0 bg-background mask-[radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+      </div>
+
       <motion.div
         ref={containerRef}
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
-        className="max-w-7xl mx-auto px-4"
+        className="relative z-10 max-w-7xl mx-auto px-4"
       >
-        <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-brand">
+        <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-primary">
           <VariableProximity
             label="Open Source Contributions"
             containerRef={containerRef}

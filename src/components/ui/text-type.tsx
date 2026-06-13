@@ -156,8 +156,7 @@ export function TextType({
   ])
 
   const shouldHideCursor =
-    hideCursorWhileTyping &&
-    (currentCharIndex < textArray[currentTextIndex].length || isDeleting)
+    hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting)
 
   const Tag = Component as ElementType
   const content = (

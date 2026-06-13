@@ -20,7 +20,7 @@ interface BorderBeamProps {
  * Wrap all other card content in `<div className="relative z-10">`.
  */
 export function BorderBeam({
-  color = 'var(--accent-purple)',
+  color = 'var(--primary)',
   duration = 4,
   borderRadius = 16,
   alwaysVisible = false,
@@ -53,7 +53,7 @@ export function BorderBeam({
       />
       {/* Inner mask — covers the card interior, leaving only the 1 px border ring visible */}
       <div
-        className="absolute inset-[1px] bg-[var(--bg-surface)]"
+        className="absolute inset-[1px] bg-[var(--card)]"
         style={{ borderRadius: Math.max(0, borderRadius - 1) }}
       />
     </div>

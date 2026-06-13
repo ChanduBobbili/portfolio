@@ -17,7 +17,7 @@ export function ThemeToggle() {
   const isClient = useIsClient()
 
   if (!isClient) {
-    return <div className="w-[52px] h-7 rounded-full bg-[var(--bg-elevated)]" />
+    return <div className="w-[52px] h-7 rounded-full bg-muted" />
   }
 
   const isDark = theme === 'dark'
@@ -25,7 +25,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className="relative w-[52px] h-7 rounded-full border border-[var(--border-default)] bg-[var(--bg-elevated)] transition-colors duration-300"
+      className="relative w-[52px] h-7 rounded-full border border-border bg-muted transition-colors duration-300"
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
     >
       <span

@@ -9,7 +9,7 @@ export function Footer() {
   return (
     <footer
       className="section-even border-t py-2"
-      style={{ borderColor: 'color-mix(in srgb, var(--brand) 15%, transparent)' }}
+      style={{ borderColor: 'color-mix(in srgb, var(--primary) 15%, transparent)' }}
     >
       <div className="mx-auto px-4 md:px-12 flex flex-row items-center justify-between gap-4 md:gap-2">
         <p className="font-sans text-xs text-muted-foreground">
@@ -22,10 +22,10 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="text-muted-foreground hover:text-brand transition-colors duration-200"
+            className="text-muted-foreground hover:text-primary transition-colors duration-200"
             style={{ filter: 'none' }}
             onMouseEnter={(e) => {
-              ;(e.currentTarget as HTMLElement).style.filter = 'drop-shadow(0 0 6px var(--brand))'
+              ;(e.currentTarget as HTMLElement).style.filter = 'drop-shadow(0 0 6px var(--primary))'
             }}
             onMouseLeave={(e) => {
               ;(e.currentTarget as HTMLElement).style.filter = 'none'
@@ -38,9 +38,9 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="text-muted-foreground hover:text-brand transition-colors duration-200"
+            className="text-muted-foreground hover:text-primary transition-colors duration-200"
             onMouseEnter={(e) => {
-              ;(e.currentTarget as HTMLElement).style.filter = 'drop-shadow(0 0 6px var(--brand))'
+              ;(e.currentTarget as HTMLElement).style.filter = 'drop-shadow(0 0 6px var(--primary))'
             }}
             onMouseLeave={(e) => {
               ;(e.currentTarget as HTMLElement).style.filter = 'none'

@@ -68,6 +68,19 @@ export function Navbar() {
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const isDarkPill = isOnLightBg
+  const pillContent = {
+    logo: isDarkPill ? 'text-foreground' : 'text-accent-foreground',
+    linkInactive: isDarkPill
+      ? 'text-accent-foreground hover:text-primary'
+      : 'text-accent-foreground hover:text-primary',
+    linkActive: isDarkPill ? 'text-primary' : 'text-primary',
+    linkDot: isDarkPill ? 'bg-primary' : 'bg-primary',
+    menuBtn: isDarkPill
+      ? 'border-foreground/25 text-foreground'
+      : 'border-foreground/25 text-primary',
+  }
+
   return (
     <header
       id="nav-header"
@@ -75,8 +88,8 @@ export function Navbar() {
         'max-w-7xl mx-auto fixed top-4 left-2 right-2 z-110 border',
         'transition-colors duration-300 rounded-xl md:rounded-2xl backdrop-blur-md',
         isOnLightBg
-          ? 'bg-background/55 border-foreground/20 text-foreground'
-          : 'bg-foreground/55 border-foreground/20 text-background'
+          ? 'bg-background/50 border-border text-foreground'
+          : 'bg-foreground/10 border-foreground/15 text-background'
       )}
     >
       <div className="max-w-6xl mx-auto px-6 md:px-0">
@@ -91,7 +104,15 @@ export function Navbar() {
             className="relative flex items-center gap-2 cursor-pointer group"
             aria-label="Scroll to top"
           >
-            <SparklesText sparklesCount={3} className={cn('text-xl font-bold tracking-wide')}>
+            <SparklesText
+              sparklesCount={3}
+              colors={
+                isDarkPill
+                  ? { first: '#38bdf8', second: '#7dd3fc' }
+                  : { first: '#0284c7', second: '#0ea5e9' }
+              }
+              className={cn('text-xl font-bold tracking-wide', pillContent.logo)}
+            >
               Chandu Bobbili
             </SparklesText>
           </motion.button>
@@ -105,14 +126,17 @@ export function Navbar() {
                   onClick={() => scrollTo(link.href)}
                   className={cn(
                     'relative px-3 py-1.5 font-mono text-xs transition-colors cursor-pointer',
-                    isActive ? 'text-brand' : 'text-muted-foreground hover:text-foreground'
+                    isActive ? pillContent.linkActive : pillContent.linkInactive
                   )}
                 >
                   {link.label}
                   {isActive && (
                     <motion.span
                       layoutId="nav-dot"
-                      className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-6 h-1 rounded-full bg-brand"
+                      className={cn(
+                        'absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-6 h-1 rounded-full',
+                        pillContent.linkDot
+                      )}
                     />
                   )}
                 </button>
@@ -122,7 +146,12 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center gap-3">
             {/* <ThemeToggle /> */}
-            <RainbowButton asChild size="sm" className="rounded-md">
+            <RainbowButton
+              asChild
+              size="sm"
+              variant={isDarkPill ? 'default' : 'outline'}
+              className="rounded-md"
+            >
               <Link href={`mailto:${personal.email}`}>
                 <Mail size={16} />
                 Hire Me
@@ -134,7 +163,10 @@ export function Navbar() {
             {/* <ThemeToggle /> */}
             <motion.button
               onClick={() => setMobileOpen((v) => !v)}
-              className="relative w-9 h-9 flex items-center justify-center rounded-md border border-foreground/20 text-foreground"
+              className={cn(
+                'relative w-9 h-9 flex items-center justify-center rounded-md border',
+                pillContent.menuBtn
+              )}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
               whileTap={{ scale: 0.92 }}
@@ -174,12 +206,15 @@ export function Navbar() {
                   initial={{ y: '100%', opacity: 0.6 }}
                   animate={{ y: 0, opacity: 1, transition: mobilePanelSpring }}
                   exit={{ y: '100%', opacity: 0, transition: mobilePanelExit }}
-                  className="md:hidden fixed inset-x-0 bottom-0 z-105 mx-3 mb-3 max-h-[min(82vh,calc(100dvh-5rem))] overflow-hidden rounded-2xl border border-border/80 bg-card/95 shadow-(--glow-hover) backdrop-blur-xl"
+                  className="md:hidden fixed inset-x-0 bottom-0 z-105 mx-3 mb-3 max-h-[min(82vh,calc(100dvh-5rem))] overflow-hidden rounded-2xl border border-border/80 bg-card/95 shadow-[0_16px_48px_rgba(56,189,248,0.2)] backdrop-blur-xl"
                   aria-label="Mobile navigation"
                 >
                   <div
                     className="pointer-events-none absolute inset-0 opacity-60"
-                    style={{ background: 'var(--glow-radial)' }}
+                    style={{
+                      background:
+                        'radial-gradient(ellipse at center, rgba(56,189,248,0.15) 0%, transparent 70%)',
+                    }}
                   />
 
                   <div className="relative flex flex-col px-5 pb-5 pt-4">
@@ -214,13 +249,13 @@ export function Navbar() {
                               onClick={() => scrollTo(link.href)}
                               className={`group flex w-full items-center gap-3 rounded-xl border px-3.5 py-3 text-left transition-colors ${
                                 isActive
-                                  ? 'border-brand/30 bg-brand/8 text-brand'
+                                  ? 'border-primary/30 bg-primary/8 text-primary'
                                   : 'border-transparent bg-background/40 text-foreground hover:border-border hover:bg-background/70'
                               }`}
                             >
                               <span
                                 className={`font-mono text-[11px] tabular-nums ${
-                                  isActive ? 'text-brand' : 'text-muted-foreground'
+                                  isActive ? 'text-primary' : 'text-muted-foreground'
                                 }`}
                               >
                                 {String(index + 1).padStart(2, '0')}
@@ -231,7 +266,7 @@ export function Navbar() {
                               <ArrowUpRight
                                 size={14}
                                 className={`shrink-0 transition-transform group-active:translate-x-0.5 group-active:-translate-y-0.5 ${
-                                  isActive ? 'text-brand' : 'text-muted-foreground'
+                                  isActive ? 'text-primary' : 'text-muted-foreground'
                                 }`}
                               />
                             </button>
