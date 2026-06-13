@@ -56,6 +56,7 @@ export function Contact() {
   return (
     <section
       id="contact"
+      data-bg="dark"
       className="section-odd relative overflow-hidden py-8 md:py-20 min-h-[40vh] md:min-h-[52vh] flex items-center"
     >
       <div className="absolute inset-0 ">

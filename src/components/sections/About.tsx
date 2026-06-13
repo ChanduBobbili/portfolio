@@ -62,7 +62,7 @@ export function About() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section id="about" className="section-even relative overflow-hidden py-8 md:py-20">
+    <section id="about" data-bg="light" className="section-even relative overflow-hidden py-8 md:py-20">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
           className={cn(

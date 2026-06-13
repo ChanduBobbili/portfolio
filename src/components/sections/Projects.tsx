@@ -213,7 +213,7 @@ function ProjectsMobile() {
 export function Projects() {
   const containerRef = useRef<HTMLDivElement>(null)
   return (
-    <section id="projects" className="section-odd relative overflow-hidden py-8 md:py-20">
+    <section id="projects" data-bg="dark" className="section-odd relative overflow-hidden py-8 md:py-20">
       <motion.div
         ref={containerRef}
         initial={{ opacity: 0, x: -20 }}

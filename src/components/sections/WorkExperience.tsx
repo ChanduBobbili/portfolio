@@ -11,7 +11,7 @@ export function WorkExperience() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section id="work" className="section-odd relative py-8 md:py-20">
+    <section id="work" data-bg="dark" className="section-odd relative py-8 md:py-20">
       <motion.div
         ref={containerRef}
         initial={{ opacity: 0, x: -20 }}

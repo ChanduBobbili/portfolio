@@ -65,7 +65,7 @@ export function TechnicalWriting() {
   const isMobile = deviceType === 'largeMobile' || deviceType === 'smallMobile'
 
   return (
-    <section id="writing" className="section-even relative overflow-hidden py-8 md:py-20">
+    <section id="writing" data-bg="light" className="section-even relative overflow-hidden py-8 md:py-20">
       <motion.div
         ref={containerRef}
         initial={{ opacity: 0, x: -20 }}

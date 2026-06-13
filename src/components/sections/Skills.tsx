@@ -127,6 +127,7 @@ export function Skills() {
   return (
     <section
       id="skills"
+      data-bg="light"
       className="section-even relative overflow-hidden py-8 md:py-20 antialiased"
     >
       <BackgroundBeams className="pointer-events-none" />

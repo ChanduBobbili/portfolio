@@ -25,6 +25,7 @@ export function Hero() {
   return (
     <section
       id="hero"
+      data-bg="dark"
       className="section-odd bg-black! relative min-h-screen flex items-center overflow-hidden pt-16 pb-8 md:pb-20"
     >
       <div className="absolute inset-0 pointer-events-none">

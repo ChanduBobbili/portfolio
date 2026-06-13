@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, Mail, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
+import { useAdaptiveNavbar } from '@/hooks/useAdaptiveNavbar'
 import { personal } from '@/data/portfolio'
 import { HoverBorderGradient } from '../../ui/hover-border-gradient'
 import { SparklesText } from '../../ui/sparkles-text'
@@ -46,6 +47,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const activeId = useScrollSpy(SECTION_IDS, 80)
+  const { isOnLightBg } = useAdaptiveNavbar()
 
   useEffect(() => {
     const raf = requestAnimationFrame(() => setMounted(true))
@@ -67,7 +69,16 @@ export function Navbar() {
   }
 
   return (
-    <header className="max-w-7xl mx-auto fixed top-4 left-2 right-2 z-110 transition-all duration-300 bg-foreground/20 rounded-xl md:rounded-2xl backdrop-blur-md border border-border">
+    <header
+      id="nav-header"
+      className={cn(
+        'max-w-7xl mx-auto fixed top-4 left-2 right-2 z-110 border',
+        'transition-colors duration-300 rounded-xl md:rounded-2xl backdrop-blur-md',
+        isOnLightBg
+          ? 'bg-background/55 border-foreground/20 text-foreground'
+          : 'bg-foreground/55 border-foreground/20 text-background'
+      )}
+    >
       <div className="max-w-6xl mx-auto px-6 md:px-0">
         <div className="flex items-center justify-between h-16">
           <motion.button
@@ -80,10 +91,7 @@ export function Navbar() {
             className="relative flex items-center gap-2 cursor-pointer group"
             aria-label="Scroll to top"
           >
-            <SparklesText
-              sparklesCount={3}
-              className="text-xl font-bold text-foreground tracking-wide"
-            >
+            <SparklesText sparklesCount={3} className={cn('text-xl font-bold tracking-wide')}>
               Chandu Bobbili
             </SparklesText>
           </motion.button>
