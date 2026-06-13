@@ -76,7 +76,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="dark"
+          forcedTheme="dark"
+          storageKey="astronaut-theme"
           enableSystem={false}
           disableTransitionOnChange={false}
         >
