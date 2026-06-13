@@ -7,9 +7,9 @@ import { ArrowUpRight, Mail, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
 import { personal } from '@/data/portfolio'
-import { HoverBorderGradient } from '../ui/hover-border-gradient'
-import { SparklesText } from '../ui/sparkles-text'
-import { RainbowButton } from '../ui/rainbow-button'
+import { HoverBorderGradient } from '../../ui/hover-border-gradient'
+import { SparklesText } from '../../ui/sparkles-text'
+import { RainbowButton } from '../../ui/rainbow-button'
 import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
