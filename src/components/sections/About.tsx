@@ -8,6 +8,7 @@ import { MagicCard } from '@/components/ui/magic-card'
 import { Terminal } from '@/components/ui/terminal'
 import { VariableProximity } from '@/components/ui/variable-proximity'
 import { SectionTitle } from '../ui/SectionTitle'
+import { cn } from '@/lib/utils'
 
 const infoCards = [
   { icon: Briefcase, label: 'Currently', value: personal.currentRole },
@@ -62,13 +63,23 @@ export function About() {
 
   return (
     <section id="about" className="section-even relative overflow-hidden py-8 md:py-20">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div
+          className={cn(
+            'absolute inset-0 bg-size-[40px_40px]',
+            'bg-[linear-gradient(to_right,var(--grid-dot)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-dot)_1px,transparent_1px)]'
+          )}
+        />
+        <div className="absolute inset-0 bg-bg-section-alt mask-[radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-4 lg:gap-16 items-start">
           <motion.div
             ref={containerRef}
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
           >
             <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-brand">
@@ -129,7 +140,7 @@ export function About() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.5, delay: 0.25, ease: 'easeInOut' }}
           >
             <Terminal

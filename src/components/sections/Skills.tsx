@@ -19,11 +19,14 @@ import {
   AccordionPanel,
 } from '@/components/animate-ui/components/base/accordion'
 import DomeGallery from '@/components/DomeGallery'
+import { BackgroundBeams } from '@/components/ui/background-beams'
 import { cn } from '@/lib/utils'
 import { useDeviceType } from '@zenithui/utils'
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { VariableProximity } from '../ui/variable-proximity'
+import { Marquee } from '../ui/marquee'
+import Image from 'next/image'
 
 const skillIconSlugs = [
   'typescript',
@@ -122,14 +125,19 @@ export function Skills() {
   const deviceType = useDeviceType()
 
   return (
-    <section id="skills" className="section-even relative overflow-hidden py-8 md:py-20">
+    <section
+      id="skills"
+      className="section-even relative overflow-hidden py-8 md:py-20 antialiased"
+    >
+      <BackgroundBeams className="pointer-events-none" />
+
       <motion.div
         ref={containerRef}
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
-        className="max-w-7xl mx-auto px-4"
+        className="relative z-10 max-w-7xl mx-auto px-4"
       >
         <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-brand">
           <VariableProximity
@@ -156,7 +164,7 @@ export function Skills() {
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.5, delay: i * 0.25, ease: 'easeInOut' }}
+                  transition={{ duration: 0.5, delay: i * 0.15, ease: 'easeInOut' }}
                 >
                   <AccordionItem
                     value={value}
@@ -212,6 +220,29 @@ export function Skills() {
               )
             })}
           </Accordion>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
+            className="relative flex lg:hidden w-full flex-col items-center justify-center overflow-hidden"
+          >
+            <Marquee pauseOnHover className="[--duration:15s]">
+              {domeImages.map((image) => (
+                <Image
+                  key={image.alt}
+                  src={image.src}
+                  alt={image.alt}
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 shrink-0"
+                />
+              ))}
+            </Marquee>
+            <div className="from-bg-section-alt pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-linear-to-r"></div>
+            <div className="from-bg-section-alt pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-linear-to-l"></div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.85 }}

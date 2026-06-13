@@ -42,29 +42,6 @@ const mobileLinkSpring = {
   damping: 26,
 }
 
-const mobileLinkVariants = {
-  hidden: { opacity: 0, y: 28, scale: 0.94 },
-  visible: () => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      ...mobileLinkSpring,
-      // delay: 0.01 + i * 0.055,
-    },
-  }),
-  exit: (i: number) => ({
-    opacity: 0,
-    y: 20,
-    scale: 0.96,
-    transition: {
-      ...mobileLinkSpring,
-      damping: 34,
-      delay: (NAV_LINKS.length - 1 - i) * 0.035,
-    },
-  }),
-}
-
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mounted, setMounted] = useState(false)

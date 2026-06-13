@@ -33,11 +33,11 @@ function EntryMeta({ entry, className }: { entry: ExperienceEntry; className?: s
         <span className="font-sans text-[10px] px-2.5 py-1 rounded-full border border-border text-muted-foreground">
           {entry.period}
         </span>
-        {entry.current && (
+        {/* {entry.current && (
           <span className="font-sans text-[10px] px-2 py-0.5 rounded-full text-brand border border-border">
             CURRENT
           </span>
-        )}
+        )} */}
       </div>
     </div>
   )
