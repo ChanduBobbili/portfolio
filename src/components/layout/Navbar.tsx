@@ -219,7 +219,7 @@ export function Navbar() {
                           <motion.li
                             key={link.href}
                             custom={index}
-                            variants={mobileLinkVariants}
+                            // variants={mobileLinkVariants}
                             initial="hidden"
                             animate="visible"
                             exit="exit"

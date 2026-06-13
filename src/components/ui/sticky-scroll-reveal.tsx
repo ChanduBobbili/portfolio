@@ -48,9 +48,9 @@ function ProjectList({ entry }: { entry: ExperienceEntry }) {
     <div className="flex flex-col gap-8">
       {entry.projects.map((project) => (
         <div key={project.name}>
-          <p className="font-sans text-[11px] font-medium tracking-[0.12em] uppercase text-brand mb-2">
-            {`// ${project.name}`}
-          </p>
+          <h5 className="font-heading text-lg font-bold text-foreground leading-tight">
+            {project.name}
+          </h5>
           <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-3">
             {project.description}
           </p>

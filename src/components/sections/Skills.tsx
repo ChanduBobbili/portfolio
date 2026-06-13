@@ -224,6 +224,7 @@ export function Skills() {
               height:
                 deviceType === 'desktop' ? '500px' : deviceType === 'tablet' ? '400px' : '300px',
             }}
+            className="hidden lg:block"
           >
             <DomeGallery
               images={domeImages}
