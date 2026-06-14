@@ -41,7 +41,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-10 md:py-20 w-full">
         <div className="grid lg:grid-cols-2 gap-4 lg:gap-12 items-center">
           <motion.div initial="hidden" animate="visible" className="max-w-2xl">
             <motion.p
@@ -107,7 +107,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="relative"
+            className="relative self-end"
           >
             <AstronautIllustration />
           </motion.div>
