@@ -1,13 +1,13 @@
-import React, { useId } from "react"
+import React, { useId } from 'react'
 
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils'
 
 interface StripedPatternProps extends React.SVGProps<SVGSVGElement> {
-  direction?: "left" | "right"
+  direction?: 'left' | 'right'
 }
 
 export function StripedPattern({
-  direction = "left",
+  direction = 'left',
   className,
   width = 10,
   height = 10,
@@ -21,7 +21,7 @@ export function StripedPattern({
     <svg
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute inset-0 z-10 h-full w-full stroke-[0.5]",
+        'pointer-events-none absolute inset-0 z-10 h-full w-full stroke-[0.5]',
         className
       )}
       xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ export function StripedPattern({
     >
       <defs>
         <pattern id={id} width={w} height={h} patternUnits="userSpaceOnUse">
-          {direction === "left" ? (
+          {direction === 'left' ? (
             <>
               <line x1="0" y1={h} x2={w} y2="0" stroke="currentColor" />
               <line x1={-w} y1={h} x2="0" y2="0" stroke="currentColor" />

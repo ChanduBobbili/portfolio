@@ -6,10 +6,7 @@ import { cn } from '@/lib/utils'
 
 type GridVariant = 'dark' | 'light'
 
-const GRID_PRESETS: Record<
-  GridVariant,
-  { border: string; stroke: string; hoveredFill: string }
-> = {
+const GRID_PRESETS: Record<GridVariant, { border: string; stroke: string; hoveredFill: string }> = {
   dark: {
     border: 'border-gray-400/30',
     stroke: 'stroke-gray-400/30',

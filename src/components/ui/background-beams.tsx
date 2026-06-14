@@ -120,7 +120,9 @@ export const BackgroundBeams = React.memo(function BackgroundBeams({
   const resolvedScrimOpacity = scrimOpacity ?? preset.scrimOpacity
 
   return (
-    <div className={cn('absolute inset-0 flex h-full w-full items-center justify-center', className)}>
+    <div
+      className={cn('absolute inset-0 flex h-full w-full items-center justify-center', className)}
+    >
       <svg
         className="pointer-events-none absolute z-0 h-full w-full"
         width="100%"
