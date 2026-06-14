@@ -37,11 +37,11 @@ const mobilePanelExit = {
   ease: [0.4, 0, 1, 1] as const,
 }
 
-const mobileLinkSpring = {
-  type: 'spring' as const,
-  stiffness: 520,
-  damping: 26,
-}
+// const mobileLinkSpring = {
+//   type: 'spring' as const,
+//   stiffness: 520,
+//   damping: 26,
+// }
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -206,30 +206,19 @@ export function Navbar() {
                   initial={{ y: '100%', opacity: 0.6 }}
                   animate={{ y: 0, opacity: 1, transition: mobilePanelSpring }}
                   exit={{ y: '100%', opacity: 0, transition: mobilePanelExit }}
-                  className="md:hidden fixed inset-x-0 bottom-0 z-105 mx-3 mb-3 max-h-[min(82vh,calc(100dvh-5rem))] overflow-hidden rounded-2xl border border-border/80 bg-card/95 shadow-[0_16px_48px_rgba(56,189,248,0.2)] backdrop-blur-xl"
+                  className="md:hidden fixed inset-x-0 bottom-0 z-105 mx-3 mb-3 max-h-[min(82vh,calc(100dvh-5rem))] overflow-hidden rounded-2xl border border-border/80 bg-card/95 backdrop-blur-xl"
                   aria-label="Mobile navigation"
                 >
-                  <div
-                    className="pointer-events-none absolute inset-0 opacity-60"
-                    style={{
-                      background:
-                        'radial-gradient(ellipse at center, rgba(56,189,248,0.15) 0%, transparent 70%)',
-                    }}
-                  />
-
                   <div className="relative flex flex-col px-5 pb-5 pt-4">
                     <div className="mb-4 flex items-center justify-between border-b border-border/60 pb-3">
                       <div>
-                        <p className="font-sans text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
+                        <p className="font-sans text-[10px] uppercase tracking-widest text-muted-foreground">
                           Navigation
                         </p>
                         <p className="font-heading text-sm font-semibold text-foreground">
-                          {personal.shortName} Bobbili
+                          {personal.name}
                         </p>
                       </div>
-                      <span className="font-sans text-[10px] uppercase tracking-widest text-muted-foreground">
-                        {String(NAV_LINKS.length).padStart(2, '0')} sections
-                      </span>
                     </div>
 
                     <ul className="flex flex-col gap-1.5 overflow-y-auto">
@@ -239,7 +228,6 @@ export function Navbar() {
                           <motion.li
                             key={link.href}
                             custom={index}
-                            // variants={mobileLinkVariants}
                             initial="hidden"
                             animate="visible"
                             exit="exit"
@@ -247,27 +235,35 @@ export function Navbar() {
                             <button
                               type="button"
                               onClick={() => scrollTo(link.href)}
-                              className={`group flex w-full items-center gap-3 rounded-xl border px-3.5 py-3 text-left transition-colors ${
+                              className={cn(
+                                'group flex w-full items-center gap-3 rounded-xl border px-3.5 py-3 text-left transition-colors',
                                 isActive
                                   ? 'border-primary/30 bg-primary/8 text-primary'
                                   : 'border-transparent bg-background/40 text-foreground hover:border-border hover:bg-background/70'
-                              }`}
+                              )}
                             >
                               <span
-                                className={`font-mono text-[11px] tabular-nums ${
+                                className={cn(
+                                  'font-mono text-[11px] tabular-nums',
                                   isActive ? 'text-primary' : 'text-muted-foreground'
-                                }`}
+                                )}
                               >
                                 {String(index + 1).padStart(2, '0')}
                               </span>
-                              <span className="flex-1 font-heading text-base font-semibold tracking-wide">
+                              <span
+                                className={cn(
+                                  'flex-1 font-heading text-sm font-semibold tracking-wide',
+                                  isActive ? 'text-primary' : 'text-muted-foreground'
+                                )}
+                              >
                                 {link.label}
                               </span>
                               <ArrowUpRight
                                 size={14}
-                                className={`shrink-0 transition-transform group-active:translate-x-0.5 group-active:-translate-y-0.5 ${
+                                className={cn(
+                                  'shrink-0 transition-transform group-active:translate-x-0.5 group-active:-translate-y-0.5',
                                   isActive ? 'text-primary' : 'text-muted-foreground'
-                                }`}
+                                )}
                               />
                             </button>
                           </motion.li>
@@ -276,17 +272,17 @@ export function Navbar() {
                     </ul>
 
                     <motion.div
-                      initial={{ opacity: 0, y: 20, scale: 0.96 }}
-                      animate={{
-                        opacity: 1,
-                        y: 0,
-                        scale: 1,
-                        transition: {
-                          ...mobileLinkSpring,
-                          delay: 0.08,
-                        },
-                      }}
-                      exit={{ opacity: 0, y: 12, transition: mobilePanelExit }}
+                      // initial={{ opacity: 0, y: 20, scale: 0.96 }}
+                      // animate={{
+                      //   opacity: 1,
+                      //   y: 0,
+                      //   scale: 1,
+                      // transition: {
+                      //   ...mobileLinkSpring,
+                      //   delay: 0.08,
+                      // },
+                      // }}
+                      // exit={{ opacity: 0, y: 12, transition: mobilePanelExit }}
                       className="mt-4"
                     >
                       <HoverBorderGradient

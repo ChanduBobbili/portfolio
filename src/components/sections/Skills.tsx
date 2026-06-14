@@ -19,7 +19,7 @@ import {
   AccordionPanel,
 } from '@/components/animate-ui/components/base/accordion'
 import DomeGallery from '@/components/DomeGallery'
-import { BackgroundBeams } from '@/components/ui/background-beams'
+import { StripedPattern } from '@/components/magicui/striped-pattern'
 import { cn } from '@/lib/utils'
 import { useDeviceType } from '@zenithui/utils'
 import { motion } from 'framer-motion'
@@ -130,8 +130,10 @@ export function Skills() {
       data-bg="light"
       className="section-even relative overflow-hidden py-8 md:py-20 antialiased"
     >
-      <BackgroundBeams className="pointer-events-none" />
-      <div className="pointer-events-none absolute inset-0 bg-background/40" />
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <StripedPattern direction="left" className="z-0 text-foreground/8" />
+        <div className="absolute inset-0 bg-background mask-[radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+      </div>
 
       <motion.div
         ref={containerRef}

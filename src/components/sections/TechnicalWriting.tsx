@@ -6,6 +6,7 @@ import { articles } from '@/data/portfolio'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { WobbleCard } from '@/components/ui/wobble-card'
 import { ArticleDialog } from '@/components/ui/ArticleDialog'
+import { InteractiveGridPattern } from '@/components/ui/interactive-grid-pattern'
 import { cn } from '@/lib/utils'
 import { useDeviceType } from '@zenithui/utils'
 import { VariableProximity } from '../ui/variable-proximity'
@@ -70,13 +71,18 @@ export function TechnicalWriting() {
       data-bg="light"
       className="section-even relative overflow-hidden py-8 md:py-20"
     >
+      <div className="absolute inset-0 overflow-hidden">
+        <InteractiveGridPattern variant="light" className="z-0" squares={[80, 40]} opacity={0.75} />
+        <div className="pointer-events-none absolute inset-0 bg-background mask-[radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+      </div>
+
       <motion.div
         ref={containerRef}
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
-        className="max-w-7xl mx-auto px-4"
+        className="relative z-10 max-w-7xl mx-auto px-4"
       >
         <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-primary">
           <VariableProximity

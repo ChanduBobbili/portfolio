@@ -169,7 +169,7 @@ function ProjectsMobile() {
     <div className="md:hidden flex flex-col gap-2">
       <div className="relative grid grid-cols-2 gap-1 p-1 rounded-xl bg-[color-mix(in_srgb,var(--primary)_6%,transparent)] overflow-x-auto scrollbar-none">
         {projects.map((project, i) => {
-          const barColor = ACCENT_BAR[project.accent] ?? ACCENT_BAR.purple
+          // const barColor = ACCENT_BAR[project.accent] ?? ACCENT_BAR.purple
           const isActive = active === i
           return (
             <motion.button
@@ -184,8 +184,8 @@ function ProjectsMobile() {
               {isActive && (
                 <motion.span
                   layoutId="tab-pill"
-                  className="absolute inset-0 rounded-lg z-[-1]"
-                  style={{ background: `color-mix(in srgb, ${barColor} 10%, transparent)` }}
+                  className="absolute inset-0 rounded-lg z-[-1] bg-muted-foreground/50"
+                  // style={{ background: `color-mix(in srgb, ${barColor} 10%, transparent)` }}
                   transition={{ type: 'spring', stiffness: 420, damping: 36 }}
                 />
               )}
