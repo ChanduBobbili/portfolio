@@ -155,7 +155,30 @@ export function Skills() {
         </h2>
         <SectionTitle className="mb-2 md:mb-4">What I work with</SectionTitle>
 
-        <div className="grid lg:grid-cols-2 gap-0 lg:gap-16 items-start justify-items-center">
+        <div className="grid lg:grid-cols-2 gap-2 lg:gap-16 items-start justify-items-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
+            className="relative flex lg:hidden w-full flex-col items-center justify-center overflow-hidden"
+          >
+            <Marquee pauseOnHover className="[--duration:15s]">
+              {domeImages.map((image) => (
+                <Image
+                  key={image.alt}
+                  src={image.src}
+                  alt={image.alt}
+                  width={40}
+                  height={40}
+                  className="w-8 h-8 shrink-0"
+                />
+              ))}
+            </Marquee>
+            <div className="from-background pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-linear-to-r"></div>
+            <div className="from-background pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-linear-to-l"></div>
+          </motion.div>
+
           <Accordion multiple={false} className="w-full">
             {skills.map((group, i) => {
               const value = categoryToValue(group.category)
@@ -224,29 +247,6 @@ export function Skills() {
               )
             })}
           </Accordion>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
-            className="relative flex lg:hidden w-full flex-col items-center justify-center overflow-hidden"
-          >
-            <Marquee pauseOnHover className="[--duration:15s]">
-              {domeImages.map((image) => (
-                <Image
-                  key={image.alt}
-                  src={image.src}
-                  alt={image.alt}
-                  width={40}
-                  height={40}
-                  className="w-10 h-10 shrink-0"
-                />
-              ))}
-            </Marquee>
-            <div className="from-background pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-linear-to-r"></div>
-            <div className="from-background pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-linear-to-l"></div>
-          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.85 }}

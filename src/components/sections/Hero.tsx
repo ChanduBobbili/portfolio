@@ -41,7 +41,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-10 md:py-20 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-10 pb-0 md:pb-20 md:py-20 w-full">
         <div className="grid lg:grid-cols-2 gap-4 lg:gap-12 items-center">
           <motion.div initial="hidden" animate="visible" className="max-w-2xl">
             <motion.p
@@ -80,7 +80,7 @@ export function Hero() {
                 text="I say Great Engineering is where elegant code meets real-world impact."
                 typingSpeed={55}
                 initialDelay={1000}
-                showCursor
+                showCursor={true}
                 cursorCharacter="|"
                 cursorClassName="text-foreground/50 font-medium"
                 className="font-heading text-base md:text-2xl text-foreground/50 font-semibold"
@@ -107,9 +107,10 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="relative self-end"
+            className="relative"
           >
             <AstronautIllustration />
+            <HeroButtons className="flex md:hidden mx-auto justify-center" />
           </motion.div>
         </div>
       </div>
@@ -127,14 +128,14 @@ function HeroButtons({ className }: { className?: string }) {
       <MagneticButton>
         <Link
           href={`mailto:${personal.email}`}
-          className="inline-flex h-11 items-center gap-2 rounded-lg bg-linear-to-b from-blue-500 to-blue-700 px-6 text-sm font-medium text-white transition-transform duration-150 active:scale-[0.98]"
+          className="w-32 md:w-auto justify-center inline-flex h-11 items-center gap-2 rounded-lg bg-linear-to-b from-blue-500 to-blue-700 px-6 text-sm font-medium text-white transition-transform duration-150 active:scale-[0.98]"
         >
           <Mail size={16} />
           Email
         </Link>
       </MagneticButton>
 
-      <RainbowButton size="lg" asChild>
+      <RainbowButton size="lg" asChild className="w-32 md:w-auto justify-center">
         <Link href={personal.resume} target="_blank" rel="noopener noreferrer">
           <FileText size={16} />
           Resume

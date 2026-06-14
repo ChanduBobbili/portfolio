@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { articles } from '@/data/portfolio'
 import { SectionTitle } from '@/components/ui/SectionTitle'
@@ -10,6 +10,7 @@ import { InteractiveGridPattern } from '@/components/ui/interactive-grid-pattern
 import { cn } from '@/lib/utils'
 import { useDeviceType } from '@zenithui/utils'
 import { VariableProximity } from '../ui/variable-proximity'
+import { StripedPattern } from '../magicui/striped-pattern'
 
 const ARTICLE_BG: Record<string, string> = {
   purple: 'bg-[#1a3550]',
@@ -17,7 +18,7 @@ const ARTICLE_BG: Record<string, string> = {
   green: 'bg-[#0f3d4a]',
 }
 
-const articleLayouts = [
+const desktopArticleOrder = [
   {
     key: 'seo',
     colSpan: 'col-span-1 lg:col-span-2',
@@ -49,6 +50,38 @@ const articleLayouts = [
   },
 ] as const
 
+const mobileArticleOrder = [
+  {
+    key: 'changesetgoo',
+    colSpan: 'col-span-1 lg:col-span-3',
+    containerClassName: 'min-h-[200px] lg:min-h-[300px]',
+    contentClassName: 'max-w-lg',
+    imageClassName:
+      'absolute -right-10 md:-right-[40%] lg:-right-[20%] -bottom-10 object-contain rounded-2xl grayscale filter',
+    imageWidth: 500,
+    imageHeight: 500,
+  },
+  {
+    key: 'seo',
+    colSpan: 'col-span-1 lg:col-span-2',
+    containerClassName: 'min-h-[200px] lg:min-h-[300px]',
+    contentClassName: 'max-w-md',
+    imageClassName: 'absolute right-4 bottom-4 w-[45%] h-[80%] object-contain rounded-2xl',
+    imageWidth: 500,
+    imageHeight: 500,
+  },
+  {
+    key: 'biome',
+    colSpan: 'col-span-1',
+    containerClassName: 'min-h-[200px] lg:min-h-[300px]',
+    contentClassName: 'max-w-80',
+    imageClassName:
+      'absolute -right-4 -bottom-6 w-40 h-40 md:w-48 md:h-48 object-contain rounded-2xl grayscale filter opacity-90',
+    imageWidth: 300,
+    imageHeight: 300,
+  },
+] as const
+
 function getArticle(key: string) {
   const article = articles.find((a) => {
     if (key === 'seo') return a.title.toLowerCase().includes('seo')
@@ -60,10 +93,17 @@ function getArticle(key: string) {
 }
 
 export function TechnicalWriting() {
+  const deviceType = useDeviceType()
+  const isMobile = useMemo(
+    () => deviceType === 'largeMobile' || deviceType === 'smallMobile',
+    [deviceType]
+  )
+  const articlesOrder = useMemo(() => {
+    return isMobile ? mobileArticleOrder : desktopArticleOrder
+  }, [isMobile])
+
   const containerRef = useRef<HTMLDivElement>(null)
   const [selectedArticle, setSelectedArticle] = useState<(typeof articles)[number] | null>(null)
-  const deviceType = useDeviceType()
-  const isMobile = deviceType === 'largeMobile' || deviceType === 'smallMobile'
 
   return (
     <section
@@ -71,9 +111,15 @@ export function TechnicalWriting() {
       data-bg="light"
       className="section-even relative overflow-hidden py-8 md:py-20"
     >
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Only show the grid pattern on desktop */}
+      <div className="absolute inset-0 overflow-hidden hidden md:block">
         <InteractiveGridPattern variant="light" className="z-0" squares={[80, 40]} opacity={0.75} />
         <div className="pointer-events-none absolute inset-0 bg-background mask-[radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+      </div>
+      {/* Only show the striped pattern on mobile */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden md:hidden">
+        <StripedPattern direction="left" className="z-0 text-foreground/8" />
+        <div className="absolute inset-0 bg-background mask-[radial-gradient(ellipse_at_center,transparent_20%,black)]" />
       </div>
 
       <motion.div
@@ -125,11 +171,11 @@ export function TechnicalWriting() {
         <div
           className={cn(
             isMobile
-              ? '-mx-4 flex gap-3 overflow-x-auto px-4 scrollbar-none'
+              ? '-mx-4 flex gap-3 overflow-x-auto overflow-y-hidden px-4 scrollbar-none'
               : 'grid grid-cols-1 lg:grid-cols-3 gap-3 w-full'
           )}
         >
-          {articleLayouts.map((layout, i) => {
+          {articlesOrder.map((layout, i) => {
             const article = getArticle(layout.key)
             const bgClass = ARTICLE_BG[article.accent] ?? ARTICLE_BG.purple
 
