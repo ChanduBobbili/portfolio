@@ -149,7 +149,7 @@ export function Navbar() {
             <RainbowButton
               asChild
               size="sm"
-              variant={isDarkPill ? 'default' : 'outline'}
+              // variant={isDarkPill ? 'default' : 'outline'}
               className="rounded-md"
             >
               <Link href={`mailto:${personal.email}`}>

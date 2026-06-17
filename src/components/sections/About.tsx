@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Briefcase, GraduationCap } from 'lucide-react'
+import { Briefcase } from 'lucide-react'
 import { personal } from '@/data/portfolio'
 import { MagicCard } from '@/components/ui/magic-card'
 import { Terminal } from '@/components/ui/terminal'
@@ -12,23 +12,13 @@ import { cn } from '@/lib/utils'
 
 const infoCards = [
   { icon: Briefcase, label: 'Currently', value: personal.currentRole },
-  { icon: GraduationCap, label: 'Education', value: personal.education },
+  // { icon: GraduationCap, label: 'Education', value: personal.education },
 ]
 
-const aboutCommands = [
-  'whoami',
-  'cat stack.json',
-  'git log --oneline --career',
-  'run diagnostics --highlight',
-  'ping chandu --contact',
-]
+const aboutCommands = ['whoami', 'cat stack.json', 'run diagnostics --highlight']
 
 const aboutOutputs: Record<number, string[]> = {
-  0: [
-    'Bobbili Vijaya Chandu',
-    'Senior SDE · Deepta AI · Hyderabad, India',
-    'TypeScript · Go · React · Microservices · 3+ years',
-  ],
+  0: ['Bobbili Vijaya Chandu'],
   1: [
     '  "languages":  ["TypeScript", "Go", "JavaScript", "Python"],',
     '  "frontend":   ["React", "Next.js", "TanStack", "Tailwind CSS"],',
@@ -37,24 +27,10 @@ const aboutOutputs: Record<number, string[]> = {
     '  "devops":     ["Docker", "Kubernetes (GKE)", "GCP", "GitHub Actions"]',
   ],
   2: [
-    '✔ 08/2025 – present   Senior SDE @ Deepta AI',
-    // '                      Klaritics analytics · Kafka · ClickHouse · GKE',
-    '✔ 09/2024 – 07/2025   SDE @ Apxor Technology Solutions',
-    // '                      Hearzap CMS · Go microservices · ~90% test coverage',
-    '✔ 07/2023 – 08/2024   Associate Web Dev @ Apxor Technology Solutions',
-    // '                      CRA → Vite · Lighthouse 54 → 97 (+80%)',
-  ],
-  3: [
     '✔ Lighthouse score    54 → 97   (+80%)',
     '✔ INP / blocking      ~500ms → negligible',
     '✔ npm downloads       ~1 000 / week  (@zenithui/day-picker)',
     '✔ Universities served  4  (concurrent via Go goroutines)',
-  ],
-  4: [
-    'email   chandubobbili12@gmail.com',
-    'github  github.com/ChanduBobbili',
-    'linkedin  linkedin.com/in/chandu-bobbili-15863319b',
-    // '✔ open to full-time · remote · relocation',
   ],
 }
 
@@ -103,7 +79,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="font-sans text-muted-foreground text-base leading-[1.75] mb-4 md:mb-8"
+              className="font-sans text-muted-foreground text-base leading-[1.75] mb-2 md:mb-4"
             >
               {personal.about}
             </motion.p>
