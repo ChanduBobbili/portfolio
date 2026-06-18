@@ -1,5 +1,7 @@
 // ─── PERSONAL ─────────────────────────────────────────────────────────────
 
+export type AboutSegment = { text: string; highlight?: boolean }
+
 export const personal = {
   name: 'Bobbili Vijaya Chandu',
   shortName: 'Chandu',
@@ -16,13 +18,25 @@ export const personal = {
   currentRole: 'Senior SDE @ Deepta AI',
   openTo: 'Full-time · Remote · Relocation',
   education: 'B.Tech CSE, JNTUGV (2019–2023)',
-  stats: [
-    { value: '3+', label: 'Years' },
-    // { value: '4', label: 'Companies' },
-    { value: '1', label: 'OSS Lib' },
-    { value: '3', label: 'Articles' },
-  ],
-  about: `SDE based in Hyderabad with 3+ years building scalable systems — from real-time analytics platforms handling live production traffic, to open-source component libraries and Go CLI tools used by other developers. I care about clean architecture, measurable impact, and writing code that doesn't rot.`,
+  about: [
+    {
+      text: "I'm an SDE who measures success in business outcomes, not just shipped features. At Deepta AI I've helped platforms handle ",
+    },
+    { text: '1M+ events/sec', highlight: true },
+    { text: ', onboard ' },
+    { text: '20,000 students', highlight: true },
+    { text: ' across ' },
+    { text: '4 universities', highlight: true },
+    { text: ', and process ' },
+    { text: '4,000 fee renewals', highlight: true },
+    { text: ' — while cutting per-applicant handling from ' },
+    { text: '15 to 8 hours', highlight: true },
+    { text: '. Earlier at Apxor, a dashboard migration (' },
+    { text: 'Lighthouse 54 → 97', highlight: true },
+    { text: ') directly retained ' },
+    { text: '5+ accounts', highlight: true },
+    { text: ' that were ready to leave.' },
+  ] satisfies AboutSegment[],
   missionStats: [
     { label: 'Events/sec, load-tested', value: '1M+' },
     { label: 'Students enrolled via platform', value: '20K' },

@@ -5,33 +5,74 @@ import { motion } from 'framer-motion'
 import { Briefcase } from 'lucide-react'
 import { personal } from '@/data/portfolio'
 import { MagicCard } from '@/components/ui/magic-card'
-import { Terminal } from '@/components/ui/terminal'
+import { Terminal, type TerminalOutputLine } from '@/components/ui/terminal'
 import { GithubHeatmap } from '@/components/ui/github-heatmap'
 import { VariableProximity } from '@/components/ui/variable-proximity'
 import { SectionTitle } from '../ui/SectionTitle'
 import { cn } from '@/lib/utils'
+import { Marquee } from '../ui/marquee'
+import Image from 'next/image'
 
-const infoCards = [
-  { icon: Briefcase, label: 'Currently', value: personal.currentRole },
-  // { icon: GraduationCap, label: 'Education', value: personal.education },
+const skillIconSlugs = [
+  'typescript',
+  'go',
+  'javascript',
+  'react',
+  'nextdotjs',
+  'nodedotjs',
+  'docker',
+  'kubernetes',
+  'googlecloud',
+  'postgresql',
+  'mongodb',
 ]
 
-const aboutCommands = ['whoami', 'cat stack.json', 'run diagnostics --highlight']
+const domeImages = skillIconSlugs.map((slug) => ({
+  src: `https://cdn.simpleicons.org/${slug}/${slug}.svg`,
+  alt: slug,
+}))
 
-const aboutOutputs: Record<number, string[]> = {
-  0: ['Bobbili Vijaya Chandu'],
+const infoCards = [
+  { icon: Briefcase, label: 'Current Role', value: 'Senior Software Engineer @ Deepta AI' },
+]
+
+const aboutCommands = [
+  'run diagnostics --highlight',
+  'run achievements --highlight',
+  'cat stack.json',
+]
+
+const aboutOutputs: Record<number, TerminalOutputLine[]> = {
+  0: [
+    {
+      type: 'diagnostic',
+      label: 'Events ingestion',
+      value: '1M+ / sec',
+      note: '(Klaritics, load-tested)',
+    },
+    { type: 'diagnostic', label: 'Lighthouse score', value: '54 → 97' },
+  ],
   1: [
+    { type: 'achievement', label: 'Leads generated', value: '50,000+' },
+    {
+      type: 'achievement',
+      label: 'Student enrollments',
+      value: '20,000 across 4 universities',
+    },
+    { type: 'achievement', label: 'App processing', value: '15h → 8h per applicant' },
+    {
+      type: 'achievement',
+      label: 'Accounts retained',
+      value: '5+',
+      note: '(churn prevented)',
+    },
+  ],
+  2: [
     '  "languages":  ["TypeScript", "Go", "JavaScript", "Python"],',
     '  "frontend":   ["React", "Next.js", "TanStack", "Tailwind CSS"],',
     '  "backend":    ["Microservices", "REST", "Kafka", "gRPC", "SSE"],',
     '  "databases":  ["PostgreSQL", "MongoDB", "ClickHouse", "Redis"],',
     '  "devops":     ["Docker", "Kubernetes (GKE)", "GCP", "GitHub Actions"]',
-  ],
-  2: [
-    '✔ Lighthouse score    54 → 97   (+80%)',
-    '✔ INP / blocking      ~500ms → negligible',
-    '✔ npm downloads       ~1 000 / week  (@zenithui/day-picker)',
-    '✔ Universities served  4  (concurrent via Go goroutines)',
   ],
 }
 
@@ -42,7 +83,7 @@ export function About() {
     <section
       id="about"
       data-bg="light"
-      className="section-even relative overflow-hidden py-8 md:py-20"
+      className="section-even relative overflow-hidden py-6 md:py-12"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
@@ -82,40 +123,67 @@ export function About() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="font-sans text-muted-foreground text-base leading-[1.75] mb-2 md:mb-4"
             >
-              {personal.about}
+              {personal.about.map((segment, i) =>
+                segment.highlight ? (
+                  <span key={i} className="font-semibold text-primary">
+                    {segment.text}
+                  </span>
+                ) : (
+                  <span key={i}>{segment.text}</span>
+                )
+              )}
             </motion.p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {infoCards.map((card, i) => (
-                <motion.div
-                  key={card.label}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.5, delay: i * 0.5, ease: 'easeInOut' }}
+            {infoCards.map((card, i) => (
+              <motion.div
+                key={card.label}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.5, delay: i * 0.5, ease: 'easeInOut' }}
+              >
+                <MagicCard
+                  className="rounded-lg border-2 border-border"
+                  gradientFrom="#ee4f27"
+                  gradientTo="#6b21ef"
+                  gradientColor="#262626"
+                  gradientOpacity={0.15}
                 >
-                  <MagicCard
-                    className="rounded-lg border-2 border-border"
-                    gradientFrom="#ee4f27"
-                    gradientTo="#6b21ef"
-                    gradientColor="#262626"
-                    gradientOpacity={0.15}
-                  >
-                    <div className="p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <card.icon size={14} className="text-primary" />
-                        <h5 className="font-heading text-sm font-light uppercase tracking-widest text-muted-foreground">
-                          {card.label}
-                        </h5>
-                      </div>
-                      <p className="font-sans text-sm font-medium text-foreground leading-snug">
-                        {card.value}
-                      </p>
+                  <div className="p-2.5 flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-2">
+                    <div className="flex items-center gap-1">
+                      <card.icon size={14} className="text-primary" />
+                      <h5 className="font-heading text-sm font-light tracking-wider text-muted-foreground">
+                        {card.label}
+                      </h5>
                     </div>
-                  </MagicCard>
-                </motion.div>
-              ))}
-            </div>
+                    <p className="font-sans text-sm font-medium text-foreground">{card.value}</p>
+                  </div>
+                </MagicCard>
+              </motion.div>
+            ))}
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
+              className="relative hidden lg:flex w-full flex-col items-center justify-center overflow-hidden mt-2 md:mt-4"
+            >
+              <Marquee pauseOnHover className="[--duration:25s]">
+                {domeImages.map((image) => (
+                  <Image
+                    key={image.alt}
+                    src={image.src}
+                    alt={image.alt}
+                    width={40}
+                    height={40}
+                    className="w-8 h-8 shrink-0"
+                  />
+                ))}
+              </Marquee>
+              <div className="from-background pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-linear-to-r"></div>
+              <div className="from-background pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-linear-to-l"></div>
+            </motion.div>
           </motion.div>
 
           <motion.div

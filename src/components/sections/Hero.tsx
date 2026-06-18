@@ -10,22 +10,22 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { HoverBorderGradient } from '../ui/hover-border-gradient'
 import { GithubIcon } from '../ui/SocialIcons'
-import { Badge } from '@/components/ui/badge'
-import { Marquee } from '@/components/ui/marquee'
+// import { Badge } from '@/components/ui/badge'
+// import { Marquee } from '@/components/ui/marquee'
 
-const heroSkills = [
-  'TypeScript',
-  'React.js',
-  'Next.js',
-  'Go',
-  'System Design',
-  'Microservices',
-  'REST APIs',
-  'BFF Pattern',
-  'Kafka',
-  'Docker',
-  'Kubernetes (GKE)',
-]
+// const heroSkills = [
+//   'TypeScript',
+//   'React.js',
+//   'Next.js',
+//   'Go',
+//   'System Design',
+//   'Microservices',
+//   'REST APIs',
+//   'BFF Pattern',
+//   'Kafka',
+//   'Docker',
+//   'Kubernetes (GKE)',
+// ]
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -57,7 +57,7 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-10 pb-0 md:pb-20 md:py-20 w-full">
-        <div className="grid min-w-0 lg:grid-cols-2 gap-4 lg:gap-12 items-center">
+        <div className="grid min-w-0 lg:grid-cols-2 gap-4 lg:gap-0 items-center">
           <motion.div initial="hidden" animate="visible" className="w-full min-w-0 max-w-2xl">
             <motion.p
               custom={0}
@@ -107,6 +107,26 @@ export function Hero() {
             <motion.div
               custom={4}
               variants={fadeUp}
+              className="flex flex-col md:flex-row gap-2 mt-2 md:mt-4"
+            >
+              {personal.missionStats.map((stat, i) => (
+                <motion.p
+                  key={stat.label}
+                  custom={i * 0.75}
+                  variants={fadeUp}
+                  className="flex md:flex-col gap-1 md:max-w-28"
+                >
+                  <span className="font-bold text-sm md:text-base xl:text-lg text-primary">
+                    {stat.value}
+                  </span>
+                  <span className="text-xs xl:text-sm">{stat.label}</span>
+                </motion.p>
+              ))}
+            </motion.div>
+
+            {/* <motion.div
+              custom={4}
+              variants={fadeUp}
               className="relative mt-4 mb-2 md:mb-6 h-9 md:h-11 w-full min-w-0 max-w-full overflow-hidden"
             >
               <Marquee
@@ -125,9 +145,9 @@ export function Hero() {
               </Marquee>
               <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-linear-to-r from-black to-transparent" />
               <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-linear-to-l from-black to-transparent" />
-            </motion.div>
+            </motion.div> */}
 
-            <HeroButtons className="hidden md:flex mt-10" />
+            <HeroButtons className="hidden md:flex mt-6" />
           </motion.div>
 
           <motion.div

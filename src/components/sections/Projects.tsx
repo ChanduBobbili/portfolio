@@ -216,7 +216,7 @@ export function Projects() {
     <section
       id="projects"
       data-bg="dark"
-      className="section-odd relative overflow-hidden py-8 md:py-20"
+      className="section-odd relative overflow-hidden py-6 md:py-12"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div

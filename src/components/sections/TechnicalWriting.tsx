@@ -109,7 +109,7 @@ export function TechnicalWriting() {
     <section
       id="writing"
       data-bg="light"
-      className="section-even relative overflow-hidden py-8 md:py-20"
+      className="section-even relative overflow-hidden py-6 md:py-12"
     >
       {/* Only show the grid pattern on desktop */}
       <div className="absolute inset-0 overflow-hidden hidden md:block">

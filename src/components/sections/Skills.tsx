@@ -128,7 +128,7 @@ export function Skills() {
     <section
       id="skills"
       data-bg="light"
-      className="section-even relative overflow-hidden py-8 md:py-20 antialiased"
+      className="section-even relative overflow-hidden py-6 md:py-12 antialiased"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <StripedPattern direction="left" className="z-0 text-foreground/8" />

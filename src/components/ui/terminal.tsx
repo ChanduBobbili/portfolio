@@ -266,14 +266,51 @@ function SyntaxHighlightedText({ text }: { text: string }) {
   )
 }
 
-interface TerminalLine {
-  type: 'command' | 'output'
-  content: string
+export type TerminalDiagnosticLine = {
+  type: 'diagnostic' | 'achievement'
+  label: string
+  value: string
+  note?: string
 }
+
+export type TerminalOutputLine = string | TerminalDiagnosticLine
+
+const DIAGNOSTIC_LABEL_WIDTH = 22
+
+function DiagnosticOutput({ line }: { line: TerminalDiagnosticLine }) {
+  const labelCol = line.label.padEnd(DIAGNOSTIC_LABEL_WIDTH, ' ')
+
+  return (
+    <span>
+      <span className="text-emerald-400">✔ </span>
+      <span className="text-neutral-500">{labelCol}</span>
+      <span
+        className={cn(
+          'font-medium',
+          line.type === 'diagnostic' ? 'text-purple-400' : 'text-emerald-400'
+        )}
+      >
+        {line.value}
+      </span>
+      {line.note ? <span className="text-neutral-500"> {line.note}</span> : null}
+    </span>
+  )
+}
+
+function OutputLine({ content }: { content: TerminalOutputLine }) {
+  if (typeof content === 'string') {
+    return <span className="text-neutral-400">{content}</span>
+  }
+  return <DiagnosticOutput line={content} />
+}
+
+type TerminalLine =
+  | { type: 'command'; content: string }
+  | { type: 'output'; content: TerminalOutputLine }
 
 export interface TerminalProps {
   commands: string[]
-  outputs?: Record<number, string[]>
+  outputs?: Record<number, TerminalOutputLine[]>
   username?: string
   className?: string
   typingSpeed?: number
@@ -443,7 +480,7 @@ export function Terminal({
                   <SyntaxHighlightedText text={line.content} />
                 </span>
               ) : (
-                <span className="text-neutral-400">{line.content}</span>
+                <OutputLine content={line.content} />
               )}
             </div>
           ))}
