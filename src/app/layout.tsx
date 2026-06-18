@@ -3,6 +3,7 @@ import { JetBrains_Mono, Outfit } from 'next/font/google'
 import { ClickSparkShell } from '@/components/layout/ClickSparkShell'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import { cn } from '@/lib/utils'
 
@@ -85,6 +86,7 @@ export default function RootLayout({
           <ClickSparkShell>{children}</ClickSparkShell>
         </ThemeProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
