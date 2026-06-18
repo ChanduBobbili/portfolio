@@ -63,7 +63,7 @@ export const experience: ExperienceEntry[] = [
         name: 'Klaritics — SaaS Data Analytics Platform',
         accent: 'cyan',
         description:
-          'A warehouse-native SaaS product analytics platform where events are tracked via a custom SDK or API. Built the full analytics layer from scratch — funnels, retention curves, user paths, insight widgets, cohorts, and real-time dashboards serving live production traffic.',
+          'A warehouse-native SaaS product analytics platform where events are ingested via a custom SDK or API, covering funnels, retention curves, user paths, cohorts, and real-time dashboards.',
         stack: [
           'React',
           'TypeScript',
@@ -80,16 +80,16 @@ export const experience: ExperienceEntry[] = [
           'Kubernetes (GKE)',
         ],
         bullets: [
-          'Engineered a full-stack SaaS data analytics platform with real-time Kafka event ingestion and ClickHouse-backed analytics covering funnels, retention curves, user paths, cohorts, and real-time dashboards serving live production traffic.',
-          'Built the analytics frontend with React, TypeScript, Vite, TanStack, Tailwind CSS, and Zustand; architected the backend on Go microservices with MongoDB, Redis, Docker, and Kubernetes (GKE).',
-          'Designed pub/sub event pipelines using Kafka for async inter-service communication; implemented Redis for distributed caching and session management, significantly reducing database load.',
+          'Load-tested at 1M+ events/sec with real-time Kafka ingestion and a ClickHouse-backed analytics layer covering funnels, retention curves, user paths, cohorts, and live dashboards.',
+          'Analytics frontend serving live production traffic, using React, Vite, TanStack, Tailwind CSS, and Zustand.',
+          'Go microservices on Kubernetes (GKE) with MongoDB, Redis distributed caching, and Kafka pub/sub pipelines that significantly reduced database load.',
         ],
       },
       {
         name: 'Application Management System',
         accent: 'purple',
         description:
-          'A multi-university student application platform used by 4 universities — covering the entire lifecycle from lead generation to admission. Features dynamic form/course/fee configuration, two dedicated frontends (student portal + authority dashboard), and an embeddable SDK for third-party sites.',
+          'A multi-university student application platform used by 4 universities, covering lead generation through admission with a student portal, authority dashboard, and embeddable SDK for third-party sites.',
         stack: [
           'React',
           'TypeScript',
@@ -104,11 +104,10 @@ export const experience: ExperienceEntry[] = [
           'JWT',
         ],
         bullets: [
-          'Architected a high-scale university student application platform used by 4 universities — lead generation (API, CSV, IVR, Facebook Ads, embeddable widgets), application submission with FlexiPay/loan payments, document upload, and admission tracking.',
-          'Built two frontend applications (student portal + authority dashboard) and an embeddable SDK for rendering dynamically configured forms and widgets on third-party university and partner websites.',
-          'Engineered a BFF reverse proxy to convert third-party cookies into first-party cookies, resolving cross-origin tracking restrictions in modern browsers on university-hosted student portals.',
-          'Leveraged Go goroutines and channels for concurrent payment processing and lead ingestion across multiple institutions simultaneously.',
-          'Built JWT-based auth with refresh/access token rotation; deployed all services on GCP GKE from scratch via Docker, Kubernetes, and GitHub Actions CI/CD.',
+          'Generated 50,000+ leads and enrolled 20,000 students for a Winter 2025 batch across 4 universities, while cutting application processing time from 15 to 8 hours per applicant.',
+          "Handled 4,000 students' fee renewals for the previous batch across the same multi-university platform.",
+          'Resolved cross-origin tracking restrictions on university-hosted portals via a BFF reverse proxy that converted third-party cookies into first-party cookies.',
+          'Concurrent payment processing and lead ingestion across institutions using Go goroutines and channels, with JWT auth and full GCP GKE deployment via Docker and GitHub Actions.',
         ],
       },
     ],
@@ -124,7 +123,7 @@ export const experience: ExperienceEntry[] = [
         name: 'Hearzap — Hearing Aid Clinic Management System',
         accent: 'purple',
         description:
-          'An internal full-stack web application for Hearzap employees managing the complete hearing aid clinic workflow — from patient walk-in and appointment booking to hearing tests, product recommendations, sale orders, and CRM for both Hearzap↔Client and Hearzap↔Dealer relationships.',
+          'An internal full-stack web application for Hearzap clinic staff, covering patient walk-in through appointments, hearing tests, product recommendations, sale orders, and dealer/client CRM.',
         stack: [
           'React',
           'TypeScript',
@@ -139,9 +138,9 @@ export const experience: ExperienceEntry[] = [
           'Kubernetes (GKE)',
         ],
         bullets: [
-          'Built Hearzap — an internal clinic management system covering patient appointments, hearing tests, product recommendations, sale orders, warehouse operations, and CRM for Hearzap↔Client and Hearzap↔Dealer workflows.',
-          'Implemented ReactJS + TypeScript frontend with TanStack (routing, data fetching, forms), Zustand, and Immer; achieved ~90% unit test coverage via Vitest with E2E coverage via Playwright.',
-          'Developed and maintained scalable Go CRUD APIs within a microservices architecture — each module (appointments, client management, store, hearing test) as a dedicated service with its own PostgreSQL database.',
+          'Unified end-to-end clinic operations in one system — appointments, hearing tests, product recommendations, sale orders, warehouse management, and Hearzap↔Client and Hearzap↔Dealer CRM workflows.',
+          'Reached ~90% unit test coverage via Vitest with E2E coverage via Playwright, on a React + TypeScript frontend using TanStack, Zustand, and Immer.',
+          'Scalable Go microservices architecture with each module (appointments, client management, store, hearing test) as a dedicated service with its own PostgreSQL database.',
         ],
       },
     ],
@@ -157,7 +156,7 @@ export const experience: ExperienceEntry[] = [
         name: 'Apxor Dashboard — CRA → Vite Migration',
         accent: 'cyan',
         description:
-          "Led the migration of Apxor's legacy Create React App dashboard to a modern Vite-based stack. Started by designing the new Stories feature UI in Figma, then drove the full codebase modernisation — achieving an 80% Lighthouse score improvement.",
+          "Migration of Apxor's legacy Create React App dashboard to a modern Vite-based stack, including the Stories feature and FAB shipped to production.",
         stack: [
           'Vite',
           'React',
@@ -169,20 +168,20 @@ export const experience: ExperienceEntry[] = [
           'Figma',
         ],
         bullets: [
-          'Designed the Stories feature in Figma, then led the full migration of the legacy CRA dashboard to Vite — modernising to TypeScript, Tailwind CSS, Shadcn UI, TanStack, and Zustand.',
-          'Achieved Lighthouse score improvement from 54 → 97 (80% improvement); reduced INP and blocking time from ~500ms to negligible via lazy loading, caching, and image optimisation.',
-          'Shipped the Stories feature (resembling social media stories) and FAB (Floating Action Button) to production with measurably improved user engagement metrics.',
+          'Raised Lighthouse score from 54 → 97 and reduced INP and blocking time from ~500ms to negligible via lazy loading, caching, and image optimisation on the Vite + TypeScript + Tailwind CSS + Shadcn UI stack.',
+          'Retained 5+ customer accounts that were at risk of churning — directly attributed to the performance fix.',
+          'Shipped the Stories feature (social-media-style) and FAB to production with measurably improved user engagement.',
         ],
       },
       {
         name: 'Apxor Company Website',
         accent: 'green',
         description:
-          "Maintained and enhanced Apxor's public-facing marketing website on Webflow. Implemented a multi-tool analytics stack, monitored user behaviour, and generated insight reports that informed product and design decisions.",
+          "Apxor's public-facing marketing website on Webflow, with multi-tool analytics instrumentation across Google Analytics, GTM, Mixpanel, and the Apxor SDK.",
         stack: ['Webflow', 'Google Analytics', 'Google Tag Manager', 'Mixpanel', 'Apxor SDK'],
         bullets: [
-          "Maintained Apxor's Webflow website across all breakpoints; instrumented a multi-tool analytics stack (Google Analytics, GTM, Mixpanel, Apxor SDK) to track user behaviour.",
-          'Generated insight reports from traffic and performance analytics that directly informed product and design decisions.',
+          'Insight reports from traffic and performance analytics that directly informed product and design decisions.',
+          'Responsive Webflow site maintained across all breakpoints with a full analytics stack (Google Analytics, GTM, Mixpanel, Apxor SDK) instrumented for user behaviour tracking.',
         ],
       },
     ],
@@ -213,7 +212,7 @@ export const projects: Project[] = [
     tag: 'Open Source',
     accent: 'green',
     description:
-      'Published and maintained an open-source React component library with TypeScript-first architecture, tree-shaking support, CSS variable theming with Tailwind-ready customisation, and full WAI-ARIA accessibility compliance. Ships 13+ components as tree-shakeable scoped packages.',
+      'Open-source React component library with TypeScript-first architecture, tree-shaking support, CSS variable theming with Tailwind-ready customisation, and full WAI-ARIA accessibility compliance.',
     stack: ['TypeScript', 'React', 'Tailwind CSS', 'WAI-ARIA', 'Monorepo'],
     links: {
       live: 'https://zenithui.chandubobbili.dev',
@@ -232,7 +231,7 @@ export const projects: Project[] = [
     tag: 'Open Source · CLI',
     accent: 'cyan',
     description:
-      'A lightweight Go-based CLI for managing semantic versioning and changelogs — inspired by the JavaScript Changesets tool, but shipped as a single Go binary with no Node.js runtime required. Supports add, version, tag, and publish workflows.',
+      'Lightweight Go CLI for semantic versioning and changelog management — inspired by the JavaScript Changesets tool, shipped as a single binary with no Node.js runtime; supports add, version, tag, and publish workflows.',
     stack: ['Go', 'CLI', 'Semantic Versioning', 'Git'],
     links: {
       github: 'https://github.com/ChanduBobbili/changesetgoo',
