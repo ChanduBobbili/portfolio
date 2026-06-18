@@ -24,10 +24,9 @@ export const personal = {
   ],
   about: `SDE based in Hyderabad with 3+ years building scalable systems — from real-time analytics platforms handling live production traffic, to open-source component libraries and Go CLI tools used by other developers. I care about clean architecture, measurable impact, and writing code that doesn't rot.`,
   missionStats: [
-    { label: 'Systems Deployed', value: '6+' },
-    { label: 'npm Downloads / wk', value: '~1k' },
-    { label: 'Lighthouse Score Δ', value: '54 → 97' },
-    // { label: 'Test Coverage', value: '~90%' },
+    { label: 'Events/sec, load-tested', value: '1M+' },
+    { label: 'Students enrolled via platform', value: '20K' },
+    { label: 'Accounts retained after perf fix', value: '5+' },
   ],
 }
 
@@ -271,13 +270,13 @@ export const skills = [
     items: [
       'React.js',
       'Next.js',
+      'Tailwind CSS',
+      'Webflow',
       'TanStack',
       'Zustand',
-      'Tailwind CSS',
       'Shadcn UI',
       'Vitest',
       'Playwright',
-      'Webflow',
     ],
   },
   {

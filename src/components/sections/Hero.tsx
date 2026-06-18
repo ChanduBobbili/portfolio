@@ -6,7 +6,6 @@ import Galaxy from '@/components/Galaxy'
 import { personal } from '@/data/portfolio'
 import { AstronautIllustration } from '@/components/ui/AstronautIllustration'
 import { MagneticButton } from '@/components/ui/magnetic-button'
-import { RainbowButton } from '@/components/ui/rainbow-button'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { HoverBorderGradient } from '../ui/hover-border-gradient'
@@ -14,7 +13,19 @@ import { GithubIcon } from '../ui/SocialIcons'
 import { Badge } from '@/components/ui/badge'
 import { Marquee } from '@/components/ui/marquee'
 
-const heroSkills = personal.subTagline.split(' · ')
+const heroSkills = [
+  'TypeScript',
+  'React.js',
+  'Next.js',
+  'Go',
+  'System Design',
+  'Microservices',
+  'REST APIs',
+  'BFF Pattern',
+  'Kafka',
+  'Docker',
+  'Kubernetes (GKE)',
+]
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -35,7 +46,7 @@ export function Hero() {
       <div className="absolute inset-0 pointer-events-none">
         <Galaxy
           density={0.9}
-          glowIntensity={0.35}
+          glowIntensity={0.1}
           starSpeed={0.35}
           twinkleIntensity={0.35}
           speed={0.5}
@@ -60,7 +71,7 @@ export function Hero() {
               }}
               className="font-sans text-xs md:text-base text-foreground/50 mb-3 leading-snug"
             >
-              I say Great Engineering is where elegant code meets real-world impact.
+              Great engineering merges elegant code with real-world impact.
             </motion.p>
 
             <motion.h1
@@ -90,7 +101,7 @@ export function Hero() {
               }}
               className="font-heading text-[clamp(1.5rem,1.5vw,2.5rem)] text-primary font-semibold"
             >
-              I build production systems that scale and ship measurable results.
+              Architecting scalable production environments designed to maximize business ROI.
             </motion.p>
 
             <motion.div
@@ -137,38 +148,43 @@ export function Hero() {
 function HeroButtons({ className }: { className?: string }) {
   return (
     <motion.div
-      custom={4}
+      custom={6}
       variants={fadeUp}
-      className={cn('flex flex-wrap items-center gap-3', className)}
+      className={cn('flex flex-wrap items-start md:items-center gap-2', className)}
     >
+      <MagneticButton>
+        <Link
+          href={`mailto:${personal.email}`}
+          className="inline-flex h-11 md:h-12 items-center gap-2 rounded-lg bg-linear-to-b from-blue-500 to-blue-700 px-6 md:px-8 text-sm md:text-base font-semibold text-white shadow-[0_0_20px_color-mix(in_srgb,var(--primary)_40%,transparent)] transition-transform duration-150 active:scale-[0.98]"
+        >
+          <Mail size={16} />
+          Email me
+        </Link>
+      </MagneticButton>
+
       <HoverBorderGradient
         as="a"
-        href={personal.github}
+        href={personal.resume}
         target="_blank"
         rel="noopener noreferrer"
         containerClassName="rounded-full w-28 md:w-32 rounded-lg"
         className="h-10 w-full text-sm bg-background text-foreground flex items-center justify-center gap-2"
       >
-        <GithubIcon className="size-4" />
-        GitHub
+        <FileText className="size-4" />
+        Resume
       </HoverBorderGradient>
 
-      <RainbowButton size="lg" asChild className="w-28 md:w-32 rounded-lg justify-center text-sm">
-        <Link href={personal.resume} target="_blank" rel="noopener noreferrer">
-          <FileText size={16} />
-          Resume
-        </Link>
-      </RainbowButton>
-
-      <MagneticButton>
-        <Link
-          href={`mailto:${personal.email}`}
-          className="w-28 md:w-32 rounded-lg justify-center inline-flex h-11 items-center gap-2 text-sm bg-linear-to-b from-blue-500 to-blue-700 px-6 font-medium text-white transition-transform duration-150 active:scale-[0.98]"
-        >
-          <Mail size={16} />
-          Email
-        </Link>
-      </MagneticButton>
+      <HoverBorderGradient
+        as="a"
+        href={personal.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        containerClassName="rounded-full w-fit md:w-32 rounded-lg"
+        className="h-10 w-full text-sm bg-background text-foreground flex items-center justify-center gap-2"
+      >
+        <GithubIcon className="size-4" />
+        <span className="hidden md:inline">GitHub</span>
+      </HoverBorderGradient>
     </motion.div>
   )
 }
