@@ -6,6 +6,7 @@ import { Briefcase } from 'lucide-react'
 import { personal } from '@/data/portfolio'
 import { MagicCard } from '@/components/ui/magic-card'
 import { Terminal } from '@/components/ui/terminal'
+import { GithubHeatmap } from '@/components/ui/github-heatmap'
 import { VariableProximity } from '@/components/ui/variable-proximity'
 import { SectionTitle } from '../ui/SectionTitle'
 import { cn } from '@/lib/utils'
@@ -135,6 +136,8 @@ export function About() {
             />
           </motion.div>
         </div>
+
+        <GithubHeatmap className="mt-6" />
       </div>
     </section>
   )
