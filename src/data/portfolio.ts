@@ -44,6 +44,7 @@ export type ExperienceEntry = {
   role: string
   company: string
   companyUrl?: string
+  companyLogo?: string
   location: string
   period: string
   current: boolean
@@ -54,6 +55,9 @@ export const experience: ExperienceEntry[] = [
   {
     role: 'Senior Software Engineer',
     company: 'Deepta AI Private Limited',
+    companyUrl: 'https://deeptaai.com',
+    companyLogo:
+      'https://res.cloudinary.com/dtay6zw4c/image/upload/f_auto,q_auto:best/Deepta_Log_hmsreb.png',
     location: 'Hyderabad, India',
     period: '08/2025 – Present',
     current: true,
@@ -114,6 +118,9 @@ export const experience: ExperienceEntry[] = [
   {
     role: 'Software Engineer',
     company: 'Apxor Technology Solutions Pvt Ltd',
+    companyUrl: 'https://apxor.com',
+    companyLogo:
+      'https://res.cloudinary.com/dtay6zw4c/image/upload/f_auto,q_auto:best/apxor_bebuqj.png',
     location: 'Hyderabad, India',
     period: '09/2024 – 07/2025',
     current: false,
@@ -147,6 +154,9 @@ export const experience: ExperienceEntry[] = [
   {
     role: 'Associate Web Developer',
     company: 'Apxor Technology Solutions Pvt Ltd',
+    companyUrl: 'https://apxor.com',
+    companyLogo:
+      'https://res.cloudinary.com/dtay6zw4c/image/upload/f_auto,q_auto:best/apxor_bebuqj.png',
     location: 'Hyderabad, India',
     period: '07/2023 – 08/2024',
     current: false,

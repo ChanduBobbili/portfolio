@@ -2,17 +2,50 @@
 
 import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { motion, useScroll, useTransform } from 'motion/react'
+import { ChevronDown } from 'lucide-react'
+import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react'
 
-import type { ExperienceEntry } from '@/data/portfolio'
+import type { ExperienceEntry, ExperienceProject } from '@/data/portfolio'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { useDeviceType } from '@zenithui/utils'
+import Image from 'next/image'
 
-function EntryMeta({ entry, className }: { entry: ExperienceEntry; className?: string }) {
+function EntryMeta({
+  entry,
+  className,
+  showLocation,
+}: {
+  entry: ExperienceEntry
+  className?: string
+  showLocation?: boolean
+}) {
   return (
-    <div className={cn('flex flex-col gap-3', className)}>
-      {entry.companyUrl ? (
+    <div className={cn('flex flex-col gap-2', className)}>
+      {entry.companyUrl && entry.companyLogo ? (
+        <Link
+          href={entry.companyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-heading text-sm font-bold text-primary hover:underline"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={entry.companyLogo}
+            alt={entry.company}
+            loading="lazy"
+            className={cn(
+              'w-28 h-10 object-contain',
+              entry.company.includes('Apxor') && 'w-24 h-7'
+            )}
+          />
+        </Link>
+      ) : entry.companyLogo ? (
+        <div className="flex items-center gap-2">
+          <Image src={entry.companyLogo} alt={entry.company} width={24} height={24} />
+          <p className="font-heading text-sm font-bold text-primary">{entry.company}</p>
+        </div>
+      ) : entry.companyUrl ? (
         <Link
           href={entry.companyUrl}
           target="_blank"
@@ -25,60 +58,114 @@ function EntryMeta({ entry, className }: { entry: ExperienceEntry; className?: s
         <p className="font-heading text-sm font-bold text-primary">{entry.company}</p>
       )}
 
-      <h3 className="font-heading text-xl font-bold text-foreground leading-tight">{entry.role}</h3>
+      <div className="hidden md:flex md:flex-col md:gap-2">
+        <h3 className="font-heading text-lg font-bold text-foreground leading-tight">
+          {entry.role}
+        </h3>
 
-      <p className="font-sans text-sm text-muted-foreground">{entry.location}</p>
+        {showLocation && (
+          <p className="font-sans text-sm text-muted-foreground">{entry.location}</p>
+        )}
 
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="font-sans text-[10px] px-2.5 py-1 rounded-full border border-border text-muted-foreground">
-          {entry.period}
-        </span>
-        {/* {entry.current && (
-          <span className="font-sans text-[10px] px-2 py-0.5 rounded-full text-primary border border-border">
-            CURRENT
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="font-sans text-[10px] px-2.5 py-1 rounded-full border border-border text-muted-foreground">
+            {entry.period}
           </span>
-        )} */}
+        </div>
+      </div>
+
+      <div className="flex md:hidden justify-between items-center">
+        <h3 className="font-heading text-xl font-bold text-primary leading-tight">{entry.role}</h3>
+
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="font-sans text-[10px] px-2 py-1 rounded-full border border-border text-muted-foreground">
+            {entry.period}
+          </span>
+        </div>
       </div>
     </div>
   )
 }
 
-function ProjectList({ entry }: { entry: ExperienceEntry }) {
+function ProjectItem({
+  project,
+  defaultExpanded,
+}: {
+  project: ExperienceProject
+  defaultExpanded: boolean
+}) {
+  const [expanded, setExpanded] = useState(defaultExpanded)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setExpanded(defaultExpanded)
+    }, 100)
+    return () => clearTimeout(timeout)
+  }, [defaultExpanded])
+
+  return (
+    <div>
+      <h5 className="font-heading text-base md:text-lg font-bold text-foreground leading-tight">
+        {project.name}
+      </h5>
+      <p className="font-sans text-sm text-foreground/70 font-medium leading-relaxed mb-3">
+        {project.description}
+      </p>
+      <button
+        type="button"
+        onClick={() => setExpanded((prev) => !prev)}
+        aria-expanded={expanded}
+        className="inline-flex items-center gap-1 font-sans text-xs text-primary hover:text-primary/80 transition-colors mb-2"
+      >
+        {expanded ? 'Hide details' : 'Show details'}
+        <ChevronDown className={cn('size-3.5 transition-transform', expanded && 'rotate-180')} />
+      </button>
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            key="details"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            className="overflow-hidden"
+          >
+            {project.stack.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {project.stack.map((tech) => (
+                  <Badge
+                    key={tech}
+                    variant="secondary"
+                    className="font-sans rounded-sm text-xs px-2 py-1"
+                  >
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            )}
+            <ul className="flex flex-col gap-2">
+              {project.bullets.map((bullet, bi) => (
+                <li
+                  key={bi}
+                  className="flex gap-2.5 font-sans text-sm text-muted-foreground leading-relaxed"
+                >
+                  <span className="text-primary shrink-0 mt-0.5">▸</span>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+function ProjectList({ entry }: { entry: ExperienceEntry; isActiveEntry: boolean }) {
   return (
     <div className="flex flex-col gap-8">
       {entry.projects.map((project) => (
-        <div key={project.name}>
-          <h5 className="font-heading text-lg font-bold text-foreground leading-tight">
-            {project.name}
-          </h5>
-          <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-3">
-            {project.description}
-          </p>
-          {project.stack.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mb-4">
-              {project.stack.map((tech) => (
-                <Badge
-                  key={tech}
-                  variant="secondary"
-                  className="font-sans rounded-sm text-xs px-2 py-1"
-                >
-                  {tech}
-                </Badge>
-              ))}
-            </div>
-          )}
-          <ul className="flex flex-col gap-2">
-            {project.bullets.map((bullet, bi) => (
-              <li
-                key={bi}
-                className="flex gap-2.5 font-sans text-sm text-muted-foreground leading-relaxed"
-              >
-                <span className="text-primary shrink-0 mt-0.5">▸</span>
-                {bullet}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ProjectItem key={project.name} project={project} defaultExpanded={true} />
       ))}
     </div>
   )
@@ -213,7 +300,7 @@ export function ExperienceStickyScroll({
               className="py-4 lg:py-8 border-b border-border last:border-b-0"
             >
               <EntryMeta entry={entry} className="mb-4 lg:mb-8 lg:hidden" />
-              <ProjectList entry={entry} />
+              <ProjectList entry={entry} isActiveEntry={activeIndex === index} />
             </motion.div>
           ))}
         </div>
@@ -228,7 +315,7 @@ export function ExperienceStickyScroll({
                 animate={{ opacity: 1, filter: 'blur(0px)' }}
                 transition={{ duration: 0.5, ease: 'easeInOut' }}
               >
-                <EntryMeta entry={activeEntry} />
+                <EntryMeta entry={activeEntry} showLocation={true} />
               </motion.div>
             )}
           </div>
