@@ -30,7 +30,7 @@ export function WorkExperience() {
             falloff="gaussian"
           />
         </h2>
-        <SectionTitle>Where I&apos;ve worked</SectionTitle>
+        <SectionTitle>Where I&apos;ve shipped at scale</SectionTitle>
 
         <ExperienceStickyScroll entries={experience} />
       </motion.div>

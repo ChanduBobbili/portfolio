@@ -247,7 +247,7 @@ export function Projects() {
           />
         </h2>
 
-        <SectionTitle className="mb-2 md:mb-6">Things I&apos;ve built</SectionTitle>
+        <SectionTitle className="mb-2 md:mb-6">Tools I put in the world</SectionTitle>
 
         <ProjectsDesktop />
         <ProjectsMobile />

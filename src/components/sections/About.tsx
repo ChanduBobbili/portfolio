@@ -106,7 +106,7 @@ export function About() {
           >
             <h2 className="font-heading md:text-base text-sm font-bold tracking-normal text-primary">
               <VariableProximity
-                label="About Me"
+                label="A bit about me"
                 containerRef={containerRef}
                 fromFontVariationSettings="'wght' 400, 'wdth' 100"
                 toFontVariationSettings="'wght' 900, 'wdth' 125"
@@ -114,7 +114,7 @@ export function About() {
                 falloff="gaussian"
               />
             </h2>
-            <SectionTitle>A bit about me</SectionTitle>
+            <SectionTitle>More than shipped features</SectionTitle>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}

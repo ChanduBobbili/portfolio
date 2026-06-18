@@ -153,7 +153,7 @@ export function Skills() {
             falloff="gaussian"
           />
         </h2>
-        <SectionTitle className="mb-2 md:mb-4">What I work with</SectionTitle>
+        <SectionTitle className="mb-2 md:mb-4">From UI to infrastructure</SectionTitle>
 
         <div className="grid lg:grid-cols-2 gap-2 lg:gap-16 items-start justify-items-center">
           <motion.div

@@ -140,7 +140,7 @@ export function TechnicalWriting() {
             falloff="gaussian"
           />
         </h2>
-        <SectionTitle className="mb-2">Articles I&apos;ve written </SectionTitle>
+        <SectionTitle className="mb-2">Ideas I&apos;ve shipped in prose</SectionTitle>
 
         <motion.p
           initial={{ opacity: 0, y: 12 }}
