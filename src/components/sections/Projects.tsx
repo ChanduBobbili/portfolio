@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ExternalLink, Star, Download } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 import { GithubIcon } from '@/components/ui/SocialIcons'
 import { projects } from '@/data/portfolio'
 import { SectionTitle } from '@/components/ui/SectionTitle'
@@ -54,16 +54,17 @@ function ProjectDetail({ project }: { project: (typeof projects)[number] }) {
         </div>
 
         {project.stats && (
-          <div className="flex flex-col md:flex-row gap-3 md:gap-5 mb-2 md:mb-5 font-sans text-sm text-muted-foreground">
+          <div className="flex gap-1 md:gap-2 mb-2">
             {project.stats.map((stat) => (
-              <span key={stat.label} className="flex items-center gap-1.5">
-                {stat.label.includes('star') && <Star className="text-primary size-3 md:size-4" />}
-                {stat.label.includes('download') && (
-                  <Download className="text-primary size-3 md:size-4" />
-                )}
-                <strong className="text-foreground text-xs md:text-sm">{stat.value}</strong>
-                &nbsp;{stat.label}
-              </span>
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={stat.label}
+                alt={stat.label}
+                src={stat.value}
+                className="h-5 w-fit object-contain"
+                width={100}
+                height={100}
+              />
             ))}
           </div>
         )}

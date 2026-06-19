@@ -243,9 +243,15 @@ export const projects: Project[] = [
     },
     featured: true,
     stats: [
-      { label: 'Weekly npm downloads', value: '~1k' },
-      { label: 'GitHub stars', value: '7' },
-      { label: 'Components', value: '13+' },
+      { label: 'npm downloads', value: 'https://img.shields.io/npm/dw/@zenithui/day-picker.png' },
+      {
+        label: 'GitHub stars',
+        value: 'https://img.shields.io/github/stars/ChanduBobbili/ZenithUI.png?style=flat',
+      },
+      {
+        label: 'License',
+        value: 'https://img.shields.io/github/license/ChanduBobbili/ZenithUI.png',
+      },
     ],
   },
   {
@@ -261,8 +267,22 @@ export const projects: Project[] = [
     },
     featured: true,
     stats: [
-      { label: 'GitHub stars', value: '2' },
-      { label: 'License', value: 'MIT' },
+      {
+        label: 'GitHub stars',
+        value: 'https://img.shields.io/github/stars/ChanduBobbili/changesetgoo.png?style=flat',
+      },
+      {
+        label: 'License',
+        value: 'https://img.shields.io/github/license/ChanduBobbili/changesetgoo.png',
+      },
+      {
+        label: 'Go Reference',
+        value: 'https://pkg.go.dev/badge/github.com/ChanduBobbili/changesetgoo.svg',
+      },
+      {
+        label: 'Go Report Card',
+        value: 'https://goreportcard.com/badge/github.com/ChanduBobbili/changesetgoo',
+      },
     ],
   },
 ]
