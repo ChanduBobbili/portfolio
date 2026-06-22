@@ -36,3 +36,11 @@ async function loadGoogleFont(font: string, weight: number) {
 export async function loadOgFont() {
   return loadGoogleFont('Outfit', 700)
 }
+
+export async function loadOgFonts() {
+  const [regular, bold] = await Promise.all([
+    loadGoogleFont('Outfit', 400),
+    loadGoogleFont('Outfit', 700),
+  ])
+  return { regular, bold }
+}
