@@ -134,6 +134,15 @@ html {
   scroll-padding-top: var(--nav-height) + 4rem;
 }
 
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis {
+  scroll-behavior: auto !important;
+}
+
 ::selection {
   background: rgba(56, 189, 248, 0.25);
   color: #e8eaf2;

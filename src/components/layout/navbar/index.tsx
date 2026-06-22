@@ -7,6 +7,8 @@ import { ArrowUpRight, Mail, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
 import { useNavVisibility } from '@/hooks/useNavVisibility'
+import { useLenisScrollTo } from '@/hooks/useLenisScrollTo'
+import { useLenis } from 'lenis/react'
 import { personal } from '@/data/portfolio'
 import { HoverBorderGradient } from '../../ui/hover-border-gradient'
 import { SparklesText } from '../../ui/sparkles-text'
@@ -52,6 +54,8 @@ export function Navbar() {
     anchor: 'top',
   })
   const hideNav = !heroLeft
+  const scrollToSection = useLenisScrollTo()
+  const lenis = useLenis()
 
   useEffect(() => {
     const raf = requestAnimationFrame(() => setMounted(true))
@@ -60,12 +64,14 @@ export function Navbar() {
 
   useEffect(() => {
     if (!mobileOpen) return
+    lenis?.stop()
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     return () => {
+      lenis?.start()
       document.body.style.overflow = prev
     }
-  }, [mobileOpen])
+  }, [mobileOpen, lenis])
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -74,7 +80,7 @@ export function Navbar() {
 
   const scrollTo = (href: string) => {
     setMobileOpen(false)
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+    scrollToSection(href)
   }
 
   const isDarkPill = isOnLightBg
@@ -111,7 +117,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             whileTap={{ scale: 0.98 }}
             transition={mobilePanelSpring}
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => scrollToSection('#hero')}
             className="relative flex items-center gap-2 cursor-pointer group"
             aria-label="Scroll to top"
           >
@@ -232,7 +238,7 @@ export function Navbar() {
                       </div>
                     </div>
 
-                    <ul className="flex flex-col gap-1.5 overflow-y-auto">
+                    <ul className="flex flex-col gap-1.5 overflow-y-auto" data-lenis-prevent>
                       {NAV_LINKS.map((link, index) => {
                         const isActive = activeId === link.href.replace('#', '')
                         return (

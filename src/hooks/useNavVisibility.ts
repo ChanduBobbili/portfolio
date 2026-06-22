@@ -1,7 +1,8 @@
 'use client'
 
 import { useEventListener } from '@zenithui/utils'
-import { useCallback, useState } from 'react'
+import { useLenis } from 'lenis/react'
+import { useCallback, useEffect, useState } from 'react'
 
 export interface NavVisibility {
   heroLeft: boolean
@@ -56,8 +57,14 @@ export function useNavVisibility({
     setState({ heroLeft, isOnLightBg })
   }, [navElementId, anchor, bandTop, bandBottom, heroOffset])
 
+  useLenis(update)
   useEventListener('scroll', update, undefined, { passive: true })
   useEventListener('resize', update, undefined, { passive: true })
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    update()
+  }, [update])
 
   return state
 }

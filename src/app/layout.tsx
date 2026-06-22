@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { JetBrains_Mono, Outfit } from 'next/font/google'
 import { ClickSparkShell } from '@/components/layout/ClickSparkShell'
+import { SmoothScrollProvider } from '@/components/layout/SmoothScrollProvider'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -114,7 +115,9 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange={false}
         >
-          <ClickSparkShell>{children}</ClickSparkShell>
+          <SmoothScrollProvider>
+            <ClickSparkShell>{children}</ClickSparkShell>
+          </SmoothScrollProvider>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

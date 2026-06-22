@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Briefcase, ContactIcon, FolderOpen, Zap } from 'lucide-react'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
 import { useNavVisibility } from '@/hooks/useNavVisibility'
+import { useLenisScrollTo } from '@/hooks/useLenisScrollTo'
 import { cn } from '@/lib/utils'
-import { useCallback } from 'react'
 
 const SCROLL_SPY_IDS = ['about', 'projects', 'skills', 'work', 'writing', 'contact']
 
@@ -30,10 +30,7 @@ export function BottomNav() {
     anchor: 'bottom',
   })
   const showTab = heroLeft
-
-  const scrollTo = useCallback((href: string) => {
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
-  }, [])
+  const scrollTo = useLenisScrollTo()
 
   const isDarkPill = isOnLightBg
   const pillContent = {
