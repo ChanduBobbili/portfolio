@@ -97,10 +97,8 @@ function ProjectItem({
   const [expanded, setExpanded] = useState(defaultExpanded)
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setExpanded(defaultExpanded)
-    }, 100)
-    return () => clearTimeout(timeout)
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setExpanded(defaultExpanded)
   }, [defaultExpanded])
 
   return (
@@ -297,9 +295,17 @@ export function ExperienceStickyScroll({
               data-index={index}
               animate={{ opacity: activeIndex === index ? 1 : 0.35 }}
               transition={{ duration: 0.35, ease: 'easeInOut' }}
-              className="py-4 lg:py-8 border-b border-border last:border-b-0"
+              className="scroll-mt-32 py-4 lg:py-8 border-b border-border last:border-b-0"
             >
-              <EntryMeta entry={entry} className="mb-4 lg:mb-8 lg:hidden" />
+              <EntryMeta
+                entry={entry}
+                className={cn(
+                  'mb-4 lg:hidden',
+                  'sticky z-30 -mx-4 px-4 py-3',
+                  'top-0',
+                  'border-b border-border bg-background/95 backdrop-blur-sm'
+                )}
+              />
               <ProjectList entry={entry} isActiveEntry={activeIndex === index} />
             </motion.div>
           ))}

@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { HoverBorderGradient } from '../ui/hover-border-gradient'
 import { GithubIcon } from '../ui/SocialIcons'
+import { Marquee } from '../ui/marquee'
 // import { Badge } from '@/components/ui/badge'
 // import { Marquee } from '@/components/ui/marquee'
 
@@ -41,7 +42,7 @@ export function Hero() {
     <section
       id="hero"
       data-bg="dark"
-      className="section-odd bg-black! relative min-h-screen flex items-center overflow-hidden pt-16 pb-8 md:pb-20"
+      className="section-odd bg-black! relative min-h-screen flex items-center overflow-hidden pb-8 md:pb-20"
     >
       <div className="absolute inset-0 pointer-events-none">
         <Galaxy
@@ -58,7 +59,11 @@ export function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-10 pb-0 md:pb-20 md:py-20 w-full">
         <div className="grid min-w-0 lg:grid-cols-2 gap-4 lg:gap-0 items-center">
-          <motion.div initial="hidden" animate="visible" className="w-full min-w-0 max-w-2xl">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            className="w-full min-w-0 max-w-2xl text-center lg:text-left mx-auto lg:mx-0"
+          >
             <motion.p
               custom={0}
               variants={{
@@ -99,15 +104,15 @@ export function Hero() {
                   transition: { duration: 0.5, delay: i * 0.15, ease: [0, 0, 0.2, 1] as const },
                 }),
               }}
-              className="font-heading text-[clamp(1.5rem,1.5vw,2.5rem)] text-primary font-semibold"
+              className="font-heading text-xl md:text-2xl text-primary font-semibold"
             >
-              Architecting scalable production environments designed to maximize business ROI.
+              Architecting scalable environments designed to maximize business ROI.
             </motion.p>
 
             <motion.div
               custom={4}
               variants={fadeUp}
-              className="flex flex-col md:flex-row gap-2 mt-2 md:mt-4"
+              className="hidden md:flex flex-row gap-2 mt-2 md:mt-4"
             >
               {personal.missionStats.map((stat, i) => (
                 <motion.p
@@ -124,28 +129,32 @@ export function Hero() {
               ))}
             </motion.div>
 
-            {/* <motion.div
+            <motion.div
               custom={4}
               variants={fadeUp}
-              className="relative mt-4 mb-2 md:mb-6 h-9 md:h-11 w-full min-w-0 max-w-full overflow-hidden"
+              className="relative h-9 w-full min-w-0 max-w-full overflow-hidden md:hidden"
             >
               <Marquee
                 pauseOnHover
-                className="h-full w-full min-w-0 max-w-full [--duration:30s] [--gap:0.5rem] p-0"
+                className="h-full w-full min-w-0 max-w-full [--duration:30s] [--gap:1rem] p-0"
               >
-                {heroSkills.map((skill) => (
-                  <Badge
-                    key={skill}
-                    variant="outline"
-                    className="font-sans text-xs px-3 py-1.5 md:px-3 md:py-3.5 border-foreground/20 bg-foreground/5 text-foreground"
+                {personal.missionStats.map((stat, i) => (
+                  <motion.p
+                    key={stat.label}
+                    custom={i * 0.75}
+                    variants={fadeUp}
+                    className="flex md:flex-col gap-1 md:max-w-28 items-center"
                   >
-                    {skill}
-                  </Badge>
+                    <span className="font-bold text-sm md:text-base xl:text-lg text-primary">
+                      {stat.value}
+                    </span>
+                    <span className="text-xs xl:text-sm">{stat.label}</span>
+                  </motion.p>
                 ))}
               </Marquee>
               <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-linear-to-r from-black to-transparent" />
               <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-linear-to-l from-black to-transparent" />
-            </motion.div> */}
+            </motion.div>
 
             <HeroButtons className="hidden md:flex mt-6" />
           </motion.div>

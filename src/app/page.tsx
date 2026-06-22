@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/layout/navbar'
+import { BottomNav } from '@/components/layout/BottomNav'
 import { Footer } from '@/components/layout/Footer'
 import { Hero } from '@/components/sections/Hero'
 import { About } from '@/components/sections/About'
@@ -12,6 +13,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      <BottomNav />
       <main>
         <Hero />
         <About />

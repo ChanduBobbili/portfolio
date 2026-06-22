@@ -45,10 +45,8 @@ function AccordionItem(props: AccordionItemProps) {
   const [isOpen, setIsOpen] = React.useState(value?.includes(props?.value) ?? false)
 
   React.useEffect(() => {
-    const t = setTimeout(() => {
-      setIsOpen(value?.includes(props?.value) ?? false)
-    }, 0)
-    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsOpen(value?.includes(props?.value) ?? false)
   }, [value, props?.value])
 
   return (

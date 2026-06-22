@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, Mail, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
-import { useAdaptiveNavbar } from '@/hooks/useAdaptiveNavbar'
+import { useNavVisibility } from '@/hooks/useNavVisibility'
 import { personal } from '@/data/portfolio'
 import { HoverBorderGradient } from '../../ui/hover-border-gradient'
 import { SparklesText } from '../../ui/sparkles-text'
@@ -46,8 +46,12 @@ const mobilePanelExit = {
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const activeId = useScrollSpy(SECTION_IDS, 80)
-  const { isOnLightBg } = useAdaptiveNavbar()
+  const activeId = useScrollSpy(SECTION_IDS, 20)
+  const { heroLeft, isOnLightBg } = useNavVisibility({
+    navElementId: 'nav-header',
+    anchor: 'top',
+  })
+  const hideNav = !heroLeft
 
   useEffect(() => {
     const raf = requestAnimationFrame(() => setMounted(true))
@@ -62,6 +66,11 @@ export function Navbar() {
       document.body.style.overflow = prev
     }
   }, [mobileOpen])
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (hideNav) setMobileOpen(false)
+  }, [hideNav])
 
   const scrollTo = (href: string) => {
     setMobileOpen(false)
@@ -85,8 +94,10 @@ export function Navbar() {
     <header
       id="nav-header"
       className={cn(
-        'max-w-7xl mx-auto fixed top-4 left-2 right-2 z-110 border',
-        'transition-colors duration-300 rounded-xl md:rounded-2xl backdrop-blur-md',
+        'max-w-7xl mx-auto fixed top-0 left-0 right-0 md:top-4 md:left-2 md:right-2 z-110 border hidden md:block',
+        'transition-colors duration-300 rounded-b-xl md:rounded-2xl backdrop-blur-md',
+        'transition-opacity duration-200',
+        hideNav && 'opacity-0 pointer-events-none',
         isOnLightBg
           ? 'bg-background/50 border-border text-foreground'
           : 'bg-foreground/10 border-foreground/15 text-background'
