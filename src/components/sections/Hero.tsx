@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { FileText, Mail } from 'lucide-react'
 import Galaxy from '@/components/Galaxy'
+import { SectionZoomReveal } from '@/components/layout/SectionZoomReveal'
 import { personal } from '@/data/portfolio'
 import { AstronautIllustration } from '@/components/ui/AstronautIllustration'
 import { MagneticButton } from '@/components/ui/magnetic-button'
@@ -11,22 +12,6 @@ import { cn } from '@/lib/utils'
 import { HoverBorderGradient } from '../ui/hover-border-gradient'
 import { GithubIcon } from '../ui/SocialIcons'
 import { Marquee } from '../ui/marquee'
-// import { Badge } from '@/components/ui/badge'
-// import { Marquee } from '@/components/ui/marquee'
-
-// const heroSkills = [
-//   'TypeScript',
-//   'React.js',
-//   'Next.js',
-//   'Go',
-//   'System Design',
-//   'Microservices',
-//   'REST APIs',
-//   'BFF Pattern',
-//   'Kafka',
-//   'Docker',
-//   'Kubernetes (GKE)',
-// ]
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -39,87 +24,113 @@ const fadeUp = {
 
 export function Hero() {
   return (
-    <section
+    <SectionZoomReveal
+      mode="exit"
       id="hero"
       data-bg="dark"
       className="section-odd bg-black! relative min-h-screen flex items-center overflow-hidden pb-8 md:pb-20"
+      contentClassName="max-w-7xl mx-auto px-4 py-10 pb-0 md:pb-20 md:py-20 w-full"
+      background={
+        <div className="absolute inset-0 pointer-events-none">
+          <Galaxy
+            density={0.9}
+            glowIntensity={0.1}
+            starSpeed={0.35}
+            twinkleIntensity={0.35}
+            speed={0.5}
+            mouseInteraction={true}
+            mouseRepulsion={true}
+            transparent={true}
+          />
+        </div>
+      }
     >
-      <div className="absolute inset-0 pointer-events-none">
-        <Galaxy
-          density={0.9}
-          glowIntensity={0.1}
-          starSpeed={0.35}
-          twinkleIntensity={0.35}
-          speed={0.5}
-          mouseInteraction={true}
-          mouseRepulsion={true}
-          transparent={true}
-        />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-10 pb-0 md:pb-20 md:py-20 w-full">
-        <div className="grid min-w-0 lg:grid-cols-2 gap-4 lg:gap-0 items-center">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            className="w-full min-w-0 max-w-2xl text-center lg:text-left mx-auto lg:mx-0"
+      <div className="grid min-w-0 lg:grid-cols-2 gap-4 lg:gap-0 items-center">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          className="w-full min-w-0 max-w-2xl text-center lg:text-left mx-auto lg:mx-0"
+        >
+          <motion.p
+            custom={0}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: (i: number) => ({
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.5, delay: i * 0.15, ease: [0, 0, 0.2, 1] as const },
+              }),
+            }}
+            className="font-sans text-xs md:text-base text-foreground/50 mb-3 leading-snug"
           >
-            <motion.p
-              custom={0}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: (i: number) => ({
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.5, delay: i * 0.15, ease: [0, 0, 0.2, 1] as const },
-                }),
-              }}
-              className="font-sans text-xs md:text-base text-foreground/50 mb-3 leading-snug"
-            >
-              Great engineering merges elegant code with real-world impact.
-            </motion.p>
+            Great engineering merges elegant code with real-world impact.
+          </motion.p>
 
-            <motion.h1
-              custom={1}
-              variants={{
-                hidden: { opacity: 0, y: -40 },
-                visible: (i: number) => ({
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.5, delay: i * 0.25, ease: [0, 0, 0.2, 1] as const },
-                }),
-              }}
-              className="font-heading text-[clamp(2rem,2.5vw,3.5rem)] font-extrabold tracking-[0.02em] leading-[1.05] text-foreground mb-2 md:mb-4"
-            >
-              {personal.name}
-            </motion.h1>
+          <motion.h1
+            custom={1}
+            variants={{
+              hidden: { opacity: 0, y: -40 },
+              visible: (i: number) => ({
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.5, delay: i * 0.25, ease: [0, 0, 0.2, 1] as const },
+              }),
+            }}
+            className="font-heading text-[clamp(2rem,2.5vw,3.5rem)] font-extrabold tracking-[0.02em] leading-[1.05] text-foreground mb-2 md:mb-4"
+          >
+            {personal.name}
+          </motion.h1>
 
-            <motion.p
-              custom={3}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: (i: number) => ({
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.5, delay: i * 0.15, ease: [0, 0, 0.2, 1] as const },
-                }),
-              }}
-              className="font-heading text-xl md:text-2xl text-primary font-semibold"
-            >
-              Architecting scalable environments designed to maximize business ROI.
-            </motion.p>
+          <motion.p
+            custom={3}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: (i: number) => ({
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.5, delay: i * 0.15, ease: [0, 0, 0.2, 1] as const },
+              }),
+            }}
+            className="font-heading text-xl md:text-2xl text-primary font-semibold"
+          >
+            Architecting scalable environments designed to maximize business ROI.
+          </motion.p>
 
-            <motion.div
-              custom={4}
-              variants={fadeUp}
-              className="hidden md:flex flex-row gap-2 mt-2 md:mt-4"
+          <motion.div
+            custom={4}
+            variants={fadeUp}
+            className="hidden md:flex flex-row gap-2 mt-2 md:mt-4"
+          >
+            {personal.missionStats.map((stat, i) => (
+              <motion.p
+                key={stat.label}
+                custom={i * 0.75}
+                variants={fadeUp}
+                className="flex md:flex-col gap-1 md:max-w-28"
+              >
+                <span className="font-bold text-sm md:text-base xl:text-lg text-primary">
+                  {stat.value}
+                </span>
+                <span className="text-xs xl:text-sm">{stat.label}</span>
+              </motion.p>
+            ))}
+          </motion.div>
+
+          <motion.div
+            custom={4}
+            variants={fadeUp}
+            className="relative h-9 w-full min-w-0 max-w-full overflow-hidden md:hidden"
+          >
+            <Marquee
+              pauseOnHover
+              className="h-full w-full min-w-0 max-w-full [--duration:30s] [--gap:1rem] p-0"
             >
               {personal.missionStats.map((stat, i) => (
                 <motion.p
                   key={stat.label}
                   custom={i * 0.75}
                   variants={fadeUp}
-                  className="flex md:flex-col gap-1 md:max-w-28"
+                  className="flex md:flex-col gap-1 md:max-w-28 items-center"
                 >
                   <span className="font-bold text-sm md:text-base xl:text-lg text-primary">
                     {stat.value}
@@ -127,50 +138,25 @@ export function Hero() {
                   <span className="text-xs xl:text-sm">{stat.label}</span>
                 </motion.p>
               ))}
-            </motion.div>
-
-            <motion.div
-              custom={4}
-              variants={fadeUp}
-              className="relative h-9 w-full min-w-0 max-w-full overflow-hidden md:hidden"
-            >
-              <Marquee
-                pauseOnHover
-                className="h-full w-full min-w-0 max-w-full [--duration:30s] [--gap:1rem] p-0"
-              >
-                {personal.missionStats.map((stat, i) => (
-                  <motion.p
-                    key={stat.label}
-                    custom={i * 0.75}
-                    variants={fadeUp}
-                    className="flex md:flex-col gap-1 md:max-w-28 items-center"
-                  >
-                    <span className="font-bold text-sm md:text-base xl:text-lg text-primary">
-                      {stat.value}
-                    </span>
-                    <span className="text-xs xl:text-sm">{stat.label}</span>
-                  </motion.p>
-                ))}
-              </Marquee>
-              <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-linear-to-r from-black to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-linear-to-l from-black to-transparent" />
-            </motion.div>
-
-            <HeroButtons className="hidden md:flex mt-6" />
+            </Marquee>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-linear-to-r from-black to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-linear-to-l from-black to-transparent" />
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="relative"
-          >
-            <AstronautIllustration />
-            <HeroButtons className="flex md:hidden mx-auto justify-center" />
-          </motion.div>
-        </div>
+          <HeroButtons className="hidden md:flex mt-6" />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="relative"
+        >
+          <AstronautIllustration />
+          <HeroButtons className="flex md:hidden mx-auto justify-center" />
+        </motion.div>
       </div>
-    </section>
+    </SectionZoomReveal>
   )
 }
 
