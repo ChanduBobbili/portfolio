@@ -25,7 +25,7 @@ const tabSpring = {
 }
 
 export function BottomNav() {
-  const activeId = useActiveSection([...BOTTOM_TAB_IDS])
+  const activeId = useActiveSection(BOTTOM_TAB_IDS)
   const { heroLeft = false, isOnLightBg } = useNavVisibility({
     navElementId: 'bottom-nav',
     anchor: 'bottom',

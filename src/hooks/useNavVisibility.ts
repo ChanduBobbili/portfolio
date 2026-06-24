@@ -54,7 +54,11 @@ export function useNavVisibility({
       }
     }
 
-    setState({ heroLeft, isOnLightBg })
+    setState((prev) =>
+      prev.heroLeft === heroLeft && prev.isOnLightBg === isOnLightBg
+        ? prev
+        : { heroLeft, isOnLightBg }
+    )
   }, [navElementId, anchor, bandTop, bandBottom, heroOffset])
 
   useLenis(update)

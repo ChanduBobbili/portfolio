@@ -37,15 +37,9 @@ export function useActiveSection(sectionIds: string[]): string {
 
   const update = useCallback(() => {
     const hashSection = parseSectionHash(sectionIds)
-    if (hashSection && hashSection !== activeId) {
-      setActiveId(hashSection)
-      return
-    }
-    const dominantSection = getViewportDominantSection(sectionIds)
-    if (dominantSection !== activeId) {
-      setActiveId(dominantSection)
-    }
-  }, [sectionIds, activeId])
+    const next = hashSection ?? getViewportDominantSection(sectionIds)
+    setActiveId((prev) => (prev === next ? prev : next))
+  }, [sectionIds])
 
   useLenis(update)
   useEventListener('scroll', update, undefined, { passive: true })
@@ -62,9 +56,11 @@ export function useActiveSection(sectionIds: string[]): string {
   }, [update])
 
   useEffect(() => {
+    // Mount-only initial sync; update is stable when sectionIds is stable.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     update()
-  }, [update])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return activeId
 }
