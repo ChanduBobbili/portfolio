@@ -41,6 +41,7 @@ export const personal = {
     { label: 'Events/sec, load-tested', value: '1M+' },
     { label: 'Students enrolled via platform', value: '20K' },
     { label: 'Accounts retained after perf fix', value: '5+' },
+    { label: 'Technical Articles Written', value: '4' },
   ],
 }
 
@@ -349,7 +350,7 @@ export const articles = [
     summary:
       'A practical, checklist-driven guide covering metadata, Open Graph, structured data, sitemap, Core Web Vitals, and more for Next.js apps.',
     tags: ['SEO', 'Next.js', 'Frontend'],
-    accent: 'purple',
+    accent: 'green',
     image: '/images/articles/seo.png',
     url: 'https://dev.to/chandu_bobbili_06/mastering-seo-for-nextjs-a-practical-optimization-checklist-4nld',
   },
@@ -367,8 +368,17 @@ export const articles = [
     summary:
       'Introduces changesetgoo — the Go CLI for semantic versioning and changelog management — covering the problem it solves and how to use it in a real project.',
     tags: ['Open Source', 'Release Management', 'Go'],
-    accent: 'green',
+    accent: 'yellow',
     image: '/images/articles/changesetgoo.png',
     url: 'https://dev.to/chandu_bobbili_06/say-goodbye-to-changelog-chaos-introducing-changesetgoo-c2j',
+  },
+  {
+    title: 'How Web Push Notifications Work Internally: Implementing with React + Golang',
+    summary:
+      'In this blog, we will understand how Web Push Notifications work internally and implement a complete push notification system using React.js and Golang.',
+    tags: ['Web Push Notifications', 'React.js', 'Go'],
+    accent: 'green',
+    image: '/images/articles/web-push-notifications.png',
+    url: 'https://dev.to/chandu_bobbili_06/how-web-push-notifications-work-internally-implementing-with-react-golang-6m',
   },
 ]

@@ -99,16 +99,16 @@ export function Hero() {
           <motion.div
             custom={4}
             variants={fadeUp}
-            className="hidden md:flex flex-row gap-2 mt-2 md:mt-4"
+            className="hidden lg:flex flex-row gap-2 mt-2 lg:mt-4"
           >
             {personal.missionStats.map((stat, i) => (
               <motion.p
                 key={stat.label}
                 custom={i * 0.75}
                 variants={fadeUp}
-                className="flex md:flex-col gap-1 md:max-w-28"
+                className="flex lg:flex-col gap-1 lg:max-w-28"
               >
-                <span className="font-bold text-sm md:text-base xl:text-lg text-primary">
+                <span className="font-bold text-sm lg:text-base xl:text-lg text-primary">
                   {stat.value}
                 </span>
                 <span className="text-xs xl:text-sm">{stat.label}</span>
@@ -119,7 +119,7 @@ export function Hero() {
           <motion.div
             custom={4}
             variants={fadeUp}
-            className="relative h-9 w-full min-w-0 max-w-full overflow-hidden md:hidden"
+            className="relative h-9 w-full min-w-0 max-w-full overflow-hidden lg:hidden"
           >
             <Marquee
               pauseOnHover
@@ -130,9 +130,9 @@ export function Hero() {
                   key={stat.label}
                   custom={i * 0.75}
                   variants={fadeUp}
-                  className="flex md:flex-col gap-1 md:max-w-28 items-center"
+                  className="flex lg:flex-col gap-1 lg:max-w-28 items-center"
                 >
-                  <span className="font-bold text-sm md:text-base xl:text-lg text-primary">
+                  <span className="font-bold text-sm lg:text-base xl:text-lg text-primary">
                     {stat.value}
                   </span>
                   <span className="text-xs xl:text-sm">{stat.label}</span>
@@ -143,7 +143,7 @@ export function Hero() {
             <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-linear-to-l from-black to-transparent" />
           </motion.div>
 
-          <HeroButtons className="hidden md:flex mt-6" />
+          <HeroButtons className="hidden lg:flex mt-6" />
         </motion.div>
 
         <motion.div
@@ -153,7 +153,7 @@ export function Hero() {
           className="relative"
         >
           <AstronautIllustration />
-          <HeroButtons className="flex md:hidden mx-auto justify-center" />
+          <HeroButtons className="flex lg:hidden mx-auto justify-center" />
         </motion.div>
       </div>
     </SectionZoomReveal>

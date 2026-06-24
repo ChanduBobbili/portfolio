@@ -21,8 +21,17 @@ const ARTICLE_BG: Record<string, string> = {
 
 const desktopArticleOrder = [
   {
-    key: 'seo',
+    key: 'push',
     colSpan: 'col-span-1 lg:col-span-2',
+    containerClassName: 'min-h-[200px] lg:min-h-[300px]',
+    contentClassName: 'max-w-md',
+    imageClassName: 'absolute right-4 bottom-4 w-[45%] h-[80%] object-contain rounded-2xl',
+    imageWidth: 500,
+    imageHeight: 500,
+  },
+  {
+    key: 'changesetgoo',
+    colSpan: 'col-span-1 lg:col-span-1',
     containerClassName: 'min-h-[200px] lg:min-h-[300px]',
     contentClassName: 'max-w-md',
     imageClassName: 'absolute right-4 bottom-4 w-[45%] h-[80%] object-contain rounded-2xl',
@@ -40,8 +49,8 @@ const desktopArticleOrder = [
     imageHeight: 300,
   },
   {
-    key: 'changesetgoo',
-    colSpan: 'col-span-1 lg:col-span-3',
+    key: 'seo',
+    colSpan: 'col-span-1 lg:col-span-2',
     containerClassName: 'min-h-[200px] lg:min-h-[300px]',
     contentClassName: 'max-w-lg',
     imageClassName:
@@ -52,6 +61,16 @@ const desktopArticleOrder = [
 ] as const
 
 const mobileArticleOrder = [
+  {
+    key: 'push',
+    colSpan: 'col-span-1 lg:col-span-3',
+    containerClassName: 'min-h-[200px] lg:min-h-[300px]',
+    contentClassName: 'max-w-lg',
+    imageClassName:
+      'absolute -right-10 md:-right-[40%] lg:-right-[20%] -bottom-10 object-contain rounded-2xl grayscale filter',
+    imageWidth: 500,
+    imageHeight: 500,
+  },
   {
     key: 'changesetgoo',
     colSpan: 'col-span-1 lg:col-span-3',
@@ -87,6 +106,7 @@ function getArticle(key: string) {
   const article = articles.find((a) => {
     if (key === 'seo') return a.title.toLowerCase().includes('seo')
     if (key === 'biome') return a.title.toLowerCase().includes('biome')
+    if (key === 'push') return a.title.toLowerCase().includes('push')
     return a.title.toLowerCase().includes('changesetgoo')
   })
   if (!article) throw new Error(`Article not found for key: ${key}`)

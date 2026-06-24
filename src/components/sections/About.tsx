@@ -61,6 +61,7 @@ const aboutOutputs: Record<number, TerminalOutputLine[]> = {
       value: '20,000 across 4 universities',
     },
     { type: 'achievement', label: 'App processing', value: '15h → 8h per applicant' },
+    { type: 'achievement', label: 'Technical Articles Written', value: '4' },
     {
       type: 'achievement',
       label: 'Accounts retained',
