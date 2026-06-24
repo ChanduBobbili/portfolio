@@ -2,12 +2,11 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { Briefcase, ContactIcon, FolderOpen, Zap } from 'lucide-react'
-import { useScrollSpy } from '@/hooks/useScrollSpy'
+import { useActiveSection } from '@/hooks/useActiveSection'
 import { useNavVisibility } from '@/hooks/useNavVisibility'
 import { useLenisScrollTo } from '@/hooks/useLenisScrollTo'
+import { setSectionHash } from '@/lib/utils'
 import { cn } from '@/lib/utils'
-
-const SCROLL_SPY_IDS = ['about', 'projects', 'skills', 'work', 'writing', 'contact']
 
 const BOTTOM_TABS = [
   { label: 'Projects', href: '#projects', icon: FolderOpen, id: 'projects' },
@@ -15,6 +14,8 @@ const BOTTOM_TABS = [
   { label: 'Work', href: '#work', icon: Briefcase, id: 'work' },
   { label: 'Contact', href: '#contact', icon: ContactIcon, id: 'contact' },
 ] as const
+
+const BOTTOM_TAB_IDS = BOTTOM_TABS.map((tab) => tab.id) as string[]
 
 const tabSpring = {
   type: 'spring' as const,
@@ -24,12 +25,11 @@ const tabSpring = {
 }
 
 export function BottomNav() {
-  const activeId = useScrollSpy(SCROLL_SPY_IDS, 20)
-  const { heroLeft, isOnLightBg } = useNavVisibility({
+  const activeId = useActiveSection([...BOTTOM_TAB_IDS])
+  const { heroLeft = false, isOnLightBg } = useNavVisibility({
     navElementId: 'bottom-nav',
     anchor: 'bottom',
   })
-  const showTab = heroLeft
   const scrollTo = useLenisScrollTo()
 
   const isDarkPill = isOnLightBg
@@ -47,7 +47,7 @@ export function BottomNav() {
 
   return (
     <AnimatePresence>
-      {showTab && (
+      {heroLeft && (
         <motion.nav
           id="bottom-nav"
           initial={{ y: 80, opacity: 0 }}
@@ -72,7 +72,10 @@ export function BottomNav() {
               <button
                 key={tab.href}
                 type="button"
-                onClick={() => scrollTo(tab.href)}
+                onClick={() => {
+                  setSectionHash(tab.id)
+                  scrollTo(tab.href)
+                }}
                 aria-label={tab.label}
                 aria-current={isActive ? 'page' : undefined}
                 className={cn(

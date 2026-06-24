@@ -53,6 +53,7 @@ export function Contact() {
 
   return (
     <SectionZoomReveal
+      disableZoom={true}
       id="contact"
       data-bg="dark"
       className="section-odd relative overflow-hidden py-6 md:py-12 min-h-[40vh] md:min-h-[52vh] flex items-center"

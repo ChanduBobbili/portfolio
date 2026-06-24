@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, Mail, Menu, X } from 'lucide-react'
 import Link from 'next/link'
-import { useScrollSpy } from '@/hooks/useScrollSpy'
+import { useActiveSection } from '@/hooks/useActiveSection'
 import { useNavVisibility } from '@/hooks/useNavVisibility'
 import { useLenisScrollTo } from '@/hooks/useLenisScrollTo'
 import { useLenis } from 'lenis/react'
@@ -13,13 +13,13 @@ import { personal } from '@/data/portfolio'
 import { HoverBorderGradient } from '../../ui/hover-border-gradient'
 import { SparklesText } from '../../ui/sparkles-text'
 import { RainbowButton } from '../../ui/rainbow-button'
-import { cn } from '@/lib/utils'
+import { cn, setSectionHash } from '@/lib/utils'
 
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
-  { label: 'Work', href: '#work' },
-  { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Work', href: '#work' },
   { label: 'Writing', href: '#writing' },
   { label: 'Contact', href: '#contact' },
 ]
@@ -48,7 +48,7 @@ const mobilePanelExit = {
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const activeId = useScrollSpy(SECTION_IDS, 20)
+  const activeId = useActiveSection(SECTION_IDS)
   const { heroLeft, isOnLightBg } = useNavVisibility({
     navElementId: 'nav-header',
     anchor: 'top',
@@ -80,6 +80,8 @@ export function Navbar() {
 
   const scrollTo = (href: string) => {
     setMobileOpen(false)
+    const sectionId = href.replace('#', '')
+    setSectionHash(sectionId)
     scrollToSection(href)
   }
 
@@ -117,7 +119,10 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             whileTap={{ scale: 0.98 }}
             transition={mobilePanelSpring}
-            onClick={() => scrollToSection('#hero')}
+            onClick={() => {
+              setSectionHash('hero')
+              scrollToSection('#hero')
+            }}
             className="relative flex items-center gap-2 cursor-pointer group"
             aria-label="Scroll to top"
           >

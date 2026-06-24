@@ -134,6 +134,13 @@ html {
   scroll-padding-top: var(--nav-height) + 4rem;
 }
 
+/* For mobile devices - remove scroll padding to top */
+@media screen and (max-width: 768px) {
+  html {
+    scroll-padding-top: 0px;
+  }
+}
+
 html.lenis,
 html.lenis body {
   height: auto;

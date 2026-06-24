@@ -1,12 +1,13 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useLenis } from 'lenis/react'
-
-const SCROLL_OFFSET = -80
+import { useDeviceType } from '@zenithui/utils'
 
 export function useLenisScrollTo() {
   const lenis = useLenis()
+  const deviceType = useDeviceType()
+  const SCROLL_OFFSET = useMemo(() => (deviceType === 'desktop' ? -80 : 0), [deviceType])
 
   return useCallback(
     (href: string) => {
@@ -25,6 +26,6 @@ export function useLenisScrollTo() {
         document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
       }
     },
-    [lenis]
+    [lenis, SCROLL_OFFSET]
   )
 }

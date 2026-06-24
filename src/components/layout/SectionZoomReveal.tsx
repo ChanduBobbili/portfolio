@@ -9,11 +9,12 @@ type SectionZoomRevealProps = React.ComponentPropsWithoutRef<'section'> & {
   mode?: 'enter' | 'exit'
   background?: React.ReactNode
   contentClassName?: string
+  disableZoom?: boolean
 }
 
 export const SectionZoomReveal = forwardRef<HTMLElement, SectionZoomRevealProps>(
   function SectionZoomReveal(
-    { mode = 'enter', background, children, className, contentClassName, ...props },
+    { mode = 'enter', background, children, className, contentClassName, disableZoom, ...props },
     ref
   ) {
     const internalRef = useRef<HTMLElement>(null)
@@ -31,7 +32,11 @@ export const SectionZoomReveal = forwardRef<HTMLElement, SectionZoomRevealProps>
       <section ref={setSectionRef} className={className} {...props}>
         {background}
         <motion.div
-          style={{ scale, opacity, transformOrigin: 'center top' }}
+          style={{
+            scale: disableZoom ? 1 : scale,
+            opacity: disableZoom ? 1 : opacity,
+            transformOrigin: 'center top',
+          }}
           className={cn('relative z-10', contentClassName)}
         >
           {children}
