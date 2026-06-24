@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef } from 'react'
 import { motion, useMotionValue, useSpring, useInView } from 'framer-motion'
+import { defaultGalaxySkillSlugs, skillIconUrl } from '@/data/skill-icons'
 
 interface GalaxyProps {
   focal?: [number, number]
@@ -22,6 +23,7 @@ interface GalaxyProps {
   transparent?: boolean
   className?: string
   entranceDuration?: number
+  skillSlugs?: string[]
 }
 
 interface Star {
@@ -36,6 +38,7 @@ interface Star {
   flare: boolean
   twinklePhase: number
   twinkleSpeed: number
+  skillSlug?: string
 }
 
 const NUM_LAYERS = 8
@@ -132,6 +135,68 @@ function generateStarPool(): Star[] {
   return stars
 }
 
+function starKey(s: Star): string {
+  return `${s.layer}:${s.cellX}:${s.cellY}`
+}
+
+function assignSkillStars(pool: Star[], slugs: string[]): Star[] {
+  if (slugs.length === 0) return pool
+
+  const candidates = pool.filter((s) => !s.flare && s.size >= 0.35 && s.size <= 0.75)
+  const picked: Star[] = []
+  const pickedKeys = new Set<string>()
+
+  for (let layer = 0; layer < NUM_LAYERS; layer++) {
+    const layerCandidates = candidates
+      .filter((s) => s.layer === layer)
+      .sort((a, b) => hash21(a.seed, a.layer + 100) - hash21(b.seed, b.layer + 100))
+    if (layerCandidates.length > 0) {
+      const star = layerCandidates[0]
+      picked.push(star)
+      pickedKeys.add(starKey(star))
+    }
+  }
+
+  const remaining = candidates
+    .filter((s) => !pickedKeys.has(starKey(s)))
+    .sort((a, b) => hash21(a.seed * 2, a.layer) - hash21(b.seed * 2, b.layer))
+
+  for (const s of remaining) {
+    if (picked.length >= slugs.length) break
+    picked.push(s)
+    pickedKeys.add(starKey(s))
+  }
+
+  const assignment = new Map<string, string>()
+  for (let i = 0; i < Math.min(picked.length, slugs.length); i++) {
+    assignment.set(starKey(picked[i]), slugs[i])
+  }
+
+  return pool.map((s) => {
+    const slug = assignment.get(starKey(s))
+    return slug ? { ...s, skillSlug: slug } : s
+  })
+}
+
+function loadSkillLogos(slugs: string[]): Promise<Map<string, HTMLImageElement>> {
+  const cache = new Map<string, HTMLImageElement>()
+  return Promise.all(
+    slugs.map(
+      (slug) =>
+        new Promise<void>((resolve, reject) => {
+          const img = new Image()
+          img.crossOrigin = 'anonymous'
+          img.onload = () => {
+            cache.set(slug, img)
+            resolve()
+          }
+          img.onerror = reject
+          img.src = skillIconUrl(slug)
+        })
+    )
+  ).then(() => cache)
+}
+
 export default function GalaxyCanvas({
   focal = [0.5, 0.5],
   rotation = [1.0, 0.0],
@@ -150,6 +215,7 @@ export default function GalaxyCanvas({
   autoCenterRepulsion = 0,
   transparent = true,
   entranceDuration = 1.2,
+  skillSlugs = defaultGalaxySkillSlugs,
   className,
   ...rest
 }: GalaxyProps) {
@@ -193,92 +259,86 @@ export default function GalaxyCanvas({
   const isInView = useInView(wrapperRef, { once: true, margin: '-10% 0px' })
 
   // Generated once — geometry is static, only visual params animate
-  const starPool = useMemo(() => generateStarPool(), [])
+  const starPool = useMemo(() => assignSkillStars(generateStarPool(), skillSlugs), [skillSlugs])
 
   useEffect(() => {
     const canvas = canvasRef.current
     const wrapper = wrapperRef.current
     if (!canvas || !wrapper) return
 
-    const ctx = canvas.getContext('2d', { alpha: transparent })
-    if (!ctx) return
+    let cancelled = false
+    let logoCache = new Map<string, HTMLImageElement>()
 
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const freezeFrame = disableAnimation || reducedMotion
+    const uniqueSlugs = [...new Set(skillSlugs)]
+    const cleanupRef = { current: () => {} }
 
-    let dpr = 1
-    let width = 0
-    let height = 0
-
-    function resize() {
-      const isMobile = window.matchMedia('(max-width: 768px)').matches
-      dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.5)
-      width = wrapper!.offsetWidth
-      height = wrapper!.offsetHeight
-      canvas!.width = width * dpr
-      canvas!.height = height * dpr
-      canvas!.style.width = `${width}px`
-      canvas!.style.height = `${height}px`
-      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
-    }
-    window.addEventListener('resize', resize)
-    resize()
-
-    let animateId = 0
-    let isVisible = false
-    let staticDrawn = false
-
-    function drawFlareRay(
-      c: CanvasRenderingContext2D,
-      length: number,
-      width: number,
-      r: number,
-      g: number,
-      b: number,
-      alpha: number
-    ) {
-      // draws a ray pointing in +x and -x from origin, tapering to a point
-      for (const dir of [1, -1]) {
-        const grad = c.createLinearGradient(0, 0, dir * length, 0)
-        grad.addColorStop(0, `rgba(${r},${g},${b},${alpha})`)
-        grad.addColorStop(1, `rgba(${r},${g},${b},0)`)
-        c.fillStyle = grad
-        c.beginPath()
-        c.moveTo(0, -width)
-        c.lineTo(dir * length, 0)
-        c.lineTo(0, width)
-        c.closePath()
-        c.fill()
+    const init = async () => {
+      try {
+        logoCache = await loadSkillLogos(uniqueSlugs)
+      } catch {
+        // Skill logos failed to load; those stars are skipped until available
       }
+      if (cancelled) return
+
+      runCanvas()
     }
 
-    function drawStarLayer(
-      time: number,
-      layerIndex: number,
-      depth: number,
-      fade: number,
-      scale: number,
-      uHueShift: number,
-      uSaturation: number,
-      uGlowIntensity: number,
-      uTwinkleIntensity: number,
-      mouseUV: { x: number; y: number },
-      mouseActive: number
-    ) {
-      const minDim = Math.min(width, height)
+    function runCanvas() {
+      const context = canvas!.getContext('2d', { alpha: transparent })
+      if (!context) return
+      const ctx = context
 
-      for (const star of starPool) {
-        if (star.layer !== layerIndex) continue
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      const freezeFrame = disableAnimation || reducedMotion
 
-        // base position in "uv" space, scaled by this layer's scale + global rotation/focal/repulsion
-        // approximate: place each cell center, jittered by the shader's "pad" drift
+      let dpr = 1
+      let width = 0
+      let height = 0
+
+      function resize() {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches
+        dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.5)
+        width = wrapper!.offsetWidth
+        height = wrapper!.offsetHeight
+        canvas!.width = width * dpr
+        canvas!.height = height * dpr
+        canvas!.style.width = `${width}px`
+        canvas!.style.height = `${height}px`
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      }
+      window.addEventListener('resize', resize)
+      resize()
+
+      let animateId = 0
+      let isVisible = false
+      let staticDrawn = false
+
+      interface StarScreenPosition {
+        px: number
+        py: number
+        twinkle: number
+        alpha: number
+        radius: number
+      }
+
+      function computeStarScreenPosition(
+        star: Star,
+        time: number,
+        depth: number,
+        fade: number,
+        scale: number,
+        uTwinkleIntensity: number,
+        mouseUV: { x: number; y: number },
+        mouseActive: number
+      ): StarScreenPosition | null {
+        const minDim = Math.min(width, height)
+
         const padX = Math.sin(star.seed * 34 + (time * speed) / 10) * 0.5 - 0.25
         const padY = Math.sin(star.seed * 38 + (time * speed) / 30) * 0.5 - 0.25
 
         const u = (star.cellX + 0.5 + padX) / scale
         const v = (star.cellY + 0.5 + padY) / scale
 
-        // global rotation (auto + prop rotation)
         const autoAngle = time * rotationSpeed
         const cosA = Math.cos(autoAngle)
         const sinA = Math.sin(autoAngle)
@@ -291,7 +351,6 @@ export default function GalaxyCanvas({
         ru = ru2
         rv = rv2
 
-        // mouse repulsion / parallax offset
         if (mouseRepulsion) {
           const mx = mouseUV.x - 0.5
           const my = mouseUV.y - 0.5
@@ -313,25 +372,14 @@ export default function GalaxyCanvas({
           rv += (rv / dist) * repel * 0.05
         }
 
-        // map uv -> screen px (focal-relative)
         const focalPxX = focal[0] * width
-        const focalPxY = (1 - focal[1]) * height // flip y: shader uv.y grows up, canvas grows down
+        const focalPxY = (1 - focal[1]) * height
         const px = focalPxX + ru * minDim
         const py = focalPxY - rv * minDim
 
-        // cull offscreen with margin
         const margin = 40
-        if (px < -margin || px > width + margin || py < -margin || py > height + margin) continue
+        if (px < -margin || px > width + margin || py < -margin || py > height + margin) return null
 
-        // color: hue from base + shift, value from size, saturation scaled
-        const hue = (star.hueBase + uHueShift / 360) % 1
-        const value = Math.max(0.3, star.size)
-        const [r, g, b] = hsvToRgb(hue, Math.min(1, uSaturation), value)
-        const rr = Math.round(r * 255)
-        const gg = Math.round(g * 255)
-        const bb = Math.round(b * 255)
-
-        // twinkle
         const twinkleRaw = Math.sin(time * speed + star.twinklePhase) * 0.5 + 1
         const twinkle = 1 + (twinkleRaw - 1) * uTwinkleIntensity
 
@@ -339,185 +387,266 @@ export default function GalaxyCanvas({
         const radius = Math.max(0.2, baseRadius * twinkle)
         const alpha = Math.min(1, fade * (0.5 + star.size * 0.5) * twinkle)
 
-        if (alpha <= 0.01 || radius <= 0.05) continue
+        if (alpha <= 0.01 || radius <= 0.05) return null
 
-        // glow
-        if (uGlowIntensity > 0 && (star.flare || star.size > 0.6)) {
-          const glowRadius = radius * (3 + uGlowIntensity * 8)
-          const gradient = ctx!.createRadialGradient(px, py, 0, px, py, glowRadius)
-          gradient.addColorStop(0, `rgba(${rr},${gg},${bb},${alpha * 0.5})`)
-          gradient.addColorStop(1, `rgba(${rr},${gg},${bb},0)`)
-          ctx!.fillStyle = gradient
-          ctx!.beginPath()
-          ctx!.arc(px, py, glowRadius, 0, Math.PI * 2)
-          ctx!.fill()
-        }
+        return { px, py, twinkle, alpha, radius }
+      }
 
-        // core
-        ctx!.fillStyle = `rgba(${rr},${gg},${bb},${alpha})`
-        ctx!.beginPath()
-        ctx!.arc(px, py, radius, 0, Math.PI * 2)
-        ctx!.fill()
-
-        // ── 4-pointed flare (diamond/star glint) ──────────────────────────
-        if (star.flare) {
-          const flareLen = radius * (4 + uGlowIntensity * 10) * twinkle
-          const flareAlpha = alpha * 0.8
-
-          ctx!.save()
-          ctx!.translate(px, py)
-          ctx!.globalCompositeOperation = 'lighter'
-
-          // horizontal + vertical rays
-          drawFlareRay(ctx!, flareLen, radius * 0.4, rr, gg, bb, flareAlpha)
-          ctx!.rotate(Math.PI / 2)
-          drawFlareRay(ctx!, flareLen, radius * 0.4, rr, gg, bb, flareAlpha)
-
-          // diagonal rays (shorter, dimmer — matches MAT45 in the shader)
-          ctx!.rotate(Math.PI / 4)
-          drawFlareRay(ctx!, flareLen * 0.5, radius * 0.3, rr, gg, bb, flareAlpha * 0.5)
-          ctx!.rotate(Math.PI / 2)
-          drawFlareRay(ctx!, flareLen * 0.5, radius * 0.3, rr, gg, bb, flareAlpha * 0.5)
-
-          ctx!.restore()
+      function drawFlareRay(
+        c: CanvasRenderingContext2D,
+        length: number,
+        width: number,
+        r: number,
+        g: number,
+        b: number,
+        alpha: number
+      ) {
+        // draws a ray pointing in +x and -x from origin, tapering to a point
+        for (const dir of [1, -1]) {
+          const grad = c.createLinearGradient(0, 0, dir * length, 0)
+          grad.addColorStop(0, `rgba(${r},${g},${b},${alpha})`)
+          grad.addColorStop(1, `rgba(${r},${g},${b},0)`)
+          c.fillStyle = grad
+          c.beginPath()
+          c.moveTo(0, -width)
+          c.lineTo(dir * length, 0)
+          c.lineTo(0, width)
+          c.closePath()
+          c.fill()
         }
       }
-    }
 
-    function render(time: number) {
-      ctx!.clearRect(0, 0, width, height)
+      function drawStarLayer(
+        time: number,
+        layerIndex: number,
+        depth: number,
+        fade: number,
+        scale: number,
+        uHueShift: number,
+        uSaturation: number,
+        uGlowIntensity: number,
+        uTwinkleIntensity: number,
+        mouseUV: { x: number; y: number },
+        mouseActive: number
+      ) {
+        for (const star of starPool) {
+          if (star.layer !== layerIndex) continue
 
-      if (!transparent) {
-        ctx!.fillStyle = '#000000'
-        ctx!.fillRect(0, 0, width, height)
+          const pos = computeStarScreenPosition(
+            star,
+            time,
+            depth,
+            fade,
+            scale,
+            uTwinkleIntensity,
+            mouseUV,
+            mouseActive
+          )
+          if (!pos) continue
+
+          const { px, py, twinkle, alpha, radius } = pos
+
+          if (star.skillSlug) {
+            const img = logoCache.get(star.skillSlug)
+            if (!img) continue
+
+            const logoSize = Math.max(16, radius * 10)
+            ctx.save()
+            ctx.globalCompositeOperation = 'source-over'
+            ctx.globalAlpha = alpha * 0.85
+            ctx.drawImage(img, px - logoSize / 2, py - logoSize / 2, logoSize, logoSize)
+            ctx.restore()
+            continue
+          }
+
+          const hue = (star.hueBase + uHueShift / 360) % 1
+          const value = Math.max(0.3, star.size)
+          const [r, g, b] = hsvToRgb(hue, Math.min(1, uSaturation), value)
+          const rr = Math.round(r * 255)
+          const gg = Math.round(g * 255)
+          const bb = Math.round(b * 255)
+
+          if (uGlowIntensity > 0 && (star.flare || star.size > 0.6)) {
+            const glowRadius = radius * (3 + uGlowIntensity * 8)
+            const gradient = ctx.createRadialGradient(px, py, 0, px, py, glowRadius)
+            gradient.addColorStop(0, `rgba(${rr},${gg},${bb},${alpha * 0.5})`)
+            gradient.addColorStop(1, `rgba(${rr},${gg},${bb},0)`)
+            ctx.fillStyle = gradient
+            ctx.beginPath()
+            ctx.arc(px, py, glowRadius, 0, Math.PI * 2)
+            ctx.fill()
+          }
+
+          ctx.fillStyle = `rgba(${rr},${gg},${bb},${alpha})`
+          ctx.beginPath()
+          ctx.arc(px, py, radius, 0, Math.PI * 2)
+          ctx.fill()
+
+          if (star.flare) {
+            const flareLen = radius * (4 + uGlowIntensity * 10) * twinkle
+            const flareAlpha = alpha * 0.8
+
+            ctx.save()
+            ctx.translate(px, py)
+            ctx.globalCompositeOperation = 'lighter'
+
+            drawFlareRay(ctx, flareLen, radius * 0.4, rr, gg, bb, flareAlpha)
+            ctx.rotate(Math.PI / 2)
+            drawFlareRay(ctx, flareLen, radius * 0.4, rr, gg, bb, flareAlpha)
+
+            ctx.rotate(Math.PI / 4)
+            drawFlareRay(ctx, flareLen * 0.5, radius * 0.3, rr, gg, bb, flareAlpha * 0.5)
+            ctx.rotate(Math.PI / 2)
+            drawFlareRay(ctx, flareLen * 0.5, radius * 0.3, rr, gg, bb, flareAlpha * 0.5)
+
+            ctx.restore()
+          }
+        }
       }
 
-      const t = freezeFrame ? 0 : time * 0.001
-      const starSpeedVal = freezeFrame ? 0 : (t * starSpeed) / 10
+      function render(time: number) {
+        ctx.clearRect(0, 0, width, height)
 
-      const uHueShift = hueSpring.get()
-      const uDensity = Math.max(0.1, densitySpring.get())
-      const uGlow = glowSpring.get()
-      const uSat = satSpring.get()
-      const uTwinkle = twinkleSpring.get()
+        if (!transparent) {
+          ctx.fillStyle = '#000000'
+          ctx.fillRect(0, 0, width, height)
+        }
 
-      const mouseUV = { x: smoothMousePos.current.x, y: smoothMousePos.current.y }
-      const mouseActive = smoothMouseActive.current
+        const t = freezeFrame ? 0 : time * 0.001
+        const starSpeedVal = freezeFrame ? 0 : (t * starSpeed) / 10
 
-      ctx!.globalCompositeOperation = transparent ? 'lighter' : 'source-over'
+        const uHueShift = hueSpring.get()
+        const uDensity = Math.max(0.1, densitySpring.get())
+        const uGlow = glowSpring.get()
+        const uSat = satSpring.get()
+        const uTwinkle = twinkleSpring.get()
 
-      for (let i = 0; i < NUM_LAYER_COUNT; i++) {
-        const iFrac = i / NUM_LAYER_COUNT
-        const depth = (((iFrac + starSpeedVal * speed) % 1) + 1) % 1
-        const scale = mix(20 * uDensity, 0.5 * uDensity, depth)
-        const fade = depth * smoothstep(1, 0.9, depth)
-        if (fade <= 0.001) continue
+        const mouseUV = { x: smoothMousePos.current.x, y: smoothMousePos.current.y }
+        const mouseActive = smoothMouseActive.current
 
-        drawStarLayer(
-          t,
-          i,
-          depth,
-          fade,
-          scale,
-          uHueShift,
-          uSat,
-          uGlow,
-          uTwinkle,
-          mouseUV,
-          mouseActive
-        )
+        ctx.globalCompositeOperation = transparent ? 'lighter' : 'source-over'
+
+        for (let i = 0; i < NUM_LAYER_COUNT; i++) {
+          const iFrac = i / NUM_LAYER_COUNT
+          const depth = (((iFrac + starSpeedVal * speed) % 1) + 1) % 1
+          const scale = mix(20 * uDensity, 0.5 * uDensity, depth)
+          const fade = depth * smoothstep(1, 0.9, depth)
+          if (fade <= 0.001) continue
+
+          drawStarLayer(
+            t,
+            i,
+            depth,
+            fade,
+            scale,
+            uHueShift,
+            uSat,
+            uGlow,
+            uTwinkle,
+            mouseUV,
+            mouseActive
+          )
+        }
       }
-    }
 
-    const NUM_LAYER_COUNT = NUM_LAYERS
+      const NUM_LAYER_COUNT = NUM_LAYERS
 
-    function mix(a: number, b: number, t: number) {
-      return a * (1 - t) + b * t
-    }
-
-    function smoothstep(edge0: number, edge1: number, x: number) {
-      const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)))
-      return t * t * (3 - 2 * t)
-    }
-
-    function update(t: number) {
-      if (!isVisible) return
-      animateId = requestAnimationFrame(update)
-
-      const lerp = 0.05
-      smoothMousePos.current.x += (targetMousePos.current.x - smoothMousePos.current.x) * lerp
-      smoothMousePos.current.y += (targetMousePos.current.y - smoothMousePos.current.y) * lerp
-      smoothMouseActive.current += (targetMouseActive.current - smoothMouseActive.current) * lerp
-
-      render(t)
-    }
-
-    function startLoop() {
-      if (animateId === 0) animateId = requestAnimationFrame(update)
-    }
-
-    function stopLoop() {
-      if (animateId !== 0) {
-        cancelAnimationFrame(animateId)
-        animateId = 0
+      function mix(a: number, b: number, t: number) {
+        return a * (1 - t) + b * t
       }
-    }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting
-        if (isVisible) {
-          if (freezeFrame) {
-            if (!staticDrawn) {
-              render(0)
-              staticDrawn = true
+      function smoothstep(edge0: number, edge1: number, x: number) {
+        const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)))
+        return t * t * (3 - 2 * t)
+      }
+
+      function update(t: number) {
+        if (!isVisible) return
+        animateId = requestAnimationFrame(update)
+
+        const lerp = 0.05
+        smoothMousePos.current.x += (targetMousePos.current.x - smoothMousePos.current.x) * lerp
+        smoothMousePos.current.y += (targetMousePos.current.y - smoothMousePos.current.y) * lerp
+        smoothMouseActive.current += (targetMouseActive.current - smoothMouseActive.current) * lerp
+
+        render(t)
+      }
+
+      function startLoop() {
+        if (animateId === 0) animateId = requestAnimationFrame(update)
+      }
+
+      function stopLoop() {
+        if (animateId !== 0) {
+          cancelAnimationFrame(animateId)
+          animateId = 0
+        }
+      }
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          isVisible = entry.isIntersecting
+          if (isVisible) {
+            if (freezeFrame) {
+              if (!staticDrawn) {
+                render(0)
+                staticDrawn = true
+              }
+            } else {
+              startLoop()
             }
           } else {
-            startLoop()
+            stopLoop()
           }
-        } else {
-          stopLoop()
+        },
+        { threshold: 0 }
+      )
+      observer.observe(wrapper!)
+
+      function handleMouseMove(e: MouseEvent) {
+        const rect = wrapper!.getBoundingClientRect()
+        targetMousePos.current = {
+          x: (e.clientX - rect.left) / rect.width,
+          y: 1 - (e.clientY - rect.top) / rect.height,
         }
-      },
-      { threshold: 0 }
-    )
-    observer.observe(wrapper)
-
-    function handleMouseMove(e: MouseEvent) {
-      const rect = wrapper!.getBoundingClientRect()
-      targetMousePos.current = {
-        x: (e.clientX - rect.left) / rect.width,
-        y: 1 - (e.clientY - rect.top) / rect.height,
+        targetMouseActive.current = 1
       }
-      targetMouseActive.current = 1
+
+      function handleMouseLeave() {
+        targetMouseActive.current = 0
+      }
+
+      if (mouseInteraction) {
+        wrapper!.addEventListener('mousemove', handleMouseMove)
+        wrapper!.addEventListener('mouseleave', handleMouseLeave)
+      }
+
+      // initial paint for frozen state before observer fires
+      if (freezeFrame) {
+        render(0)
+        staticDrawn = true
+      }
+
+      cleanupRef.current = () => {
+        observer.disconnect()
+        stopLoop()
+        window.removeEventListener('resize', resize)
+        if (mouseInteraction) {
+          wrapper!.removeEventListener('mousemove', handleMouseMove)
+          wrapper!.removeEventListener('mouseleave', handleMouseLeave)
+        }
+      }
     }
 
-    function handleMouseLeave() {
-      targetMouseActive.current = 0
-    }
-
-    if (mouseInteraction) {
-      wrapper.addEventListener('mousemove', handleMouseMove)
-      wrapper.addEventListener('mouseleave', handleMouseLeave)
-    }
-
-    // initial paint for frozen state before observer fires
-    if (freezeFrame) {
-      render(0)
-      staticDrawn = true
-    }
+    init()
 
     return () => {
-      observer.disconnect()
-      stopLoop()
-      window.removeEventListener('resize', resize)
-      if (mouseInteraction) {
-        wrapper.removeEventListener('mousemove', handleMouseMove)
-        wrapper.removeEventListener('mouseleave', handleMouseLeave)
-      }
+      cancelled = true
+      cleanupRef.current()
     }
   }, [
     starPool,
+    skillSlugs,
     focal,
     rotation,
     starSpeed,
