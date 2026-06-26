@@ -14,7 +14,7 @@ export const personal = {
   whatsapp: '916305974480',
   github: 'https://github.com/ChanduBobbili',
   linkedin: 'https://linkedin.com/in/chandu-bobbili-15863319b',
-  resume: 'https://drive.google.com/file/d/1zhpAwC_QXOsiDV4zdq7Dbn0GF-DPsMKa/view?usp=drivesdk',
+  resume: 'https://drive.google.com/file/d/14b4OH_lvkH16t8mxcyPsc2Cl3BJ8CkeG/view',
   currentRole: 'Senior SDE @ Deepta AI',
   openTo: 'Full-time · Remote · Relocation',
   education: 'B.Tech CSE, JNTUGV (2019–2023)',
@@ -78,7 +78,7 @@ export const experience: ExperienceEntry[] = [
     current: true,
     projects: [
       {
-        name: 'Klaritics — SaaS Data Analytics Platform',
+        name: 'Klaritics — AI-Powered SaaS Data Analytics Platform',
         accent: 'cyan',
         description:
           'A warehouse-native SaaS product analytics platform where events are ingested via a custom SDK or API, covering funnels, retention curves, user paths, cohorts, and real-time dashboards.',
@@ -98,13 +98,13 @@ export const experience: ExperienceEntry[] = [
           'Kubernetes (GKE)',
         ],
         bullets: [
-          'Load-tested at 1M+ events/sec with real-time Kafka ingestion and a ClickHouse-backed analytics layer covering funnels, retention curves, user paths, cohorts, and live dashboards.',
-          'Analytics frontend serving live production traffic, using React, Vite, TanStack, Tailwind CSS, and Zustand.',
-          'Go microservices on Kubernetes (GKE) with MongoDB, Redis distributed caching, and Kafka pub/sub pipelines that significantly reduced database load.',
+          'Co-led as technical co-lead — splitting tasks, conducting code reviews, and driving architecture decisions alongside hands-on development.',
+          'Engineered real-time event ingestion via Kafka and ClickHouse-backed analytics — load-tested at 1M+ events/sec — covering funnels, retention curves, user paths, cohorts, and live dashboards.',
+          'Built analytics frontend with React, TypeScript, Vite, TanStack, Tailwind CSS, Zustand; backend on Go microservices with MongoDB, Redis caching, Docker, Kubernetes (GKE) — significantly reducing database load.',
         ],
       },
       {
-        name: 'Application Management System',
+        name: 'Application Management System — Multi-University Admissions Platform',
         accent: 'purple',
         description:
           'A multi-university student application platform used by 4 universities, covering lead generation through admission with a student portal, authority dashboard, and embeddable SDK for third-party sites.',
@@ -122,10 +122,10 @@ export const experience: ExperienceEntry[] = [
           'JWT',
         ],
         bullets: [
-          'Generated 50,000+ leads and enrolled 20,000 students for a Winter 2025 batch across 4 universities, while cutting application processing time from 15 to 8 hours per applicant.',
-          "Handled 4,000 students' fee renewals for the previous batch across the same multi-university platform.",
-          'Resolved cross-origin tracking restrictions on university-hosted portals via a BFF reverse proxy that converted third-party cookies into first-party cookies.',
-          'Concurrent payment processing and lead ingestion across institutions using Go goroutines and channels, with JWT auth and full GCP GKE deployment via Docker and GitHub Actions.',
+          'Co-led as technical co-lead, overseeing task distribution and code reviews across all squads.',
+          'Generated 50,000+ leads, enrolled 20,000 students for Winter 2025 batch across 4 universities; cut processing time from 15 → 8 hours/applicant; handled 4,000 fee renewals for prior batch.',
+          'Architected Go microservices with goroutines + channels for concurrent payment and lead ingestion; built BFF reverse proxy resolving cross-origin tracking restrictions.',
+          'Shipped embeddable JS SDK for third-party sites; JWT auth with token rotation; full deployment via Docker, Kubernetes (GKE), GitHub Actions CI/CD on GCP.',
         ],
       },
     ],
@@ -159,9 +159,10 @@ export const experience: ExperienceEntry[] = [
           'Kubernetes (GKE)',
         ],
         bullets: [
-          'Unified end-to-end clinic operations in one system — appointments, hearing tests, product recommendations, sale orders, warehouse management, and Hearzap↔Client and Hearzap↔Dealer CRM workflows.',
-          'Reached ~90% unit test coverage via Vitest with E2E coverage via Playwright, on a React + TypeScript frontend using TanStack, Zustand, and Immer.',
-          'Scalable Go microservices architecture with each module (appointments, client management, store, hearing test) as a dedicated service with its own PostgreSQL database.',
+          'Led as sole tech lead — task splitting, full code reviews, and hands-on development as individual contributor, delivering the product end-to-end.',
+          'Unified clinic ops in one platform: appointments, hearing tests, product recommendations, sale orders, warehouse, and Hearzap↔Client / Hearzap↔Dealer CRM workflows.',
+          'Achieved ~90% unit test coverage via Vitest + full E2E via Playwright; React + TypeScript frontend with TanStack, Zustand, Immer.',
+          'Scalable Go microservices — each module a dedicated service with its own PostgreSQL DB; deployed on Kubernetes (GKE).',
         ],
       },
     ],
@@ -192,9 +193,9 @@ export const experience: ExperienceEntry[] = [
           'Figma',
         ],
         bullets: [
-          'Raised Lighthouse score from 54 → 97 and reduced INP and blocking time from ~500ms to negligible via lazy loading, caching, and image optimisation on the Vite + TypeScript + Tailwind CSS + Shadcn UI stack.',
-          'Retained 5+ customer accounts that were at risk of churning — directly attributed to the performance fix.',
-          'Shipped the Stories feature (social-media-style) and FAB to production with measurably improved user engagement.',
+          'Raised Lighthouse score 54 → 97 (80% improvement); reduced INP and blocking time from ~500ms → negligible via lazy loading, caching, and image optimisation on Vite + TypeScript + Tailwind CSS + Shadcn UI.',
+          'Directly retained 5+ enterprise accounts at risk of churning — business impact solely attributed to the performance overhaul.',
+          'Shipped Stories feature (social-media-style) and FAB to production with measurably improved user engagement.',
         ],
       },
       {
@@ -204,8 +205,7 @@ export const experience: ExperienceEntry[] = [
           "Apxor's public-facing marketing website on Webflow, with multi-tool analytics instrumentation across Google Analytics, GTM, Mixpanel, and the Apxor SDK.",
         stack: ['Webflow', 'Google Analytics', 'Google Tag Manager', 'Mixpanel', 'Apxor SDK'],
         bullets: [
-          'Insight reports from traffic and performance analytics that directly informed product and design decisions.',
-          'Responsive Webflow site maintained across all breakpoints with a full analytics stack (Google Analytics, GTM, Mixpanel, Apxor SDK) instrumented for user behaviour tracking.',
+          'Maintained responsive Webflow site; instrumented full analytics stack — Google Analytics, GTM, Mixpanel, Apxor SDK — generating insight reports that directly informed product and design decisions.',
         ],
       },
     ],

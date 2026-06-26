@@ -40,18 +40,29 @@ const infoCards = [
 const aboutCommands = [
   'run diagnostics --highlight',
   'run achievements --highlight',
-  'cat stack.json',
+  'list open-source --stats',
 ]
 
 const aboutOutputs: Record<number, TerminalOutputLine[]> = {
   0: [
     {
       type: 'diagnostic',
+      label: 'Tech lead (projects)',
+      value: '3',
+      note: '(Klaritics · AMS · Hearzap)',
+    },
+    {
+      type: 'diagnostic',
       label: 'Events ingestion',
       value: '1M+ / sec',
       note: '(Klaritics, load-tested)',
     },
-    { type: 'diagnostic', label: 'Lighthouse score', value: '54 → 97' },
+    {
+      type: 'diagnostic',
+      label: 'Lighthouse score',
+      value: '54 → 97',
+      note: '(Apxor Dashboard)',
+    },
   ],
   1: [
     { type: 'achievement', label: 'Leads generated', value: '50,000+' },
@@ -61,7 +72,6 @@ const aboutOutputs: Record<number, TerminalOutputLine[]> = {
       value: '20,000 across 4 universities',
     },
     { type: 'achievement', label: 'App processing', value: '15h → 8h per applicant' },
-    { type: 'achievement', label: 'Technical Articles Written', value: '4' },
     {
       type: 'achievement',
       label: 'Accounts retained',
@@ -70,11 +80,30 @@ const aboutOutputs: Record<number, TerminalOutputLine[]> = {
     },
   ],
   2: [
-    '  "languages":  ["TypeScript", "Go", "JavaScript", "Python"],',
-    '  "frontend":   ["React", "Next.js", "TanStack", "Tailwind CSS"],',
-    '  "backend":    ["Microservices", "REST", "Kafka", "gRPC", "SSE"],',
-    '  "databases":  ["PostgreSQL", "MongoDB", "ClickHouse", "Redis"],',
-    '  "devops":     ["Docker", "Kubernetes (GKE)", "GCP", "GitHub Actions"]',
+    {
+      type: 'diagnostic',
+      label: 'Library',
+      value: 'ZenithUI',
+      note: '(React component library)',
+    },
+    {
+      type: 'diagnostic',
+      label: 'npm packages',
+      value: '13+ scoped',
+      note: '(@zenithui/*)',
+    },
+    {
+      type: 'diagnostic',
+      label: 'Weekly downloads',
+      value: '700+ / week',
+      note: '(combined npm)',
+    },
+    {
+      type: 'diagnostic',
+      label: 'CLI tool',
+      value: 'changesetgoo',
+      note: '(Go, single binary)',
+    },
   ],
 }
 
